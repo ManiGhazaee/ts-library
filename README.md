@@ -1,0 +1,1 @@
+To view the JSDoc generated documentation for this library, click [here](./docs/out/index.html).
