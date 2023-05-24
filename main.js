@@ -1,6 +1,7 @@
 /**
  * Returns an object containing all elements with an `id` attribute in the document, with keys converted to camelCase.
  * @returns {object} An object containing all elements with an `id` attribute in the document, with keys converted to camelCase.
+ * @requires {@link kebabToCamel}
  */
 export function getElementsByIds() {
         let elementsById = {};
@@ -299,6 +300,47 @@ export function hexToRgb(h) {
         }
 
         return "rgb(" + +r + "," + +g + "," + +b + ")";
+}
+
+/**
+ * returns a array containing all values that array1 has and array2 doesnt and array2 has and array1 doesnt.
+ * @param {Array<any>} arr1 
+ * @param {Array<any>} arr2 
+ * @returns {Array<any>}
+ * @example 
+ * let arr1 = [1, 2, 3, 0];
+ * let arr2 = [1, 4, 3, 5, 2];
+ * diffBetweenTwoArray(arr1, arr2);
+ * // returns [4, 5, 0]
+ */
+
+export function diffBetweenTwoArray(arr1, arr2) {
+        let set1 = new Set(arr1);
+        let set2 = new Set(arr2);
+        let diff = [];
+        for (let i = 0; i < arr2.length; i++) {
+                if (!set1.has(arr2[i])) {
+                        diff.push(arr2[i])
+                }
+        }
+        for (let i = 0; i < arr1.length; i++) {
+                if (!set2.has(arr1[i])) {
+                        diff.push(arr1[i])
+                }
+        }
+        return [...new Set(diff)];
+}
+
+/**
+ * removes duplicated values from an array.
+ * @param {Array<any>} array 
+ * @returns {Array<any>}
+ * @example 
+ * let array = [1, 2, 2, 3];
+ * rmDuplicate(array); // returns [1, 2, 3]
+ */
+export function rmDuplicate(array) {
+        return [...new Set(array)];
 }
 
 
