@@ -8,7 +8,7 @@ export function getElementsByIds() {
         let allElements = document.getElementsByTagName("*");
         for (let i = 0; i < allElements.length; i++) {
                 if (allElements[i].id != null && allElements[i].id !== "") {
-                        elementsById[kebabToCamel(elems[i].id)] = allElements[i];
+                        elementsById[kebabToCamel(allElements[i].id)] = allElements[i];
                 }
         }
         return elementsById;
@@ -45,6 +45,114 @@ export function kebabToCamel(str) {
         }
         return str.join("");
 }
+
+/**
+ * Changes the case of a string to the specified format.
+ * @param {string} str - The string to change the case of.
+ * @param {("camel"|"snake"|"kebab"|"scream"|"upper"|"lower")} changeTo - The case format to change the string to.
+ * @returns {string} - The original string with its case changed to the specified format.
+ * @example
+ * // Returns "exampleStringWithAllCases"
+ * changeCase("-Example_string-with all-_ CASES__", "camel");
+ *
+ * // Returns "ExampleStringWithAllCases"
+ * changeCase("-Example_string-with all-_ CASES__", "pascal");
+ *
+ * // Returns "_example_string_with_all_cases_"
+ * changeCase("-Example_string-with all-_ CASES__", "snake");
+ *
+ * // Returns "-example-string-with-all-cases-"
+ * changeCase("-Example_string-with all-_ CASES__", "kebab");
+ *
+ * // Returns "_EXAMPLE_STRING_WITH_ALL_CASES_"
+ * changeCase("-Example_string-with all-_ CASES__", "scream");
+ *
+ * // Returns "EXAMPLESTRINGWITHALLCASES"
+ * changeCase("-Example_string-with all-_ CASES__", "upper");
+
+ * // Returns "examplestringwithallcases"
+ * changeCase("-Example_string-with all-_ CASES__", "lower");
+ */
+export function changeCase(str, changeTo) {
+        str = str.split("");
+        if (changeTo === "camel" || changeTo === "pascal") {
+                for (let i = 0; i < str.length; i++) {
+                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
+                                str.splice(i, 1);
+                                str[i] = str[i].toUpperCase();
+                        } else {
+                                str[i] = str[i].toLowerCase();
+                        }
+                }
+                if (changeTo === "camel") {
+                        str[0] = str[0].toLowerCase();
+                } else {
+                        str[0] = str[0].toUpperCase();
+                }
+                for (let i = 0; i < str.length; i++) {
+                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
+                                str.splice(i, 1);
+                                i--;
+                        }
+                }
+        } else if (changeTo === "snake" || changeTo === "kebab" || changeTo === "scream") {
+                for (let i = 0; i < str.length; i++) {
+                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
+                                if (changeTo === "snake" || changeTo === "scream") {
+                                        str[i] = "_";
+                                } else {
+                                        str[i] = "-";
+                                }
+                        } else if (str[i] === str[i].toUpperCase() && str[i + 1] != null && str[i + 1] !== str[i + 1].toUpperCase()) {
+                                str[i] = str[i].toLowerCase();
+                                if (changeTo === "snake" || changeTo === "scream") {
+                                        str.splice(i, 0, "_");
+                                } else {
+                                        str.splice(i, 0, "-");
+                                }
+                                i++;
+                        } else {
+                                str[i] = str[i].toLowerCase();
+                        }
+                }
+                for (let i = 0; i < str.length - 1; i++) {
+                        if ((str[i] === "_" && (str[i + 1] === "_" || str[i + 1] === "-")) || (str[i] === "-" && (str[i + 1] === "_" || str[i + 1] === "-"))) {
+                                str.splice(i, 1);
+                                i--;
+                        }
+                }
+                if (changeTo === "scream") {
+                        for (let i = 0; i < str.length; i++) {
+                                str[i] = str[i].toUpperCase();
+                        }
+                }
+        } else if (changeTo === "upper" || changeTo === "lower") {
+                for (let i = 0; i < str.length; i++) {
+                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
+                                str.splice(i, 1);
+                                i--;
+                        }
+                }
+                if (changeTo === "upper") {
+                        for (let i = 0; i < str.length; i++) {
+                                str[i] = str[i].toUpperCase();
+                        }
+                } else {
+                        for (let i = 0; i < str.length; i++) {
+                                str[i] = str[i].toLowerCase();
+                        }
+                }
+        }
+        return str.join("");
+}
+
+console.log(changeCase("-Example_string-with all-_ CASES__", "camel"));
+console.log(changeCase("-Example_string-with all-_ CASES__", "pascal"));
+console.log(changeCase("-Example_string-with all-_ CASES__", "snake"));
+console.log(changeCase("-Example_string-with all-_ CASES__", "kebab"));
+console.log(changeCase("-Example_string-with all-_ CASES__", "scream"));
+console.log(changeCase("-Example_string-with all-_ CASES__", "upper"));
+console.log(changeCase("-Example_string-with all-_ CASES__", "lower"));
 
 /**
  * Retrieves all items from local storage and updates the values in the provided object.
@@ -150,11 +258,11 @@ export function $(querySelector) {
 
 /**
  * querySelectorAll
- * @param {string} querySelector
+ * @param {string} querySelectorAll
  * @returns {HTMLElement}
  */
-export function $$(querySelector) {
-        return document.querySelectorAll(querySelector);
+export function $$(querySelectorAll) {
+        return document.querySelectorAll(querySelectorAll);
 }
 
 /**
@@ -222,7 +330,7 @@ export function addClasses(element, array) {
 }
 
 /**
- * turns string of rgb to array containing rgb values `[r, g, b]` 
+ * turns string of rgb to array containing rgb values `[r, g, b]`
  * @param {string} str - rgb representaion of a color
  * @returns {Array<number>}
  * @example rgbToArray("rgb(189, 22, 89)") // [189, 22, 89]
@@ -237,10 +345,10 @@ export function rgbToArray(str) {
 }
 
 /**
- *  
- * @param {Array<number>} color1 
- * @param {Array<number>} color2 
- * @param {number} percent 
+ *
+ * @param {Array<number>} color1
+ * @param {Array<number>} color2
+ * @param {number} percent
  * @returns {Array<number>}
  */
 export function betweenTwoColor(color1, color2, percent) {
@@ -261,7 +369,7 @@ export function betweenTwoColor(color1, color2, percent) {
 
 /**
  * turns array containing rgb values to string `"rgb(r, g, b)"`
- * @param {Array<number>} arr 
+ * @param {Array<number>} arr
  * @returns {string}
  * @example arrayToRgb([222, 45, 88]); // "rgb(222, 45, 88)"
  */
@@ -271,7 +379,7 @@ export function arrayToRgb(arr) {
 
 /**
  * turns rgb array to hex string
- * @param {Array<number>} array 
+ * @param {Array<number>} array
  * @returns {string}
  * @example rgbToHex([68, 419, 0]); // #44ff00
  */
@@ -281,7 +389,7 @@ export function rgbToHex(array) {
 
 /**
  * turns hex representation of a color to rgb string `"rgb(r, g, b)"`
- * @param {string} h 
+ * @param {string} h
  * @returns {string}
  * @example hexToRgb("#44ff00"); // rgb(68, 419, 0)
  */
@@ -304,14 +412,13 @@ export function hexToRgb(h) {
 
 /**
  * returns a array containing all values that array1 has and array2 doesnt and array2 has and array1 doesnt.
- * @param {Array<any>} arr1 
- * @param {Array<any>} arr2 
+ * @param {Array<any>} arr1
+ * @param {Array<any>} arr2
  * @returns {Array<any>}
- * @example 
+ * @example
  * let arr1 = [1, 2, 3, 0];
  * let arr2 = [1, 4, 3, 5, 2];
- * diffBetweenTwoArray(arr1, arr2);
- * // returns [4, 5, 0]
+ * diffBetweenTwoArray(arr1, arr2); // returns [4, 5, 0]
  */
 
 export function diffBetweenTwoArray(arr1, arr2) {
@@ -320,12 +427,12 @@ export function diffBetweenTwoArray(arr1, arr2) {
         let diff = [];
         for (let i = 0; i < arr2.length; i++) {
                 if (!set1.has(arr2[i])) {
-                        diff.push(arr2[i])
+                        diff.push(arr2[i]);
                 }
         }
         for (let i = 0; i < arr1.length; i++) {
                 if (!set2.has(arr1[i])) {
-                        diff.push(arr1[i])
+                        diff.push(arr1[i]);
                 }
         }
         return [...new Set(diff)];
@@ -333,9 +440,9 @@ export function diffBetweenTwoArray(arr1, arr2) {
 
 /**
  * removes duplicated values from an array.
- * @param {Array<any>} array 
+ * @param {Array<any>} array
  * @returns {Array<any>}
- * @example 
+ * @example
  * let array = [1, 2, 2, 3];
  * rmDuplicate(array); // returns [1, 2, 3]
  */
@@ -343,6 +450,41 @@ export function rmDuplicate(array) {
         return [...new Set(array)];
 }
 
+/**
+ * returns the DOM element that matches the given querySelector and id, or returns undefined if it doesnt find a match.
+ * @param {string} querySelectorAll
+ * @param {string} id
+ * @returns {HTMLElement|undefined}
+ */
+export function $$byId(querySelectorAll, id) {
+        let elems = document.querySelectorAll(querySelectorAll);
+
+        for (let i = 0; i < elems.length; i++) {
+                if (elems[i].id === id) {
+                        return elems[i];
+                }
+        }
+        return undefined;
+}
+
+/**
+ * returns a object containing elements that matched the given querySelectorAll and idsArray, or returns undefined if it doesnt find a match.
+ * @param {string} querySelectorAll
+ * @param {Array<number>} idsArray
+ * @returns {object|undefined}
+ */
+export function $$byIds(querySelectorAll, idsArray) {
+        let elements = {};
+        document.querySelectorAll(querySelectorAll).forEach((elem) => {
+                for (let i = 0; i < idsArray.length; i++) {
+                        if (elem.id === idsArray[i]) {
+                                elements[idsArray[i]] = elem;
+                        }
+                }
+        });
+        if (Object.keys(elements).length === 0) return undefined;
+        return elements;
+}
 
 // ========================================
 // TEST
@@ -361,6 +503,7 @@ console.log(doc);
 console.log(kebabToCamel("child-two"));
 
 let xLS = localStorage.getItem("x");
+let x;
 x = xLS || "default_value";
 
 let ls = {
@@ -381,4 +524,9 @@ console.log(lsGet("x"));
 
 localStorage.setItem("x", "value");
 x = "value";
+console.log($$byIds(".container", ["ss", "two", "one"]));
+console.log($$byIds(".container", ["one"]));
+console.log($$byId(".container", "two"));
+console.log($$byId(".container", "one"));
+console.log($$byId(".container", "i", "id"));
 // ========================================
