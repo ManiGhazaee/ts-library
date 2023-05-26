@@ -5,7 +5,7 @@
  */
 export function getElementsByIds() {
         let elementsById = {};
-        let allElements = document.getElementsByTagName("*");
+        let allElements = document.querySelectorAll("*");
         for (let i = 0; i < allElements.length; i++) {
                 if (allElements[i].id != null && allElements[i].id !== "") {
                         elementsById[kebabToCamel(allElements[i].id)] = allElements[i];
@@ -585,7 +585,6 @@ export function arrayDiff(arr1, arr2) {
         return diff;
 }
 
-
 /**
  * removes duplicated values from an array.
  * @param {Array<any>} array
@@ -634,9 +633,70 @@ export function $$byIds(querySelectorAll, idsArray) {
         return elements;
 }
 
+/**
+ * Applies the given CSS rules to the specified element(s).
+ * (enter valid css like examples and dont put unnecessary semicolons like ";;")
+ * @param {string} cssRulesString - The CSS rules to apply.
+ * @param {(HTMLElement|HTMLElement[])} elementsArray - The element(s) to apply the CSS rules to.
+ * @example
+ * // Apply CSS rules to a single element
+ * const element = document.getElementById("myElement");
+ * cssToElements("color: red; font-size: 16px;", element);
+ *
+ * // Apply CSS rules to an array of elements
+ * const elements = document.querySelectorAll(".myClass");
+ * cssToElements("background-color: yellow; border: 1px solid black;", elements);
+ */
+export function cssToElements(cssRulesString, elementsArray) {
+        const elements = [].concat(elementsArray);
+
+        for (let i = 0; i < elements.length; i++) {
+                let style = elements[i].style.cssText + cssRulesString;
+                style = style.split(/[:;]/g).filter((v) => v != "");
+                
+                for (let i = 0; i < style.length; i += 2) {
+                        style[i] = style[i].trim();
+                }
+                for (let i = 0; i < style.length; i++) {
+                        if (i % 2 === 1) continue;
+                        for (let j = i + 2; j < style.length; j++) {
+                                if (style[i] === style[j]) {
+                                        style.splice(i, 2);
+                                        i--;
+                                        break;
+                                }
+                        }
+                }
+                for (let i = 0; i < style.length; i++) {
+                        if (i % 2 === 0) {
+                                style[i] += ":";
+                        } else {
+                                style[i] += ";";
+                        }
+                }
+                
+                style = style.join("");
+                elements[i].style.cssText = style;
+        }
+}
+
 // ========================================
 // TEST
-
+// let elems = getElementsByIds();
+// cssToElements("width: 500px; height: 100px; background-color: red;", elems["child"]);
+// let inter;
+// let times = 0;
+// inter = setInterval(() => {
+//         if (times > 8) {
+//                 clearInterval(inter);
+//         }
+//         if (times % 2 === 0) {
+//                 cssToElements("background-color: white", elems["child"]);
+//         } else {
+//                 cssToElements("background-color: red; border: 1px solid green", elems["child"]);
+//         }
+//         times++;
+// }, 1000);
 // let doc = getElementsByIds();
 // console.log(doc);
 
