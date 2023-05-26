@@ -73,7 +73,7 @@ export function kebabToCamel(str) {
  * // Returns "examplestringwithallcases"
  * changeCase("-Example_string-with all-_ CASES__", "lower");
  */
-export function changeCase(str, changeTo) {
+export function changeCasex(str, changeTo) {
         str = str.split("");
         if (changeTo === "camel" || changeTo === "pascal") {
                 for (let i = 0; i < str.length; i++) {
@@ -146,13 +146,120 @@ export function changeCase(str, changeTo) {
         return str.join("");
 }
 
-console.log(changeCase("-Example_string-with all-_ CASES__", "camel"));
-console.log(changeCase("-Example_string-with all-_ CASES__", "pascal"));
-console.log(changeCase("-Example_string-with all-_ CASES__", "snake"));
-console.log(changeCase("-Example_string-with all-_ CASES__", "kebab"));
-console.log(changeCase("-Example_string-with all-_ CASES__", "scream"));
-console.log(changeCase("-Example_string-with all-_ CASES__", "upper"));
-console.log(changeCase("-Example_string-with all-_ CASES__", "lower"));
+export function changeCase(str, changeTo) {
+        if (changeTo === "camel" || changeTo === "pascal") {
+                for (let i = 0; i < str.length; i++) {
+                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
+                                str = spice(str, i, 2, str[i + 1].toUpperCase());
+                        } else {
+                                str = spice(str, i, 1, str[i].toLowerCase());
+                        }
+                }
+                if (changeTo === "camel") {
+                        str = spice(str, 0, 1, str[0].toLowerCase());
+                } else {
+                        str = spice(str, 0, 1, str[0].toUpperCase());
+                }
+                for (let i = 0; i < str.length; i++) {
+                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
+                                str = spice(str, i, 1);
+                                i--;
+                        }
+                }
+        } else if (changeTo === "snake" || changeTo === "kebab" || changeTo === "scream") {
+                for (let i = 0; i < str.length; i++) {
+                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
+                                if (changeTo === "snake" || changeTo === "scream") {
+                                        str = spice(str, i, 1, "_");
+                                } else {
+                                        str = spice(str, i, 1, "-");
+                                }
+                        } else if (str[i] === str[i].toUpperCase() && str[i + 1] != null && str[i + 1] !== str[i + 1].toUpperCase()) {
+                                str = spice(str, i, 1, str[i].toUpperCase());
+                                if (changeTo === "snake" || changeTo === "scream") {
+                                        str = spice(str, i, 0, "_");
+                                } else {
+                                        str = spice(str, i, 0, "-");
+                                }
+                                i++;
+                        } else {
+                                str = spice(str, i, 1, str[i].toLowerCase());
+                        }
+                }
+                for (let i = 0; i < str.length - 1; i++) {
+                        if ((str[i] === "_" && (str[i + 1] === "_" || str[i + 1] === "-")) || (str[i] === "-" && (str[i + 1] === "_" || str[i + 1] === "-"))) {
+                                str = spice(str, i, 1);
+                                i--;
+                        }
+                }
+                if (changeTo === "scream") {
+                        for (let i = 0; i < str.length; i++) {
+                                str = spice(str, i, 1, str[i].toUpperCase());
+                        }
+                }
+        } else if (changeTo === "upper" || changeTo === "lower") {
+                for (let i = 0; i < str.length; i++) {
+                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
+                                str = spice(str, i, 1);
+                                i--;
+                        }
+                }
+                if (changeTo === "upper") {
+                        for (let i = 0; i < str.length; i++) {
+                                str = spice(str, i, 1, str[i].toUpperCase());
+                        }
+                } else {
+                        for (let i = 0; i < str.length; i++) {
+                                str = spice(str, i, 1, str[i].toLowerCase());
+                        }
+                }
+        }
+        return str;
+}
+// console.log(changeCase("-Example_string-with all-_ CASES__", "camel"));
+// console.log(changeCase("-Example_string-with all-_ CASES__", "pascal"));
+// console.log(changeCase("-Example_string-with all-_ CASES__", "snake"));
+// console.log(changeCase("-Example_string-with all-_ CASES__", "kebab"));
+// console.log(changeCase("-Example_string-with all-_ CASES__", "scream"));
+// console.log(changeCase("-Example_string-with all-_ CASES__", "upper"));
+// console.log(changeCase("-Example_string-with all-_ CASES__", "lower"));
+
+/**
+ * removes a character at the index given.
+ * @param {string} str
+ * @param {number} index
+ * @returns {string}
+ */
+export function rmCharAt(str, index) {
+        return str.slice(0, index) + str.slice(index + 1);
+}
+
+/**
+ * splice for strings
+ * @param {string} string
+ * @param {number} start
+ * @param {number} deleteCount
+ * @param {string} insertString
+ * @returns {string}
+ */
+export function spice(string, start, deleteCount, insertString) {
+        return string.slice(0, start) + (insertString || "") + string.slice(start + (deleteCount || 0));
+}
+
+export function toUpper(string, start, deleteCount, insertString) {
+        return string.slice(0, start) + (insertString || "") + string.slice(start + (deleteCount || 0));
+}
+
+/**
+ * adds strToAdd to str at index.
+ * @param {string} str
+ * @param {string} strToAdd
+ * @param {number} index
+ * @returns {string}
+ */
+export function addCharAt(str, strToAdd, index) {
+        return str.slice(0, index) + strToAdd + str.slice(index);
+}
 
 /**
  * Retrieves all items from local storage and updates the values in the provided object.
@@ -410,18 +517,7 @@ export function hexToRgb(h) {
         return "rgb(" + +r + "," + +g + "," + +b + ")";
 }
 
-/**
- * returns a array containing all values that array1 has and array2 doesnt and array2 has and array1 doesnt.
- * @param {Array<any>} arr1
- * @param {Array<any>} arr2
- * @returns {Array<any>}
- * @example
- * let arr1 = [1, 2, 3, 0];
- * let arr2 = [1, 4, 3, 5, 2];
- * diffBetweenTwoArray(arr1, arr2); // returns [4, 5, 0]
- */
-
-export function diffBetweenTwoArray(arr1, arr2) {
+export function diffBetweenTwoArraysSLOWEST(arr1, arr2) {
         let set1 = new Set(arr1);
         let set2 = new Set(arr2);
         let diff = [];
@@ -437,6 +533,58 @@ export function diffBetweenTwoArray(arr1, arr2) {
         }
         return [...new Set(diff)];
 }
+
+/**
+ *
+ * @param {array} arr1
+ * @param {array} arr2
+ * @returns
+ */
+export function diffBetweenTwoArraysLOWRANGE(arr1, arr2) {
+        let set = new Set(arr2);
+        let diff = [];
+
+        for (let i = 0; i < arr1.length; i++) {
+                if (!set.has(arr1[i])) {
+                        diff.push(arr1[i]);
+                } else {
+                        set.delete(arr1[i]);
+                }
+        }
+        diff = diff.concat(...set.values());
+
+        return diff;
+}
+
+/**
+ * (arrayDiff doesnt count duplicated elements as diff).
+ * returns a array containing all values that array1 has and array2 doesnt and array2 has and array1 doesnt.
+ * @param {Array<any>} arr1
+ * @param {Array<any>} arr2
+ * @returns {Array<any>}
+ * @example
+ * let arr1 = [1, 2, 3, 0];
+ * let arr2 = [1, 4, 3, 5, 2];
+ * arrayDiff(arr1, arr2); // returns [0, 4, 5]
+ */
+export function arrayDiff(arr1, arr2) {
+        let set = new Set(arr2);
+        let diff = [];
+
+        for (let i = 0; i < arr1.length; i++) {
+                if (set.has(arr1[i])) {
+                        set.delete(arr1[i]);
+                } else {
+                        diff.push(arr1[i]);
+                }
+        }
+        for (let i of set) {
+                diff.push(i);
+        }
+
+        return diff;
+}
+
 
 /**
  * removes duplicated values from an array.
@@ -489,44 +637,44 @@ export function $$byIds(querySelectorAll, idsArray) {
 // ========================================
 // TEST
 
-let doc = getElementsByIds();
-console.log(doc);
+// let doc = getElementsByIds();
+// console.log(doc);
 
-doc.passwordGenerator.style.width = "100px";
-doc.passwordGenerator.style.height = "100px";
-doc.passwordGenerator.style.backgroundColor = "red";
+// doc.passwordGenerator.style.width = "100px";
+// doc.passwordGenerator.style.height = "100px";
+// doc.passwordGenerator.style.backgroundColor = "red";
 
-createAndAppendElement("div", { id: "foo" }, document.body);
-doc = getElementsByIds();
-console.log(doc);
+// createAndAppendElement("div", { id: "foo" }, document.body);
+// doc = getElementsByIds();
+// console.log(doc);
 
-console.log(kebabToCamel("child-two"));
+// console.log(kebabToCamel("child-two"));
 
-let xLS = localStorage.getItem("x");
-let x;
-x = xLS || "default_value";
+// let xLS = localStorage.getItem("x");
+// let x;
+// x = xLS || "default_value";
 
-let ls = {
-        x: "default_value",
-        y: "bluh",
-        z: "goo",
-        a: "far",
-};
+// let ls = {
+//         x: "default_value",
+//         y: "bluh",
+//         z: "goo",
+//         a: "far",
+// };
 
-lsGetAll(ls);
-console.log(`ls: ${JSON.stringify(ls)}`);
-console.log(localStorage);
-console.log(lsGet("x"));
-lsSet("x", "blue", ls);
-console.log(ls);
-console.log(localStorage);
-console.log(lsGet("x"));
+// lsGetAll(ls);
+// console.log(`ls: ${JSON.stringify(ls)}`);
+// console.log(localStorage);
+// console.log(lsGet("x"));
+// lsSet("x", "blue", ls);
+// console.log(ls);
+// console.log(localStorage);
+// console.log(lsGet("x"));
 
-localStorage.setItem("x", "value");
-x = "value";
-console.log($$byIds(".container", ["ss", "two", "one"]));
-console.log($$byIds(".container", ["one"]));
-console.log($$byId(".container", "two"));
-console.log($$byId(".container", "one"));
-console.log($$byId(".container", "i", "id"));
+// localStorage.setItem("x", "value");
+// x = "value";
+// console.log($$byIds(".container", ["ss", "two", "one"]));
+// console.log($$byIds(".container", ["one"]));
+// console.log($$byId(".container", "two"));
+// console.log($$byId(".container", "one"));
+// console.log($$byId(".container", "i", "id"));
 // ========================================
