@@ -653,7 +653,7 @@ export function cssToElements(cssRulesString, elementsArray) {
         for (let i = 0; i < elements.length; i++) {
                 let style = elements[i].style.cssText + cssRulesString;
                 style = style.split(/[:;]/g).filter((v) => v != "");
-                
+
                 for (let i = 0; i < style.length; i += 2) {
                         style[i] = style[i].trim();
                 }
@@ -674,10 +674,19 @@ export function cssToElements(cssRulesString, elementsArray) {
                                 style[i] += ";";
                         }
                 }
-                
+
                 style = style.join("");
                 elements[i].style.cssText = style;
         }
+}
+
+/**
+ * Creates a deep copy of the given object or array using JSON serialization and deserialization.
+ * @param {object|array} source - The object or array to copy.
+ * @returns {object|array} A new object or array with the same properties and values as the source.
+ */
+export function deepCopy(source) {
+        return JSON.parse(JSON.stringify(source));
 }
 
 // ========================================
