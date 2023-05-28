@@ -634,7 +634,7 @@ export function $$byIds(querySelectorAll, idsArray) {
 }
 
 /**
- * Applies the given CSS rules to the specified element(s).
+ * Applies the given CSS rules to the specified element(s). without removing or duplicating old cssText.
  * (enter valid css like examples and dont put unnecessary semicolons like ";;")
  * @param {string} cssRulesString - The CSS rules to apply.
  * @param {(HTMLElement|HTMLElement[])} elementsArray - The element(s) to apply the CSS rules to.
@@ -677,6 +677,32 @@ export function cssToElements(cssRulesString, elementsArray) {
 
                 style = style.join("");
                 elements[i].style.cssText = style;
+        }
+}
+
+/**
+ * Replaces the CSS rules for the specified array of elements with the given CSS rule string.
+ *
+ * @param {string} cssRulesString - The CSS rule string to be applied to the elements.
+ * @param {Array.<HTMLElement>} elementsArray - The array of HTML elements to be updated with the new CSS rules.
+ */
+export function cssToElementsReplace(cssRulesString, elementsArray) {
+        const elements = [].concat(elementsArray);
+        for (let i = 0; i < elements.length; i++) {
+                elements[i].style.cssText = cssRulesString;
+        }
+}
+
+/**
+ * Adds the given CSS rule string to the existing CSS rules for the specified array of elements.
+ *
+ * @param {string} cssRulesString - The CSS rule string to be added to the elements' existing CSS rules.
+ * @param {Array.<HTMLElement>} elementsArray - The array of HTML elements to be updated with the new CSS rules.
+ */
+export function cssToElementsAdd(cssRulesString, elementsArray) {
+        const elements = [].concat(elementsArray);
+        for (let i = 0; i < elements.length; i++) {
+                elements[i].style.cssText += cssRulesString;
         }
 }
 
