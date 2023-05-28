@@ -73,7 +73,7 @@ export function kebabToCamel(str) {
  * // Returns "examplestringwithallcases"
  * changeCase("-Example_string-with all-_ CASES__", "lower");
  */
-export function changeCasex(str, changeTo) {
+export function changeCase(str, changeTo) {
         str = str.split("");
         if (changeTo === "camel" || changeTo === "pascal") {
                 for (let i = 0; i < str.length; i++) {
@@ -146,76 +146,6 @@ export function changeCasex(str, changeTo) {
         return str.join("");
 }
 
-export function changeCase(str, changeTo) {
-        if (changeTo === "camel" || changeTo === "pascal") {
-                for (let i = 0; i < str.length; i++) {
-                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
-                                str = spice(str, i, 2, str[i + 1].toUpperCase());
-                        } else {
-                                str = spice(str, i, 1, str[i].toLowerCase());
-                        }
-                }
-                if (changeTo === "camel") {
-                        str = spice(str, 0, 1, str[0].toLowerCase());
-                } else {
-                        str = spice(str, 0, 1, str[0].toUpperCase());
-                }
-                for (let i = 0; i < str.length; i++) {
-                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
-                                str = spice(str, i, 1);
-                                i--;
-                        }
-                }
-        } else if (changeTo === "snake" || changeTo === "kebab" || changeTo === "scream") {
-                for (let i = 0; i < str.length; i++) {
-                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
-                                if (changeTo === "snake" || changeTo === "scream") {
-                                        str = spice(str, i, 1, "_");
-                                } else {
-                                        str = spice(str, i, 1, "-");
-                                }
-                        } else if (str[i] === str[i].toUpperCase() && str[i + 1] != null && str[i + 1] !== str[i + 1].toUpperCase()) {
-                                str = spice(str, i, 1, str[i].toUpperCase());
-                                if (changeTo === "snake" || changeTo === "scream") {
-                                        str = spice(str, i, 0, "_");
-                                } else {
-                                        str = spice(str, i, 0, "-");
-                                }
-                                i++;
-                        } else {
-                                str = spice(str, i, 1, str[i].toLowerCase());
-                        }
-                }
-                for (let i = 0; i < str.length - 1; i++) {
-                        if ((str[i] === "_" && (str[i + 1] === "_" || str[i + 1] === "-")) || (str[i] === "-" && (str[i + 1] === "_" || str[i + 1] === "-"))) {
-                                str = spice(str, i, 1);
-                                i--;
-                        }
-                }
-                if (changeTo === "scream") {
-                        for (let i = 0; i < str.length; i++) {
-                                str = spice(str, i, 1, str[i].toUpperCase());
-                        }
-                }
-        } else if (changeTo === "upper" || changeTo === "lower") {
-                for (let i = 0; i < str.length; i++) {
-                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
-                                str = spice(str, i, 1);
-                                i--;
-                        }
-                }
-                if (changeTo === "upper") {
-                        for (let i = 0; i < str.length; i++) {
-                                str = spice(str, i, 1, str[i].toUpperCase());
-                        }
-                } else {
-                        for (let i = 0; i < str.length; i++) {
-                                str = spice(str, i, 1, str[i].toLowerCase());
-                        }
-                }
-        }
-        return str;
-}
 // console.log(changeCase("-Example_string-with all-_ CASES__", "camel"));
 // console.log(changeCase("-Example_string-with all-_ CASES__", "pascal"));
 // console.log(changeCase("-Example_string-with all-_ CASES__", "snake"));
