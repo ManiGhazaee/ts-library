@@ -176,10 +176,6 @@ export function spice(string, start, deleteCount, insertString) {
         return string.slice(0, start) + (insertString || "") + string.slice(start + (deleteCount || 0));
 }
 
-export function toUpper(string, start, deleteCount, insertString) {
-        return string.slice(0, start) + (insertString || "") + string.slice(start + (deleteCount || 0));
-}
-
 /**
  * adds strToAdd to str at index.
  * @param {string} str
@@ -239,14 +235,30 @@ export function lsGet(lsKey) {
 }
 
 /**
- * removes class of a given HTMLElement or node if it exist.
- * @param {HTMLElement} element
- * @param {string} classToRemove
- * @returns {void}
+ * Removes one or more classes from one or more elements in the DOM.
+ *
+ * @param {Array<Element>|Element} elements - The element(s) to remove classes from.
+ * @param {string|string[]} classesToRemove - The class(es) to remove from the element(s).
+ *
+ * @example
+ *
+ * // Remove class "example" from all elements with class "container"
+ * const containers = document.querySelectorAll('.container');
+ * rmClasses(containers, 'example');
+ *
+ * // Remove classes "class1" and "class2" from a single element
+ * const elem = document.querySelector('#my-element');
+ * rmClasses(elem, ['class1', 'class2']);
  */
-export function rmClass(element, classToRemove) {
-        if (element.classList.contains(classToRemove)) {
-                element.classList.remove(classToRemove);
+export function rmClasses(elements, classesToRemove) {
+        const classes = [].concat(classesToRemove);
+        const elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                for (let j = 0; j < classes.length; j++) {
+                        if (elems[i].classList.contains(classes[j])) {
+                                elems[i].classList.remove(classes[j]);
+                        }
+                }
         }
 }
 
@@ -273,6 +285,23 @@ export function switchClass(element, classToRemove, classToAdd) {
                 element.classList.remove(classToRemove);
         }
         element.classList.add(classToAdd);
+}
+
+/**
+ * Removes all elements from the DOM that match a given CSS selector.
+ *
+ * @param {string} querySelectorAll - The CSS selector to match elements to be removed.
+ *
+ * @example
+ *
+ * // Remove all elements with class "example"
+ * rmAllElemsBy$$('.example');
+ */
+export function rmAllElemsBy$$(querySelectorAll) {
+        let allOccur = document.querySelectorAll(querySelectorAll);
+        for (let i = 0; i < allOccur.length; i++) {
+                allOccur[i].remove();
+        }
 }
 
 /**
@@ -340,19 +369,6 @@ export function random(n) {
         return Math.floor(Math.random() * n);
 }
 
-/**
- * removes classes of a given HTMLElement or node if it exist.
- * @param {HTMLElement} element
- * @param {Array<string>} array - array containing all classes needs to be removed
- * @returns {void}
- */
-export function rmClasses(element, array) {
-        for (let i = 0; i < array.length; i++) {
-                if (element.classList.contains(array[i])) {
-                        element.classList.remove(array[i]);
-                }
-        }
-}
 
 /**
  * adds classes to a given HTMLElement or node if it exist.
