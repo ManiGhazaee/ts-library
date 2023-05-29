@@ -508,7 +508,7 @@ export function rmDuplicate(array) {
 }
 
 /**
- * Returns an object containing elements with the given IDs that match a CSS selector.
+ * Returns an object containing elements with the given ID(s) that match a CSS selector.
  *
  * @param {string} querySelectorAll - The CSS selector to match elements.
  * @param {string|string[]} ids - The ID(s) of the element(s) to return.
