@@ -263,13 +263,29 @@ export function rmClasses(elements, classesToRemove) {
 }
 
 /**
- * adds class to a given HTMLElement or node.
- * @param {HTMLElement} element
- * @param {string} classToAdd
- * @returns {void}
+ * Adds one or more classes to one or more elements in the DOM.
+ *
+ * @param {Array<Element>|Element} elements - The element(s) to add classes to.
+ * @param {string|string[]} classesToAdd - The class(es) to add to the element(s).
+ *
+ * @example
+ *
+ * // Add class "example" to all elements with class "container"
+ * const containers = document.querySelectorAll('.container');
+ * addClasses(containers, 'example');
+ *
+ * // Add classes "class1" and "class2" to a single element
+ * const elem = document.querySelector('#my-element');
+ * addClasses(elem, ['class1', 'class2']);
  */
-export function addClass(element, classToAdd) {
-        element.classList.add(classToAdd);
+export function addClasses(elements, classesToAdd) {
+        const classes = [].concat(classesToAdd);
+        const elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                for (let j = 0; j < classes.length; j++) {
+                        elems[i].classList.add(classes[j]);
+                }
+        }
 }
 
 /**
@@ -369,19 +385,6 @@ export function random(n) {
         return Math.floor(Math.random() * n);
 }
 
-
-/**
- * adds classes to a given HTMLElement or node if it exist.
- * @param {HTMLElement} element
- * @param {Array<string>} array - array containing all classes needs to be added
- * @returns {void}
- */
-export function addClasses(element, array) {
-        for (let i = 0; i < array.length; i++) {
-                element.classList.add(array[i]);
-        }
-}
-
 /**
  * turns string of rgb to array containing rgb values `[r, g, b]`
  * @param {string} str - rgb representaion of a color
@@ -463,45 +466,6 @@ export function hexToRgb(h) {
         return "rgb(" + +r + "," + +g + "," + +b + ")";
 }
 
-export function diffBetweenTwoArraysSLOWEST(arr1, arr2) {
-        let set1 = new Set(arr1);
-        let set2 = new Set(arr2);
-        let diff = [];
-        for (let i = 0; i < arr2.length; i++) {
-                if (!set1.has(arr2[i])) {
-                        diff.push(arr2[i]);
-                }
-        }
-        for (let i = 0; i < arr1.length; i++) {
-                if (!set2.has(arr1[i])) {
-                        diff.push(arr1[i]);
-                }
-        }
-        return [...new Set(diff)];
-}
-
-/**
- *
- * @param {array} arr1
- * @param {array} arr2
- * @returns
- */
-export function diffBetweenTwoArraysLOWRANGE(arr1, arr2) {
-        let set = new Set(arr2);
-        let diff = [];
-
-        for (let i = 0; i < arr1.length; i++) {
-                if (!set.has(arr1[i])) {
-                        diff.push(arr1[i]);
-                } else {
-                        set.delete(arr1[i]);
-                }
-        }
-        diff = diff.concat(...set.values());
-
-        return diff;
-}
-
 /**
  * (arrayDiff doesnt count duplicated elements as diff).
  * returns a array containing all values that array1 has and array2 doesnt and array2 has and array1 doesnt.
@@ -544,30 +508,26 @@ export function rmDuplicate(array) {
 }
 
 /**
- * returns the DOM element that matches the given querySelector and id, or returns undefined if it doesnt find a match.
- * @param {string} querySelectorAll
- * @param {string} id
- * @returns {HTMLElement|undefined}
+ * Returns an object containing elements with the given IDs that match a CSS selector.
+ *
+ * @param {string} querySelectorAll - The CSS selector to match elements.
+ * @param {string|string[]} ids - The ID(s) of the element(s) to return.
+ *
+ * @returns {object|undefined} - An object containing the element(s) with the given ID(s), or undefined if no matching elements are found.
+ *
+ * @example
+ *
+ * // Get an object containing elements with IDs "elem1" and "elem2"
+ * const elems = $$byIds('.example', ['elem1', 'elem2']);
+ *
+ * // Use the returned object to manipulate the elements
+ * elems.elem1.classList.add('active');
+ * elems.elem2.innerHTML = 'New content';
  */
-export function $$byId(querySelectorAll, id) {
-        let elems = document.querySelectorAll(querySelectorAll);
+export function $$byIds(querySelectorAll, ids) {
+        const elements = {};
+        const idsArray = [].concat(ids);
 
-        for (let i = 0; i < elems.length; i++) {
-                if (elems[i].id === id) {
-                        return elems[i];
-                }
-        }
-        return undefined;
-}
-
-/**
- * returns a object containing elements that matched the given querySelectorAll and idsArray, or returns undefined if it doesnt find a match.
- * @param {string} querySelectorAll
- * @param {Array<number>} idsArray
- * @returns {object|undefined}
- */
-export function $$byIds(querySelectorAll, idsArray) {
-        let elements = {};
         document.querySelectorAll(querySelectorAll).forEach((elem) => {
                 for (let i = 0; i < idsArray.length; i++) {
                         if (elem.id === idsArray[i]) {
@@ -575,7 +535,9 @@ export function $$byIds(querySelectorAll, idsArray) {
                         }
                 }
         });
+
         if (Object.keys(elements).length === 0) return undefined;
+
         return elements;
 }
 
