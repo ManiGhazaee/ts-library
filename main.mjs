@@ -623,6 +623,70 @@ export function deepCopy(source) {
         return JSON.parse(JSON.stringify(source));
 }
 
+/**
+ * Sets the display property of one or more HTML elements to "block".
+ *
+ * @param {HTMLElement[]|HTMLElement} elements - The HTML element(s) to modify.
+ *
+ * @example
+ * // Set the display of all elements with class "my-element"
+ * const myElements = document.querySelectorAll('.my-element');
+ * displayBlock(myElements);
+ *
+ * // Set the display of a single element with ID "my-element"
+ * const myElement = document.getElementById('my-element');
+ * displayBlock(myElement);
+ */
+export function displayBlock(elements) {
+        let elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                elems[i].style.display = "block";
+        }
+}
+
+/**
+ * Sets the display property of one or more HTML elements to "none".
+ *
+ * @param {HTMLElement[]|HTMLElement} elements - The HTML element(s) to modify.
+ *
+ * @example
+ * // Hide all elements with class "my-element"
+ * const myElements = document.querySelectorAll('.my-element');
+ * displayNone(myElements);
+ *
+ * // Hide a single element with ID "my-element"
+ * const myElement = document.getElementById('my-element');
+ * displayNone(myElement);
+ */
+export function displayNone(elements) {
+        let elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                elems[i].style.display = "none";
+        }
+}
+
+/**
+ * Sets the display property of one or more HTML elements to a specified value.
+ *
+ * @param {HTMLElement[]|HTMLElement} elements - The HTML element(s) to modify.
+ * @param {string} displayString - The value to set the display property to.
+ *
+ * @example
+ * // Set the display of all elements with class "my-element" to "block"
+ * const myElements = document.querySelectorAll('.my-element');
+ * setDisplay(myElements, 'block');
+ *
+ * // Hide a single element with ID "my-element"
+ * const myElement = document.getElementById('my-element');
+ * setDisplay(myElement, 'none');
+ */
+export function setDisplay(elements, displayString) {
+        let elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                elems[i].style.display = displayString;
+        }
+}
+
 // ========================================
 // TEST
 // let elems = getElementsByIds();
