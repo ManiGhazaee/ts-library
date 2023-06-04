@@ -6,7 +6,7 @@ let styleElem = document.getElementById("dark-mode");
 let darkModeCss = `:root { --bg: black; }`;
 let lightModeCss = `:root { --bg: white; }`;
 
-let eventListenerFn = () => {
+let onClickFn = () => {
         dm.toggle();
 
         if (dm.darkModeState === "on") {
@@ -18,4 +18,4 @@ let eventListenerFn = () => {
         }
 };
 
-let dm = new DarkMode(styleElem, button, darkModeCss, lightModeCss, "on", eventListenerFn);
+let dm = new DarkMode(styleElem, button, darkModeCss, lightModeCss, "on", onClickFn);

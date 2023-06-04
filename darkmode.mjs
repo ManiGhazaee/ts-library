@@ -17,7 +17,7 @@ export class DarkMode {
          * @param {string} darkModeCssRules - The CSS rules for dark mode.
          * @param {string} lightModeCssRules - The CSS rules for light mode.
          * @param {"on"|"off"} [darkModeState="off"] - The initial state of dark mode ("on" or "off") (default = "off").
-         * @param {function} [eventListenerFunction] - The function to be called when the button is clicked. Defaults to toggling dark mode.
+         * @param {function} [onClickFunction] - The function to be called when the button is clicked. Defaults to toggling dark mode.
          * @param {string} [localStorageKey="darkMode"] - The key to use for storing the user's preference in local storage (default = "darkMode").
          */
         constructor(
@@ -26,7 +26,7 @@ export class DarkMode {
                 darkModeCssRules,
                 lightModeCssRules,
                 darkModeState = "off",
-                eventListenerFunction = () => {
+                onClickFunction = () => {
                         this.toggle();
                 },
                 localStorageKey = "darkMode"
@@ -37,8 +37,8 @@ export class DarkMode {
                 this.lightModeCssRules = lightModeCssRules;
                 this.darkModeState = darkModeState;
                 this.localStorageKey = localStorageKey;
-                this.eventListenerFunction = eventListenerFunction;
-                this.buttonElement.addEventListener("click", this.eventListenerFunction);
+                this.onClickFunction = onClickFunction;
+                this.buttonElement.addEventListener("click", this.onClickFunction);
                 this.initFromLocalStorage();
         }
 
