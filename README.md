@@ -26,8 +26,6 @@ dark mode example
         const lightModeCss = `:root { --bg-color: white; }`;
 
         const dm = new DarkMode(styleElement, button, darkModeCss, lightModeCss);
-        
-        button.addEventListener("click", () => { dm.toggleDarkMode(); })
       </script>
     </body>
   </html>
