@@ -39,10 +39,10 @@ export class DarkMode {
                 this.buttonElement = buttonElement;
                 this.darkModeCssRules = darkModeCssRules;
                 this.lightModeCssRules = lightModeCssRules;
-                this.darkModeState = darkModeState;
                 this.darkModeButtonClass = darkModeButtonClass;
                 this.lightModeButtonClass = lightModeButtonClass;
                 this.localStorageKey = localStorageKey;
+                this.darkModeState = darkModeState;
                 this.onClickFunction = onClickFunction;
                 this.buttonElement.addEventListener("click", this.onClickFunction);
                 this.initFromLocalStorage();
@@ -87,8 +87,8 @@ export class DarkMode {
          * @public
          */
         initFromLocalStorage() {
-                const ls = localStorage.getItem(this.localStorageKey) || this.darkModeState;
-                if (ls === "on") {
+                this.darkModeState = localStorage.getItem(this.localStorageKey) || this.darkModeState;
+                if (this.darkModeState === "on") {
                         this.enableDarkMode();
                 } else {
                         this.enableLightMode();
@@ -99,20 +99,20 @@ export class DarkMode {
          * @public
          */
         switchToDarkModeButtonClass() {
+                this.buttonElement.classList.add(this.darkModeButtonClass);
                 if (this.buttonElement.classList.contains(this.lightModeButtonClass)) {
                         this.buttonElement.classList.remove(this.lightModeButtonClass);
                 }
-                this.buttonElement.classList.add(this.darkModeButtonClass);
         }
 
         /**
          * @public
          */
         switchToLightModeButtonClass() {
+                this.buttonElement.classList.add(this.lightModeButtonClass);
                 if (this.buttonElement.classList.contains(this.darkModeButtonClass)) {
                         this.buttonElement.classList.remove(this.darkModeButtonClass);
                 }
-                this.buttonElement.classList.add(this.lightModeButtonClass);
         }
 
         /**

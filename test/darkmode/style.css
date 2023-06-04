@@ -1,8 +1,10 @@
 :root {
         --bg: white;
 }
+
 body {
         background-color: var(--bg);
+        transition: 500ms;
 }
 
 button {
@@ -12,10 +14,16 @@ button {
         box-shadow: none;
 }
 
+.gg-sun {
+        cursor: pointer;
+        transition: 500ms;
+}
+
 .dark-mode-button {
         background-color: black;
         color: white;
 }
+
 .light-mode-button {
         background-color: white;
         color: black;

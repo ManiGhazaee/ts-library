@@ -6,6 +6,13 @@ let styleElem = document.getElementById("dark-mode");
 let darkModeCss = `:root { --bg: black; }`;
 let lightModeCss = `:root { --bg: white; }`;
 
-let dm = new DarkMode(styleElem, button, darkModeCss, lightModeCss, "on");
+const onClickFn = () => {
+        dm.toggle();
+        if (dm.darkModeState === "on") {
+                button.style.transform = "rotate(30deg)";
+        } else {
+                button.style.transform = "rotate(-30deg)";
+        }
+};
 
-
+let dm = new DarkMode(styleElem, button, darkModeCss, lightModeCss, "on", undefined, undefined, onClickFn);
