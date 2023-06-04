@@ -17,6 +17,8 @@ export class DarkMode {
          * @param {string} darkModeCssRules - The CSS rules for dark mode.
          * @param {string} lightModeCssRules - The CSS rules for light mode.
          * @param {"on"|"off"} [darkModeState="off"] - The initial state of dark mode ("on" or "off") (default = "off").
+         * @param {string} [darkModeButtonClass="dark-mode-button"] - Class of button when dark mode is on (default = "dark-mode-button").
+         * @param {string} [lightModeButtonClass="light-mode-button"] - Class of button when light mode is on (default = "light-mode-button").
          * @param {function} [onClickFunction] - The function to be called when the button is clicked. Defaults to toggling dark mode.
          * @param {string} [localStorageKey="darkMode"] - The key to use for storing the user's preference in local storage (default = "darkMode").
          */
@@ -26,6 +28,8 @@ export class DarkMode {
                 darkModeCssRules,
                 lightModeCssRules,
                 darkModeState = "off",
+                darkModeButtonClass = "dark-mode-button",
+                lightModeButtonClass = "light-mode-button",
                 onClickFunction = () => {
                         this.toggle();
                 },
@@ -36,6 +40,8 @@ export class DarkMode {
                 this.darkModeCssRules = darkModeCssRules;
                 this.lightModeCssRules = lightModeCssRules;
                 this.darkModeState = darkModeState;
+                this.darkModeButtonClass = darkModeButtonClass;
+                this.lightModeButtonClass = lightModeButtonClass;
                 this.localStorageKey = localStorageKey;
                 this.onClickFunction = onClickFunction;
                 this.buttonElement.addEventListener("click", this.onClickFunction);
@@ -50,6 +56,7 @@ export class DarkMode {
                 this.styleElement.innerHTML = this.darkModeCssRules;
                 this.darkModeState = "on";
                 localStorage.setItem(this.localStorageKey, "on");
+                this.styleButton();
         }
 
         /**
@@ -60,6 +67,7 @@ export class DarkMode {
                 this.styleElement.innerHTML = this.lightModeCssRules;
                 this.darkModeState = "off";
                 localStorage.setItem(this.localStorageKey, "off");
+                this.styleButton();
         }
 
         /**
@@ -84,6 +92,37 @@ export class DarkMode {
                         this.enableDarkMode();
                 } else {
                         this.enableLightMode();
+                }
+        }
+
+        /**
+         * @public
+         */
+        switchToDarkModeButtonClass() {
+                if (this.buttonElement.classList.contains(this.lightModeButtonClass)) {
+                        this.buttonElement.classList.remove(this.lightModeButtonClass);
+                }
+                this.buttonElement.classList.add(this.darkModeButtonClass);
+        }
+
+        /**
+         * @public
+         */
+        switchToLightModeButtonClass() {
+                if (this.buttonElement.classList.contains(this.darkModeButtonClass)) {
+                        this.buttonElement.classList.remove(this.darkModeButtonClass);
+                }
+                this.buttonElement.classList.add(this.lightModeButtonClass);
+        }
+
+        /**
+         * @public
+         */
+        styleButton() {
+                if (this.darkModeState === "on") {
+                        this.switchToDarkModeButtonClass();
+                } else {
+                        this.switchToLightModeButtonClass();
                 }
         }
 }

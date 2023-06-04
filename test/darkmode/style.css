@@ -4,3 +4,19 @@
 body {
         background-color: var(--bg);
 }
+
+button {
+        appearance: none;
+        border: none;
+        padding: 5px;
+        box-shadow: none;
+}
+
+.dark-mode-button {
+        background-color: black;
+        color: white;
+}
+.light-mode-button {
+        background-color: white;
+        color: black;
+}
