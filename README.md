@@ -13,19 +13,16 @@ dark mode example
            background-color: var(--bg-color);
         }
       </style>
-      <style id="dark-mode"></style>
     </head>
     <body>
       <button id="dark-mode-button">DarkMode</button>
       <script type="module">
         import { DarkMode } from "node_modules/darkmode.mjs"
 
-        const styleElement = document.getElementById('dark-mode');
-        const button = document.getElementById('dark-mode-button');
         const darkModeCss = `:root { --bg-color: black; }`;
         const lightModeCss = `:root { --bg-color: white; }`;
 
-        const dm = new DarkMode(styleElement, button, darkModeCss, lightModeCss);
+        const dm = new DarkMode(darkModeCss, lightModeCss);
       </script>
     </body>
   </html>

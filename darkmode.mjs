@@ -3,40 +3,40 @@
  * @class
  * @public
  * @example
- *  const styleElement = document.getElementById('dark-mode');
- *  const button = document.getElementById('dark-mode-button');
  *  const darkModeCss = `:root { --bg-color: black; }`;
  *  const lightModeCss = `:root { --bg-color: white; }`;
- *  const dm = new DarkMode(styleElement, button, darkModeCss, lightModeCss);
+ *  const dm = new DarkMode(darkModeCss, lightModeCss);
  */
 export class DarkMode {
         /**
+         * Creates a new instance of the DarkMode class.
          * @constructor
-         * @param {HTMLElement} styleElement - The HTML <style> element to which the CSS rules will be applied.
-         * @param {HTMLElement} buttonElement - The HTML button to toggle dark mode.
-         * @param {string} darkModeCssRules - The CSS rules for dark mode.
-         * @param {string} lightModeCssRules - The CSS rules for light mode.
-         * @param {"on"|"off"} [darkModeState="off"] - The initial state of dark mode ("on" or "off") (default = "off").
-         * @param {string} [darkModeButtonClass="dark-mode-button"] - Class of button when dark mode is on (default = "dark-mode-button").
-         * @param {string} [lightModeButtonClass="light-mode-button"] - Class of button when light mode is on (default = "light-mode-button").
-         * @param {function} [onClickFunction] - The function to be called when the button is clicked. Defaults to toggling dark mode.
-         * @param {string} [localStorageKey="darkMode"] - The key to use for storing the user's preference in local storage (default = "darkMode").
+         * @param {string} darkModeCssRules - The CSS rules to apply when dark mode is enabled.
+         * @param {string} lightModeCssRules - The CSS rules to apply when light mode is enabled.
+         * @param {function} onClickFunction - The function to call when the button is clicked. Defaults to toggling between dark and light mode.
+         * @param {HTMLElement} buttonElement - The button element used to toggle between dark and light mode. Defaults to the element with ID "dark-mode-button".
+         * @param {string} darkModeState - The initial state of dark mode. Defaults to "on".
+         * @param {string} darkModeButtonClass - The CSS class to apply to the button when dark mode is enabled. Defaults to "dark-mode-button".
+         * @param {string} lightModeButtonClass - The CSS class to apply to the button when light mode is enabled. Defaults to "light-mode-button".
+         * @param {HTMLStyleElement} styleElement - The style element used to apply CSS rules for dark and light mode. Defaults to the element with ID "dark-mode-style", or creates a new one if none exists.
+         * @param {string} localStorageKey - The key used to store the user's preference for dark or light mode in local storage. Defaults to "darkMode".
          */
         constructor(
-                styleElement,
-                buttonElement,
                 darkModeCssRules,
                 lightModeCssRules,
-                darkModeState = "off",
-                darkModeButtonClass = "dark-mode-button",
-                lightModeButtonClass = "light-mode-button",
                 onClickFunction = () => {
                         this.toggle();
                 },
+                buttonElement,
+                darkModeState = "on",
+                darkModeButtonClass = "dark-mode-button",
+                lightModeButtonClass = "light-mode-button",
+                styleElement,
                 localStorageKey = "darkMode"
         ) {
-                this.styleElement = styleElement;
-                this.buttonElement = buttonElement;
+                this.styleElement = styleElement || document.getElementById("dark-mode-style");
+                this.initStyleElement();
+                this.buttonElement = buttonElement || document.getElementById("dark-mode-button");
                 this.darkModeCssRules = darkModeCssRules;
                 this.lightModeCssRules = lightModeCssRules;
                 this.darkModeButtonClass = darkModeButtonClass;
@@ -123,6 +123,25 @@ export class DarkMode {
                         this.switchToDarkModeButtonClass();
                 } else {
                         this.switchToLightModeButtonClass();
+                }
+        }
+
+        /**
+         * @public
+         */
+        initStyleElement() {
+                if (this.styleElement == null) {
+                        let styleElem = document.createElement("style");
+                        styleElem.setAttribute("id", "dark-mode-style");
+                        document.querySelector("head").append(styleElem);
+                        this.styleElement = styleElem;
+                }
+        }
+
+        initButtonElement() {
+                if (this.buttonElement == null) {
+                        let buttonElement = document.createElement("button").setAttribute("id", "dark-mode-button");
+                        styleElement.appendChild(document.getElementsByTagName("body"));
                 }
         }
 }

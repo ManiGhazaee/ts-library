@@ -15,4 +15,4 @@ const onClickFn = () => {
         }
 };
 
-let dm = new DarkMode(styleElem, button, darkModeCss, lightModeCss, "on", undefined, undefined, onClickFn);
+let dm = new DarkMode(darkModeCss, lightModeCss, onClickFn);
