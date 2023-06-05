@@ -18,18 +18,25 @@ Array.prototype.mat = function (index) {
 
 /**
  * A method added to the Array prototype that checks whether two arrays are equal.
- * @param {Array} array - The array to compare with.
- * @returns {Boolean|undefined} - Returns true if the arrays are equal, false if not. Returns undefined if the argument passed is not an array.
+ * @param {array} array - The array to compare with.
+ * @returns {boolean|undefined} - Returns true if the arrays are equal, false if not. Returns undefined if the argument passed is not an array.
  * @example
  * // Returns true
  * [1, 2, 3].equals([1, 2, 3]);
+ *
+ * // Returns false
+ * [1, 2, 3].equals([2, 1, 3]);
  *
  * // Returns false
  * [1, 2, undefined].equals([1, 2, 3]);
  */
 Array.prototype.equals = function (array) {
         if (Array.isArray(array)) {
-                return JSON.stringify(this) === JSON.stringify(array);
+                try {
+                        return JSON.stringify(this) === JSON.stringify(array);
+                } catch (err) {
+                        console.error(err);
+                }
         }
         return undefined;
 };
