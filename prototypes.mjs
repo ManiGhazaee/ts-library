@@ -15,3 +15,21 @@ Array.prototype.mat = function (index) {
         }
         return this[index];
 };
+
+/**
+ * A method added to the Array prototype that checks whether two arrays are equal.
+ * @param {Array} array - The array to compare with.
+ * @returns {Boolean|undefined} - Returns true if the arrays are equal, false if not. Returns undefined if the argument passed is not an array.
+ * @example
+ * // Returns true
+ * [1, 2, 3].equals([1, 2, 3]);
+ *
+ * // Returns false
+ * [1, 2, undefined].equals([1, 2, 3]);
+ */
+Array.prototype.equals = function (array) {
+        if (Array.isArray(array)) {
+                return JSON.stringify(this) === JSON.stringify(array);
+        }
+        return undefined;
+};
