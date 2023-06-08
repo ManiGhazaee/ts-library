@@ -17,26 +17,31 @@ Array.prototype.mat = function (index) {
 };
 
 /**
- * A method added to the Array prototype that checks whether two arrays are equal.
- * @param {array} array - The array to compare with.
- * @returns {boolean|undefined} - Returns true if the arrays are equal, false if not. Returns undefined if the argument passed is not an array.
+ * Sets the display property of the HTML element to "none".
+ *
+ * @function
+ * @name Element.prototype.disNone
+ * @returns {void}
+ *
  * @example
- * // Returns true
- * [1, 2, 3].equals([1, 2, 3]);
- *
- * // Returns false
- * [1, 2, 3].equals([2, 1, 3]);
- *
- * // Returns false
- * [1, 2, undefined].equals([1, 2, 3]);
+ * const myElem = document.querySelector("#my-element");
+ * myElem.disNone();
  */
-Array.prototype.equals = function (array) {
-        if (Array.isArray(array)) {
-                try {
-                        return JSON.stringify(this) === JSON.stringify(array);
-                } catch (err) {
-                        console.error(err);
-                }
-        }
-        return undefined;
+Element.prototype.disNone = function () {
+        this.style.display = "none";
+};
+
+/**
+ * Sets the display property of the HTML element to "block".
+ *
+ * @function
+ * @name Element.prototype.disBlock
+ * @returns {void}
+ *
+ * @example
+ * const myElem = document.querySelector("#my-element");
+ * myElem.disBlock();
+ */
+Element.prototype.disBlock = function () {
+        this.style.display = "block";
 };
