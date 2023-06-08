@@ -45,3 +45,17 @@ Element.prototype.disNone = function () {
 Element.prototype.disBlock = function () {
         this.style.display = "block";
 };
+
+/**
+ * Gets the last element of the array.
+ *
+ * @name Array.prototype.last
+ * @type {any}
+ * @readonly
+ * @memberOf Array.prototype
+ */
+Object.defineProperty(Array.prototype, "last", {
+        get: function () {
+                return this[this.length - 1];
+        },
+});
