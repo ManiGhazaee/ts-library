@@ -526,19 +526,18 @@ export function rmDuplicate(array) {
  */
 export function $$byIds(querySelectorAll, ids) {
         const elements = {};
-        const idsArray = [].concat(ids);
 
-        document.querySelectorAll(querySelectorAll).forEach((elem) => {
-                for (let i = 0; i < idsArray.length; i++) {
-                        if (elem.id === idsArray[i]) {
-                                elements[idsArray[i]] = elem;
-                        }
-                }
-        });
-
-        if (Object.keys(elements).length === 0) return undefined;
-
-        return elements;
+        const idsArray = Array.isArray(ids) ? ids : [ids];
+    
+        const matchedElements = document.querySelectorAll(querySelectorAll);
+    
+        for (const elem of matchedElements) {
+            if (idsArray.includes(elem.id)) {
+                elements[elem.id] = elem;
+            }
+        }
+    
+        return Object.keys(elements).length === 0 ? undefined : elements;
 }
 
 /**
@@ -556,35 +555,16 @@ export function $$byIds(querySelectorAll, ids) {
  * cssToElements("background-color: yellow; border: 1px solid black;", elements);
  */
 export function cssToElements(cssRulesString, elementsArray) {
-        const elements = [].concat(elementsArray);
+        const elements = Array.isArray(elementsArray) ? elementsArray : [elementsArray];
 
-        for (let i = 0; i < elements.length; i++) {
-                let style = elements[i].style.cssText + cssRulesString;
-                style = style.split(/[:;]/g).filter((v) => v != "");
+        for (const element of elements) {
+                const existingStyles = element.style.cssText;
+                const combinedStyles = existingStyles + cssRulesString;
 
-                for (let i = 0; i < style.length; i += 2) {
-                        style[i] = style[i].trim();
-                }
-                for (let i = 0; i < style.length; i++) {
-                        if (i % 2 === 1) continue;
-                        for (let j = i + 2; j < style.length; j++) {
-                                if (style[i] === style[j]) {
-                                        style.splice(i, 2);
-                                        i--;
-                                        break;
-                                }
-                        }
-                }
-                for (let i = 0; i < style.length; i++) {
-                        if (i % 2 === 0) {
-                                style[i] += ":";
-                        } else {
-                                style[i] += ";";
-                        }
-                }
+                const uniqueStyles = [...new Set(combinedStyles.split(/[:;]/g).filter(Boolean))];
+                const formattedStyles = uniqueStyles.map((style, index) => (index % 2 === 0 ? style.trim() + ":" : style.trim() + ";")).join("");
 
-                style = style.join("");
-                elements[i].style.cssText = style;
+                element.style.cssText = formattedStyles;
         }
 }
 
