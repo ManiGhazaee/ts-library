@@ -46,6 +46,44 @@ export function kebabToCamel(str) {
         return str.join("");
 }
 
+//these four functions below are not exported because the changeCase function combains them
+/**
+ * changes a string to a camelcase or pascal case
+ * @param {string} str - The string to convert 
+ * @param {*} changeTo - The case formatter to use
+ * @returns a formatted string
+ */
+function toCamelOrPascalCase(str, changeTo) {
+        let result = str.split(/[-_ ]+/).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('');
+        return changeTo === 'camel' ? result.charAt(0).toLowerCase() + result.slice(1) : result;
+}
+
+/**
+ * 
+ * @param {string} str - the string to convert
+ * @param {string} changeTo - The case formatter to use
+ * @returns a formatted string
+ */
+function toSnakeOrKebabOrScreamCase(str, changeTo) {
+        let separator = changeTo === 'kebab' ? '-' : '_';
+        let result = str.split(/[-_ ]+/).join(separator);
+        if (changeTo === 'scream') {
+                result = result.toUpperCase();
+        }
+        return result;
+}
+
+/**
+ * 
+ * @param {string} str - the string to convert
+ * @param {string} changeTo - the case formatter to use
+ * @returns a formatter string 
+ */
+function toUpperOrLowerCase(str, changeTo) {
+        let result = str.replace(/[-_ ]+/g, '');
+        return changeTo === 'upper' ? result.toUpperCase() : result.toLowerCase();
+}
+
 /**
  * Changes the case of a string to the specified format.
  * @param {string} str - The string to change the case of.
@@ -74,78 +112,21 @@ export function kebabToCamel(str) {
  * changeCase("-Example_string-with all-_ CASES__", "lower");
  */
 export function changeCase(str, changeTo) {
-        str = str.split("");
-        if (changeTo === "camel" || changeTo === "pascal") {
-                for (let i = 0; i < str.length; i++) {
-                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
-                                str.splice(i, 1);
-                                str[i] = str[i].toUpperCase();
-                        } else {
-                                str[i] = str[i].toLowerCase();
-                        }
-                }
-                if (changeTo === "camel") {
-                        str[0] = str[0].toLowerCase();
-                } else {
-                        str[0] = str[0].toUpperCase();
-                }
-                for (let i = 0; i < str.length; i++) {
-                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
-                                str.splice(i, 1);
-                                i--;
-                        }
-                }
-        } else if (changeTo === "snake" || changeTo === "kebab" || changeTo === "scream") {
-                for (let i = 0; i < str.length; i++) {
-                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
-                                if (changeTo === "snake" || changeTo === "scream") {
-                                        str[i] = "_";
-                                } else {
-                                        str[i] = "-";
-                                }
-                        } else if (str[i] === str[i].toUpperCase() && str[i + 1] != null && str[i + 1] !== str[i + 1].toUpperCase()) {
-                                str[i] = str[i].toLowerCase();
-                                if (changeTo === "snake" || changeTo === "scream") {
-                                        str.splice(i, 0, "_");
-                                } else {
-                                        str.splice(i, 0, "-");
-                                }
-                                i++;
-                        } else {
-                                str[i] = str[i].toLowerCase();
-                        }
-                }
-                for (let i = 0; i < str.length - 1; i++) {
-                        if ((str[i] === "_" && (str[i + 1] === "_" || str[i + 1] === "-")) || (str[i] === "-" && (str[i + 1] === "_" || str[i + 1] === "-"))) {
-                                str.splice(i, 1);
-                                i--;
-                        }
-                }
-                if (changeTo === "scream") {
-                        for (let i = 0; i < str.length; i++) {
-                                str[i] = str[i].toUpperCase();
-                        }
-                }
-        } else if (changeTo === "upper" || changeTo === "lower") {
-                for (let i = 0; i < str.length; i++) {
-                        if (str[i] === "-" || str[i] === "_" || str[i] === " ") {
-                                str.splice(i, 1);
-                                i--;
-                        }
-                }
-                if (changeTo === "upper") {
-                        for (let i = 0; i < str.length; i++) {
-                                str[i] = str[i].toUpperCase();
-                        }
-                } else {
-                        for (let i = 0; i < str.length; i++) {
-                                str[i] = str[i].toLowerCase();
-                        }
-                }
+        switch (changeTo) {
+                case 'camel':
+                case 'pascal':
+                        return toCamelOrPascalCase(str, changeTo);
+                case 'snake':
+                case 'kebab':
+                case 'scream':
+                        return toSnakeOrKebabOrScreamCase(str, changeTo);
+                case 'upper':
+                case 'lower':
+                        return toUpperOrLowerCase(str, changeTo);
+                default:
+                        throw new Error(`Invalid case: ${changeTo}`);
         }
-        return str.join("");
 }
-
 // console.log(changeCase("-Example_string-with all-_ CASES__", "camel"));
 // console.log(changeCase("-Example_string-with all-_ CASES__", "pascal"));
 // console.log(changeCase("-Example_string-with all-_ CASES__", "snake"));
@@ -528,15 +509,15 @@ export function $$byIds(querySelectorAll, ids) {
         const elements = {};
 
         const idsArray = Array.isArray(ids) ? ids : [ids];
-    
+
         const matchedElements = document.querySelectorAll(querySelectorAll);
-    
+
         for (const elem of matchedElements) {
-            if (idsArray.includes(elem.id)) {
-                elements[elem.id] = elem;
-            }
+                if (idsArray.includes(elem.id)) {
+                        elements[elem.id] = elem;
+                }
         }
-    
+
         return Object.keys(elements).length === 0 ? undefined : elements;
 }
 
