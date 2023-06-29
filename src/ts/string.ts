@@ -44,77 +44,41 @@ export function kebabToCamel(str: string): string {
  */
 type Case = "camel" | "pascal" | "snake" | "kebab" | "scream" | "upper" | "lower";
 
-export function changeCase(string: string, changeTo: Case): string {
-        let arr: string[] = string.split("");
-        if (changeTo === "camel" || changeTo === "pascal") {
-                for (let i = 0; i < arr.length; i++) {
-                        if (arr[i] === "-" || arr[i] === "_" || arr[i] === " ") {
-                                arr.splice(i, 1);
-                                arr[i] = arr[i].toUpperCase();
-                        } else {
-                                arr[i] = arr[i].toLowerCase();
-                        }
-                }
-                if (changeTo === "camel") {
-                        arr[0] = arr[0].toLowerCase();
-                } else {
-                        arr[0] = arr[0].toUpperCase();
-                }
-                for (let i = 0; i < arr.length; i++) {
-                        if (arr[i] === "-" || arr[i] === "_" || arr[i] === " ") {
-                                arr.splice(i, 1);
-                                i--;
-                        }
-                }
-        } else if (changeTo === "snake" || changeTo === "kebab" || changeTo === "scream") {
-                for (let i = 0; i < arr.length; i++) {
-                        if (arr[i] === "-" || arr[i] === "_" || arr[i] === " ") {
-                                if (changeTo === "snake" || changeTo === "scream") {
-                                        arr[i] = "_";
-                                } else {
-                                        arr[i] = "-";
-                                }
-                        } else if (arr[i] === arr[i].toUpperCase() && arr[i + 1] != null && arr[i + 1] !== arr[i + 1].toUpperCase()) {
-                                arr[i] = arr[i].toLowerCase();
-                                if (changeTo === "snake" || changeTo === "scream") {
-                                        arr.splice(i, 0, "_");
-                                } else {
-                                        arr.splice(i, 0, "-");
-                                }
-                                i++;
-                        } else {
-                                arr[i] = arr[i].toLowerCase();
-                        }
-                }
-                for (let i = 0; i < arr.length - 1; i++) {
-                        if ((arr[i] === "_" && (arr[i + 1] === "_" || arr[i + 1] === "-")) || (arr[i] === "-" && (arr[i + 1] === "_" || arr[i + 1] === "-"))) {
-                                arr.splice(i, 1);
-                                i--;
-                        }
-                }
-                if (changeTo === "scream") {
-                        for (let i = 0; i < arr.length; i++) {
-                                arr[i] = arr[i].toUpperCase();
-                        }
-                }
-        } else if (changeTo === "upper" || changeTo === "lower") {
-                for (let i = 0; i < arr.length; i++) {
-                        if (arr[i] === "-" || arr[i] === "_" || arr[i] === " ") {
-                                arr.splice(i, 1);
-                                i--;
-                        }
-                }
-                if (changeTo === "upper") {
-                        for (let i = 0; i < arr.length; i++) {
-                                arr[i] = arr[i].toUpperCase();
-                        }
-                } else {
-                        for (let i = 0; i < arr.length; i++) {
-                                arr[i] = arr[i].toLowerCase();
-                        }
-                }
+export function changeCase(str: string, changeTo: Case) {
+        switch (changeTo) {
+                case "camel":
+                case "pascal":
+                        return toCamelOrPascalCase(str, changeTo);
+                case "snake":
+                case "kebab":
+                case "scream":
+                        return toSnakeOrKebabOrScreamCase(str, changeTo);
+                case "upper":
+                case "lower":
+                        return toUpperOrLowerCase(str, changeTo);
+                default:
+                        throw new Error(`Invalid case: ${changeTo}`);
         }
-        return arr.join("");
+}
+export function toCamelOrPascalCase(str: string, changeTo: "camel" | "pascal") {
+        let result = str
+                .split(/[-_ ]+/)
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join("");
+        return changeTo === "camel" ? result.charAt(0).toLowerCase() + result.slice(1) : result;
+}
+export function toUpperOrLowerCase(str: string, changeTo: "lower" | "upper") {
+        let result = str.replace(/[-_ ]+/g, "");
+        return changeTo === "upper" ? result.toUpperCase() : result.toLowerCase();
+}
+
+export function toSnakeOrKebabOrScreamCase(str: string, changeTo: "snake" | "kebab" | "scream") {
+        let separator = changeTo === "kebab" ? "-" : "_";
+        let result = str.split(/[-_ ]+/).join(separator);
+        if (changeTo === "scream") {
+                result = result.toUpperCase();
+        }
+        return result;
 }
 
 // console.log(changeCase("-Example_string-with all-_ CASES__", "camel"));

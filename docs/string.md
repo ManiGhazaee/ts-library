@@ -70,6 +70,51 @@ changeCase(string, "upper");
 changeCase(string, "lower");
 ```
 
+### `toCamelOrPascalCase(str: string, changeTo: "camel" | "pascal"): string`
+
+This function takes a string and a string value of either "camel" or "pascal", and returns the string converted to either camelCase or PascalCase, respectively.
+
+```typescript
+const string = "-Example_string-with all-_ CASES__";
+
+// Returns "exampleStringWithAllCases"
+toCamelOrPascalCase(string, "camel");
+
+// Returns "ExampleStringWithAllCases"
+toCamelOrPascalCase(string, "pascal");
+```
+
+### `toUpperOrLowerCase(str: string, changeTo: "lower" | "upper"): string`
+
+This function takes a string and a string value of either "lower" or "upper", and returns the string converted to either all lowercase or all uppercase, respectively.
+
+```typescript
+const string = "-Example_string-with all-_ CASES__";
+
+// Returns "EXAMPLESTRINGWITHALLCASES"
+changeCase(string, "upper");
+
+// Returns "examplestringwithallcases"
+changeCase(string, "lower");
+```
+
+### `toSnakeOrKebabOrScreamCase(str: string, changeTo: "snake" | "kebab" | "scream"): string`
+
+This function takes a string and a string value of either "snake", "kebab", or "scream", and returns the string converted to snake_case, kebab-case, or SCREAMING_SNAKE_CASE, respectively.
+
+```typescript
+const string = "-Example_string-with all-_ CASES__";
+
+// Returns "_example_string_with_all_cases_"
+changeCase(string, "snake");
+
+// Returns "-example-string-with-all-cases-"
+changeCase(string, "kebab");
+
+// Returns "_EXAMPLE_STRING_WITH_ALL_CASES_"
+changeCase(string, "scream");
+```
+
 ### `rmCharAt(str: string, index: number): string`
 
 removes a character at the index given.
