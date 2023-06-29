@@ -492,39 +492,6 @@ export function rmDuplicate(array) {
 }
 
 /**
- * Returns an object containing elements with the given ID(s) that match a CSS selector.
- *
- * @param {string} querySelectorAll - The CSS selector to match elements.
- * @param {string|string[]} ids - The ID(s) of the element(s) to return.
- *
- * @returns {object|undefined} - An object containing the element(s) with the given ID(s), or undefined if no matching elements are found.
- *
- * @example
- *
- * // Get an object containing elements with IDs "elem1" and "elem2"
- * const elems = $$byIds('.example', ['elem1', 'elem2']);
- *
- * // Use the returned object to manipulate the elements
- * elems.elem1.classList.add('active');
- * elems.elem2.innerHTML = 'New content';
- */
-export function $$byIds(querySelectorAll, ids) {
-        const elements = {};
-
-        const idsArray = Array.isArray(ids) ? ids : [ids];
-
-        const matchedElements = document.querySelectorAll(querySelectorAll);
-
-        for (const elem of matchedElements) {
-                if (idsArray.includes(elem.id)) {
-                        elements[elem.id] = elem;
-                }
-        }
-
-        return Object.keys(elements).length === 0 ? undefined : elements;
-}
-
-/**
  * Applies the given CSS rules to the specified element(s). without removing or duplicating old cssText.
  * (enter valid css like examples and dont put unnecessary semicolons like ";;")
  * @param {string} cssRulesString - The CSS rules to apply.
@@ -652,26 +619,11 @@ export function setDisplay(elements, displayString) {
 }
 
 /**
- * takes an array of elements and makes it flat.
- * @param {[]}} arr - Array of elements
- * @returns a flat array
- *
- * @example
- * arr = [0, 1, 2, [3, 4]];
- * return value => [1, 2, 3, 4];
- */
-export function flattenArray(arr) {
-        return arr.reduce((flat, toFlatten) => {
-                return flat.concat(Array.isArray(toFlatten) ? flattenArray(toFlatten) : toFlatten);
-        }, []);
-}
-
-/**
  * Function to check if an object is empty
  * @param {object} obj - Object to check if it is empty
  * @returns true or false value
  */
-export function isEmpty(obj) {
+export function isObjectEmpty(obj) {
         return Object.keys(obj).length === 0 && obj.constructor === Object;
 }
 

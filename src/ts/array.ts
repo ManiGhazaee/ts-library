@@ -35,9 +35,14 @@ export function rmDuplicate<T>(array: T[]) {
 
 /**
  * Creates a deep copy of the given object or array using JSON serialization and deserialization.
- * @param {object|array} source - The object or array to copy.
- * @returns {object|array} A new object or array with the same properties and values as the source.
  */
 export function deepCopy<T>(source: T): T {
         return JSON.parse(JSON.stringify(source));
+}
+
+/**
+ * Function to get a random item from an array
+ */
+export function getRandomItem<T>(arr: T[]): T {
+        return arr[Math.floor(Math.random() * arr.length)];
 }

@@ -33,3 +33,14 @@ source: [deepCopy](../src/ts/array.ts#deepCopy)
 let array = [1, 2, 2, 3];
 deepCopy(array); // returns [1, 2, 2, 3]
 ```
+
+## `getRandomItem<T>(arr: T[]): T`
+
+Function to get a random item from an array.
+
+source: [getRandomItem](../src/ts/array.ts#getRandomItem)
+
+```typescript
+let array = [1, 2, 2, 3];
+getRandomItem(array); 
+```

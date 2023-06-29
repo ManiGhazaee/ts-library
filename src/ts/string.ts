@@ -17,9 +17,6 @@ export function kebabToCamel(str: string): string {
 
 /**
  * Changes the case of a string to the specified format.
- * @param {string} str - The string to change the case of.
- * @param {("camel"|"pascal"|"snake"|"kebab"|"scream"|"upper"|"lower")} changeTo - The case format to change the string to.
- * @returns {string} - The original string with its case changed to the specified format.
  * @example
  * // Returns "exampleStringWithAllCases"
  * changeCase("-Example_string-with all-_ CASES__", "camel");
@@ -42,9 +39,7 @@ export function kebabToCamel(str: string): string {
  * // Returns "examplestringwithallcases"
  * changeCase("-Example_string-with all-_ CASES__", "lower");
  */
-type Case = "camel" | "pascal" | "snake" | "kebab" | "scream" | "upper" | "lower";
-
-export function changeCase(str: string, changeTo: Case) {
+export function changeCase(str: string, changeTo: "camel" | "pascal" | "snake" | "kebab" | "scream" | "upper" | "lower") {
         switch (changeTo) {
                 case "camel":
                 case "pascal":
