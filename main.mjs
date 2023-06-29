@@ -4,14 +4,14 @@
  * @requires {@link kebabToCamel}
  */
 export function getElementsByIds() {
-    let elementsById = {};
-    let allElements = document.querySelectorAll("*");
-    for (let i = 0; i < allElements.length; i++) {
-        if (allElements[i].id != null && allElements[i].id !== "") {
-            elementsById[kebabToCamel(allElements[i].id)] = allElements[i];
+        let elementsById = {};
+        let allElements = document.querySelectorAll("*");
+        for (let i = 0; i < allElements.length; i++) {
+                if (allElements[i].id != null && allElements[i].id !== "") {
+                        elementsById[kebabToCamel(allElements[i].id)] = allElements[i];
+                }
         }
-    }
-    return elementsById;
+        return elementsById;
 }
 
 /**
@@ -22,11 +22,11 @@ export function getElementsByIds() {
  * @returns {void}
  */
 export function createAndAppendElement(tagName, attributes, parentElem) {
-    const newElem = document.createElement(tagName);
-    for (const attr in attributes) {
-        newElem.setAttribute(attr, attributes[attr]);
-    }
-    parentElem.appendChild(newElem);
+        const newElem = document.createElement(tagName);
+        for (const attr in attributes) {
+                newElem.setAttribute(attr, attributes[attr]);
+        }
+        parentElem.appendChild(newElem);
 }
 
 /**
@@ -35,53 +35,56 @@ export function createAndAppendElement(tagName, attributes, parentElem) {
  * @returns {string} The converted string in camelCase.
  */
 export function kebabToCamel(str) {
-    str = str.split("");
-    for (let i = 0; i < str.length; i++) {
-        if (str[i] === "-" && str[i + 1] != null) {
-            str[i + 1] = str[i + 1].toUpperCase();
-            str.splice(i, 1);
-            i--;
+        str = str.split("");
+        for (let i = 0; i < str.length; i++) {
+                if (str[i] === "-" && str[i + 1] != null) {
+                        str[i + 1] = str[i + 1].toUpperCase();
+                        str.splice(i, 1);
+                        i--;
+                }
         }
-    }
-    return str.join("");
+        return str.join("");
 }
 
 //these four functions below are not exported because the changeCase function combains them
 /**
  * changes a string to a camelcase or pascal case
- * @param {string} str - The string to convert 
+ * @param {string} str - The string to convert
  * @param {*} changeTo - The case formatter to use
  * @returns a formatted string
  */
 function toCamelOrPascalCase(str, changeTo) {
-    let result = str.split(/[-_ ]+/).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('');
-    return changeTo === 'camel' ? result.charAt(0).toLowerCase() + result.slice(1) : result;
+        let result = str
+                .split(/[-_ ]+/)
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join("");
+        return changeTo === "camel" ? result.charAt(0).toLowerCase() + result.slice(1) : result;
 }
 
 /**
- * 
+ *
  * @param {string} str - the string to convert
  * @param {string} changeTo - The case formatter to use
  * @returns a formatted string
  */
 function toSnakeOrKebabOrScreamCase(str, changeTo) {
-    let separator = changeTo === 'kebab' ? '-' : '_';
-    let result = str.split(/[-_ ]+/).join(separator);
-    if (changeTo === 'scream') {
-        result = result.toUpperCase();
-    }
-    return result;
+        let separator = changeTo === "kebab" ? "-" : "_";
+        let result = str.split(/[-_ ]+/).join(separator);
+        if (changeTo === "scream") {
+                result = result.toUpperCase();
+        }
+        return result;
 }
 
 /**
- * 
+ *
  * @param {string} str - the string to convert
  * @param {string} changeTo - the case formatter to use
- * @returns a formatter string 
+ * @returns a formatter string
  */
 function toUpperOrLowerCase(str, changeTo) {
-    let result = str.replace(/[-_ ]+/g, '');
-    return changeTo === 'upper' ? result.toUpperCase() : result.toLowerCase();
+        let result = str.replace(/[-_ ]+/g, "");
+        return changeTo === "upper" ? result.toUpperCase() : result.toLowerCase();
 }
 
 /**
@@ -112,20 +115,20 @@ function toUpperOrLowerCase(str, changeTo) {
  * changeCase("-Example_string-with all-_ CASES__", "lower");
  */
 export function changeCase(str, changeTo) {
-    switch (changeTo) {
-        case 'camel':
-        case 'pascal':
-            return toCamelOrPascalCase(str, changeTo);
-        case 'snake':
-        case 'kebab':
-        case 'scream':
-            return toSnakeOrKebabOrScreamCase(str, changeTo);
-        case 'upper':
-        case 'lower':
-            return toUpperOrLowerCase(str, changeTo);
-        default:
-            throw new Error(`Invalid case: ${changeTo}`);
-    }
+        switch (changeTo) {
+                case "camel":
+                case "pascal":
+                        return toCamelOrPascalCase(str, changeTo);
+                case "snake":
+                case "kebab":
+                case "scream":
+                        return toSnakeOrKebabOrScreamCase(str, changeTo);
+                case "upper":
+                case "lower":
+                        return toUpperOrLowerCase(str, changeTo);
+                default:
+                        throw new Error(`Invalid case: ${changeTo}`);
+        }
 }
 // console.log(changeCase("-Example_string-with all-_ CASES__", "camel"));
 // console.log(changeCase("-Example_string-with all-_ CASES__", "pascal"));
@@ -142,7 +145,7 @@ export function changeCase(str, changeTo) {
  * @returns {string}
  */
 export function rmCharAt(str, index) {
-    return str.slice(0, index) + str.slice(index + 1);
+        return str.slice(0, index) + str.slice(index + 1);
 }
 
 /**
@@ -154,7 +157,7 @@ export function rmCharAt(str, index) {
  * @returns {string}
  */
 export function spice(string, start, deleteCount, insertString) {
-    return string.slice(0, start) + (insertString || "") + string.slice(start + (deleteCount || 0));
+        return string.slice(0, start) + (insertString || "") + string.slice(start + (deleteCount || 0));
 }
 
 /**
@@ -165,7 +168,7 @@ export function spice(string, start, deleteCount, insertString) {
  * @returns {string}
  */
 export function addCharAt(str, strToAdd, index) {
-    return str.slice(0, index) + strToAdd + str.slice(index);
+        return str.slice(0, index) + strToAdd + str.slice(index);
 }
 
 /**
@@ -174,9 +177,9 @@ export function addCharAt(str, strToAdd, index) {
  * @returns {object} The `lsItems` object with updated values (if any).
  */
 export function lsGetAll(lsItems) {
-    for (const key in lsItems) {
-        lsItems[key] = localStorage.getItem(key) || lsItems[key];
-    }
+        for (const key in lsItems) {
+                lsItems[key] = localStorage.getItem(key) || lsItems[key];
+        }
 }
 
 /**
@@ -185,9 +188,9 @@ export function lsGetAll(lsItems) {
  * @returns {void}
  */
 export function lsSetAll(lsItems) {
-    for (const key in lsItems) {
-        localStorage.setItem(key, lsItems[key]);
-    }
+        for (const key in lsItems) {
+                localStorage.setItem(key, lsItems[key]);
+        }
 }
 
 /**
@@ -199,11 +202,11 @@ export function lsSetAll(lsItems) {
  * @returns {void}
  */
 export function lsSet(lsKey, lsVal, lsItems) {
-    localStorage.setItem(lsKey, lsVal);
-    if (lsItems != null) {
-        lsItems[lsKey] = lsVal;
-    }
-    lsGetAll(ls);
+        localStorage.setItem(lsKey, lsVal);
+        if (lsItems != null) {
+                lsItems[lsKey] = lsVal;
+        }
+        lsGetAll(ls);
 }
 
 /**
@@ -212,7 +215,7 @@ export function lsSet(lsKey, lsVal, lsItems) {
  * @returns {string|null} - The value associated with the provided key, or null if the key is not found in localStorage.
  */
 export function lsGet(lsKey) {
-    return localStorage.getItem(lsKey);
+        return localStorage.getItem(lsKey);
 }
 
 /**
@@ -232,15 +235,15 @@ export function lsGet(lsKey) {
  * rmClasses(elem, ['class1', 'class2']);
  */
 export function rmClasses(elements, classesToRemove) {
-    const classes = [].concat(classesToRemove);
-    const elems = [].concat(elements);
-    for (let i = 0; i < elems.length; i++) {
-        for (let j = 0; j < classes.length; j++) {
-            if (elems[i].classList.contains(classes[j])) {
-                elems[i].classList.remove(classes[j]);
-            }
+        const classes = [].concat(classesToRemove);
+        const elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                for (let j = 0; j < classes.length; j++) {
+                        if (elems[i].classList.contains(classes[j])) {
+                                elems[i].classList.remove(classes[j]);
+                        }
+                }
         }
-    }
 }
 
 /**
@@ -260,13 +263,13 @@ export function rmClasses(elements, classesToRemove) {
  * addClasses(elem, ['class1', 'class2']);
  */
 export function addClasses(elements, classesToAdd) {
-    const classes = [].concat(classesToAdd);
-    const elems = [].concat(elements);
-    for (let i = 0; i < elems.length; i++) {
-        for (let j = 0; j < classes.length; j++) {
-            elems[i].classList.add(classes[j]);
+        const classes = [].concat(classesToAdd);
+        const elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                for (let j = 0; j < classes.length; j++) {
+                        elems[i].classList.add(classes[j]);
+                }
         }
-    }
 }
 
 /**
@@ -278,10 +281,10 @@ export function addClasses(elements, classesToAdd) {
  * @returns {void}
  */
 export function switchClass(element, classToRemove, classToAdd) {
-    if (element.classList.contains(classToRemove)) {
-        element.classList.remove(classToRemove);
-    }
-    element.classList.add(classToAdd);
+        if (element.classList.contains(classToRemove)) {
+                element.classList.remove(classToRemove);
+        }
+        element.classList.add(classToAdd);
 }
 
 /**
@@ -295,10 +298,10 @@ export function switchClass(element, classToRemove, classToAdd) {
  * rmAllElemsBy$$('.example');
  */
 export function rmAllElemsBy$$(querySelectorAll) {
-    let allOccur = document.querySelectorAll(querySelectorAll);
-    for (let i = 0; i < allOccur.length; i++) {
-        allOccur[i].remove();
-    }
+        let allOccur = document.querySelectorAll(querySelectorAll);
+        for (let i = 0; i < allOccur.length; i++) {
+                allOccur[i].remove();
+        }
 }
 
 /**
@@ -307,7 +310,7 @@ export function rmAllElemsBy$$(querySelectorAll) {
  * @returns {HTMLElement}
  */
 export function byId(id) {
-    return document.getElementById(id);
+        return document.getElementById(id);
 }
 
 /**
@@ -316,7 +319,7 @@ export function byId(id) {
  * @returns {HTMLElement}
  */
 export function $(querySelector) {
-    return document.querySelector(querySelector);
+        return document.querySelector(querySelector);
 }
 
 /**
@@ -325,7 +328,7 @@ export function $(querySelector) {
  * @returns {HTMLElement}
  */
 export function $$(querySelectorAll) {
-    return document.querySelectorAll(querySelectorAll);
+        return document.querySelectorAll(querySelectorAll);
 }
 
 /**
@@ -334,9 +337,9 @@ export function $$(querySelectorAll) {
  * @returns {string}
  */
 export function tolowercase(str) {
-    if (str === " ") return " ";
-    if (str == null) return " ";
-    return str.toLowerCase();
+        if (str === " ") return " ";
+        if (str == null) return " ";
+        return str.toLowerCase();
 }
 
 /**
@@ -345,7 +348,7 @@ export function tolowercase(str) {
  * @returns {boolean}
  */
 export function isLastChild(el) {
-    return el === el.parentNode.children[el.parentNode.children.length - 1];
+        return el === el.parentNode.children[el.parentNode.children.length - 1];
 }
 
 /**
@@ -354,7 +357,7 @@ export function isLastChild(el) {
  * @returns {boolean}
  */
 export function isFirstChild(el) {
-    return el === el.parentNode.children[0];
+        return el === el.parentNode.children[0];
 }
 
 /**
@@ -363,7 +366,7 @@ export function isFirstChild(el) {
  * @returns {number}
  */
 export function random(n) {
-    return Math.floor(Math.random() * n);
+        return Math.floor(Math.random() * n);
 }
 
 /**
@@ -373,12 +376,12 @@ export function random(n) {
  * @example rgbToArray("rgb(189, 22, 89)") // [189, 22, 89]
  */
 export function rgbToArray(str) {
-    str = str.split(",");
-    for (let i = 0; i < str.length; i++) {
-        str[i] = str[i].replace(/\D/g, "");
-        str[i] = parseInt(str[i]);
-    }
-    return str;
+        str = str.split(",");
+        for (let i = 0; i < str.length; i++) {
+                str[i] = str[i].replace(/\D/g, "");
+                str[i] = parseInt(str[i]);
+        }
+        return str;
 }
 
 /**
@@ -389,19 +392,19 @@ export function rgbToArray(str) {
  * @returns {Array<number>}
  */
 export function betweenTwoColor(color1, color2, percent) {
-    let diff1 = Math.abs(color1[0] - color2[0]);
-    let diff2 = Math.abs(color1[1] - color2[1]);
-    let diff3 = Math.abs(color1[2] - color2[2]);
+        let diff1 = Math.abs(color1[0] - color2[0]);
+        let diff2 = Math.abs(color1[1] - color2[1]);
+        let diff3 = Math.abs(color1[2] - color2[2]);
 
-    let smaller1 = color1[0] > color2[0] ? color2[0] : color1[0];
-    let smaller2 = color1[1] > color2[1] ? color2[1] : color1[1];
-    let smaller3 = color1[2] > color2[2] ? color2[2] : color1[2];
+        let smaller1 = color1[0] > color2[0] ? color2[0] : color1[0];
+        let smaller2 = color1[1] > color2[1] ? color2[1] : color1[1];
+        let smaller3 = color1[2] > color2[2] ? color2[2] : color1[2];
 
-    let sign1 = smaller1 === color2[0] ? -1 : 1;
-    let sign2 = smaller2 === color2[1] ? -1 : 1;
-    let sign3 = smaller3 === color2[2] ? -1 : 1;
+        let sign1 = smaller1 === color2[0] ? -1 : 1;
+        let sign2 = smaller2 === color2[1] ? -1 : 1;
+        let sign3 = smaller3 === color2[2] ? -1 : 1;
 
-    return [color1[0] + (sign1 * (diff1 * percent)) / 100, color1[1] + (sign2 * (diff2 * percent)) / 100, color1[2] + (sign3 * (diff3 * percent)) / 100];
+        return [color1[0] + (sign1 * (diff1 * percent)) / 100, color1[1] + (sign2 * (diff2 * percent)) / 100, color1[2] + (sign3 * (diff3 * percent)) / 100];
 }
 
 /**
@@ -411,7 +414,7 @@ export function betweenTwoColor(color1, color2, percent) {
  * @example arrayToRgb([222, 45, 88]); // "rgb(222, 45, 88)"
  */
 export function arrayToRgb(arr) {
-    return `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
+        return `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
 }
 
 /**
@@ -421,7 +424,7 @@ export function arrayToRgb(arr) {
  * @example rgbToHex([68, 419, 0]); // #44ff00
  */
 export function rgbToHex(array) {
-    return "#" + ((1 << 24) + (array[0] << 16) + (array[1] << 8) + array[2]).toString(16).slice(1);
+        return "#" + ((1 << 24) + (array[0] << 16) + (array[1] << 8) + array[2]).toString(16).slice(1);
 }
 
 /**
@@ -431,20 +434,20 @@ export function rgbToHex(array) {
  * @example hexToRgb("#44ff00"); // rgb(68, 419, 0)
  */
 export function hexToRgb(h) {
-    let r = 0,
-        g = 0,
-        b = 0;
-    if (h.length == 4) {
-        r = "0x" + h[1] + h[1];
-        g = "0x" + h[2] + h[2];
-        b = "0x" + h[3] + h[3];
-    } else if (h.length == 7) {
-        r = "0x" + h[1] + h[2];
-        g = "0x" + h[3] + h[4];
-        b = "0x" + h[5] + h[6];
-    }
+        let r = 0,
+                g = 0,
+                b = 0;
+        if (h.length == 4) {
+                r = "0x" + h[1] + h[1];
+                g = "0x" + h[2] + h[2];
+                b = "0x" + h[3] + h[3];
+        } else if (h.length == 7) {
+                r = "0x" + h[1] + h[2];
+                g = "0x" + h[3] + h[4];
+                b = "0x" + h[5] + h[6];
+        }
 
-    return "rgb(" + +r + "," + +g + "," + +b + ")";
+        return "rgb(" + +r + "," + +g + "," + +b + ")";
 }
 
 /**
@@ -459,21 +462,21 @@ export function hexToRgb(h) {
  * arrayDiff(arr1, arr2); // returns [0, 4, 5]
  */
 export function arrayDiff(arr1, arr2) {
-    let set = new Set(arr2);
-    let diff = [];
+        let set = new Set(arr2);
+        let diff = [];
 
-    for (let i = 0; i < arr1.length; i++) {
-        if (set.has(arr1[i])) {
-            set.delete(arr1[i]);
-        } else {
-            diff.push(arr1[i]);
+        for (let i = 0; i < arr1.length; i++) {
+                if (set.has(arr1[i])) {
+                        set.delete(arr1[i]);
+                } else {
+                        diff.push(arr1[i]);
+                }
         }
-    }
-    for (let i of set) {
-        diff.push(i);
-    }
+        for (let i of set) {
+                diff.push(i);
+        }
 
-    return diff;
+        return diff;
 }
 
 /**
@@ -485,7 +488,7 @@ export function arrayDiff(arr1, arr2) {
  * rmDuplicate(array); // returns [1, 2, 3]
  */
 export function rmDuplicate(array) {
-    return [...new Set(array)];
+        return [...new Set(array)];
 }
 
 /**
@@ -506,19 +509,19 @@ export function rmDuplicate(array) {
  * elems.elem2.innerHTML = 'New content';
  */
 export function $$byIds(querySelectorAll, ids) {
-    const elements = {};
+        const elements = {};
 
-    const idsArray = Array.isArray(ids) ? ids : [ids];
+        const idsArray = Array.isArray(ids) ? ids : [ids];
 
-    const matchedElements = document.querySelectorAll(querySelectorAll);
+        const matchedElements = document.querySelectorAll(querySelectorAll);
 
-    for (const elem of matchedElements) {
-        if (idsArray.includes(elem.id)) {
-            elements[elem.id] = elem;
+        for (const elem of matchedElements) {
+                if (idsArray.includes(elem.id)) {
+                        elements[elem.id] = elem;
+                }
         }
-    }
 
-    return Object.keys(elements).length === 0 ? undefined : elements;
+        return Object.keys(elements).length === 0 ? undefined : elements;
 }
 
 /**
@@ -536,17 +539,17 @@ export function $$byIds(querySelectorAll, ids) {
  * cssToElements("background-color: yellow; border: 1px solid black;", elements);
  */
 export function cssToElements(cssRulesString, elementsArray) {
-    const elements = Array.isArray(elementsArray) ? elementsArray : [elementsArray];
+        const elements = Array.isArray(elementsArray) ? elementsArray : [elementsArray];
 
-    for (const element of elements) {
-        const existingStyles = element.style.cssText;
-        const combinedStyles = existingStyles + cssRulesString;
+        for (const element of elements) {
+                const existingStyles = element.style.cssText;
+                const combinedStyles = existingStyles + cssRulesString;
 
-        const uniqueStyles = [...new Set(combinedStyles.split(/[:;]/g).filter(Boolean))];
-        const formattedStyles = uniqueStyles.map((style, index) => (index % 2 === 0 ? style.trim() + ":" : style.trim() + ";")).join("");
+                const uniqueStyles = [...new Set(combinedStyles.split(/[:;]/g).filter(Boolean))];
+                const formattedStyles = uniqueStyles.map((style, index) => (index % 2 === 0 ? style.trim() + ":" : style.trim() + ";")).join("");
 
-        element.style.cssText = formattedStyles;
-    }
+                element.style.cssText = formattedStyles;
+        }
 }
 
 /**
@@ -556,10 +559,10 @@ export function cssToElements(cssRulesString, elementsArray) {
  * @param {Array.<HTMLElement>} elementsArray - The array of HTML elements to be updated with the new CSS rules.
  */
 export function cssToElementsReplace(cssRulesString, elementsArray) {
-    const elements = [].concat(elementsArray);
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.cssText = cssRulesString;
-    }
+        const elements = [].concat(elementsArray);
+        for (let i = 0; i < elements.length; i++) {
+                elements[i].style.cssText = cssRulesString;
+        }
 }
 
 /**
@@ -569,10 +572,10 @@ export function cssToElementsReplace(cssRulesString, elementsArray) {
  * @param {Array.<HTMLElement>} elementsArray - The array of HTML elements to be updated with the new CSS rules.
  */
 export function cssToElementsAdd(cssRulesString, elementsArray) {
-    const elements = [].concat(elementsArray);
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.cssText += cssRulesString;
-    }
+        const elements = [].concat(elementsArray);
+        for (let i = 0; i < elements.length; i++) {
+                elements[i].style.cssText += cssRulesString;
+        }
 }
 
 /**
@@ -581,7 +584,7 @@ export function cssToElementsAdd(cssRulesString, elementsArray) {
  * @returns {object|array} A new object or array with the same properties and values as the source.
  */
 export function deepCopy(source) {
-    return JSON.parse(JSON.stringify(source));
+        return JSON.parse(JSON.stringify(source));
 }
 
 /**
@@ -599,10 +602,10 @@ export function deepCopy(source) {
  * displayBlock(myElement);
  */
 export function displayBlock(elements) {
-    let elems = [].concat(elements);
-    for (let i = 0; i < elems.length; i++) {
-        elems[i].style.display = "block";
-    }
+        let elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                elems[i].style.display = "block";
+        }
 }
 
 /**
@@ -620,10 +623,10 @@ export function displayBlock(elements) {
  * displayNone(myElement);
  */
 export function displayNone(elements) {
-    let elems = [].concat(elements);
-    for (let i = 0; i < elems.length; i++) {
-        elems[i].style.display = "none";
-    }
+        let elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                elems[i].style.display = "none";
+        }
 }
 
 /**
@@ -642,25 +645,25 @@ export function displayNone(elements) {
  * setDisplay(myElement, 'none');
  */
 export function setDisplay(elements, displayString) {
-    let elems = [].concat(elements);
-    for (let i = 0; i < elems.length; i++) {
-        elems[i].style.display = displayString;
-    }
+        let elems = [].concat(elements);
+        for (let i = 0; i < elems.length; i++) {
+                elems[i].style.display = displayString;
+        }
 }
 
 /**
  * takes an array of elements and makes it flat.
  * @param {[]}} arr - Array of elements
  * @returns a flat array
- * 
- * @example 
+ *
+ * @example
  * arr = [0, 1, 2, [3, 4]];
- * return value => [1, 2, 3, 4]; 
+ * return value => [1, 2, 3, 4];
  */
 export function flattenArray(arr) {
-    return arr.reduce((flat, toFlatten) => {
-        return flat.concat(Array.isArray(toFlatten) ? flattenArray(toFlatten) : toFlatten);
-    }, []);
+        return arr.reduce((flat, toFlatten) => {
+                return flat.concat(Array.isArray(toFlatten) ? flattenArray(toFlatten) : toFlatten);
+        }, []);
 }
 
 /**
@@ -669,16 +672,16 @@ export function flattenArray(arr) {
  * @returns true or false value
  */
 export function isEmpty(obj) {
-    return Object.keys(obj).length === 0 && obj.constructor === Object;
+        return Object.keys(obj).length === 0 && obj.constructor === Object;
 }
 
 /**
  * Function to get a random item from an array
- * @param {[]} arr - array of elements 
+ * @param {[]} arr - array of elements
  * @returns an element of the array
  */
 export function getRandomItem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+        return arr[Math.floor(Math.random() * arr.length)];
 }
 
 /**
@@ -688,88 +691,81 @@ export function getRandomItem(arr) {
  * @returns intersection of two arrays
  */
 export function getIntersection(arr1, arr2) {
-    return arr1.filter(value => arr2.includes(value));
+        return arr1.filter((value) => arr2.includes(value));
 }
 
 /**
  * checks if an element has a class.
- * @param {HTMLElement} element - an element selected from document 
- * @param {string} className - an string that identifies the class 
+ * @param {HTMLElement} element - an element selected from document
+ * @param {string} className - an string that identifies the class
  * @returns true if the element has a class and false otherwise
  */
 export function hasClass(element, className) {
-    if (element.classList)
-        return element.classList.contains(className);
-    else
-        return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
+        if (element.classList) return element.classList.contains(className);
+        else return new RegExp("(^| )" + className + "( |$)", "gi").test(element.className);
 }
 
 /**
  * function to get all siblings of given element
- * @param {HTMLElement} element - an element selected from document 
+ * @param {HTMLElement} element - an element selected from document
  * @returns - an array of html elements
  */
 export function getSiblings(element) {
-    return Array.prototype.filter.call(element.parentNode.children, function (child) {
-        return child !== element;
-    });
+        return Array.prototype.filter.call(element.parentNode.children, function (child) {
+                return child !== element;
+        });
 }
 
 /**
  * gets the closest parent element with a specific class
- * @param {HTMLElement} element 
- * @param {string} className 
- * @returns {HTMLElement} closest parent element 
+ * @param {HTMLElement} element
+ * @param {string} className
+ * @returns {HTMLElement} closest parent element
  */
 export function closestParent(element, className) {
-    while (element) {
-        if (hasClass(element, className)) {
-            break;
+        while (element) {
+                if (hasClass(element, className)) {
+                        break;
+                }
+                element = element.parentElement;
         }
-        element = element.parentElement;
-    }
-    return element;
+        return element;
 }
 
 /**
- * 
+ *
  * @param {HTMLElement} element - selected element form DOM
  * @returns distance between selected element and inner boarder of top of the offsetParent,
  *  the closest positioned ancestor element.
  */
 export function getOffsetTop(element) {
-    let offsetTop = 0;
-    while(element) {
-        offsetTop += element.offsetTop;
-        element = element.offsetParent;
-    }
-    return offsetTop;
+        let offsetTop = 0;
+        while (element) {
+                offsetTop += element.offsetTop;
+                element = element.offsetParent;
+        }
+        return offsetTop;
 }
 
 /**
  * scrolls to selected element
- * @param {HTMLelement} element 
+ * @param {HTMLelement} element
  */
 export function smoothScrollTo(element) {
-    window.scrollTo({
-        top: getOffsetTop(element),
-        behavior: "smooth"
-    });
+        window.scrollTo({
+                top: getOffsetTop(element),
+                behavior: "smooth",
+        });
 }
 
 /**
- * 
- * @param {HTMLelement} element 
+ *
+ * @param {HTMLelement} element
  * @returns a boolean value indicating whether the element is in the viewport or not
  */
 export function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+        const rect = element.getBoundingClientRect();
+        return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
 }
 // ========================================
 // TEST
