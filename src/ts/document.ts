@@ -133,7 +133,7 @@ export function byClassName(className: string): HTMLCollectionOf<HTMLElement> {
  * querySelector
  */
 export function $(querySelector: string): HTMLElement | null {
-        return document.querySelector(querySelector);
+        return document.querySelector(querySelector) as HTMLElement;
 }
 
 /**
