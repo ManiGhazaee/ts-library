@@ -3,6 +3,7 @@ export {};
 declare global {
         interface Array<T> {
                 mat(index: number): T[];
+                readonly last: T;
         }
 }
 
@@ -22,4 +23,19 @@ if (!Array.prototype.mat) {
                 }
                 return this[index];
         };
+}
+
+/**
+ * Gets the last element of the array.
+ *
+ * @name Array.prototype.last
+ * @readonly
+ * @memberOf Array.prototype
+ */
+if (!Array.prototype.last) {
+        Object.defineProperty(Array.prototype, "last", {
+                get: function () {
+                        return this[this.length - 1];
+                },
+        });
 }
