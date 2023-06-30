@@ -1,7 +1,5 @@
 /**
  * Converts a string from kebab-case to camelCase.
- * @param {string} str - The string to convert.
- * @returns {string} The converted string in camelCase.
  */
 export function kebabToCamel(str: string): string {
         let spliced: string[] = str.split("");
@@ -55,6 +53,7 @@ export function changeCase(str: string, changeTo: "camel" | "pascal" | "snake" |
                         throw new Error(`Invalid case: ${changeTo}`);
         }
 }
+
 export function toCamelOrPascalCase(str: string, changeTo: "camel" | "pascal") {
         let result = str
                 .split(/[-_ ]+/)
@@ -62,6 +61,7 @@ export function toCamelOrPascalCase(str: string, changeTo: "camel" | "pascal") {
                 .join("");
         return changeTo === "camel" ? result.charAt(0).toLowerCase() + result.slice(1) : result;
 }
+
 export function toUpperOrLowerCase(str: string, changeTo: "lower" | "upper") {
         let result = str.replace(/[-_ ]+/g, "");
         return changeTo === "upper" ? result.toUpperCase() : result.toLowerCase();
@@ -76,19 +76,8 @@ export function toSnakeOrKebabOrScreamCase(str: string, changeTo: "snake" | "keb
         return result;
 }
 
-// console.log(changeCase("-Example_string-with all-_ CASES__", "camel"));
-// console.log(changeCase("-Example_string-with all-_ CASES__", "pascal"));
-// console.log(changeCase("-Example_string-with all-_ CASES__", "snake"));
-// console.log(changeCase("-Example_string-with all-_ CASES__", "kebab"));
-// console.log(changeCase("-Example_string-with all-_ CASES__", "scream"));
-// console.log(changeCase("-Example_string-with all-_ CASES__", "upper"));
-// console.log(changeCase("-Example_string-with all-_ CASES__", "lower"));
-
 /**
  * removes a character at the index given.
- * @param {string} str
- * @param {number} index
- * @returns {string}
  */
 export function rmCharAt(str: string, index: number): string {
         return str.slice(0, index) + str.slice(index + 1);
@@ -96,22 +85,13 @@ export function rmCharAt(str: string, index: number): string {
 
 /**
  * splice for strings
- * @param {string} string
- * @param {number} start
- * @param {number} deleteCount
- * @param {string} insertString
- * @returns {string}
  */
-export function spice(string: string, start: number, deleteCount: number, insertString: string): string {
+export function spice(string: string, start: number, deleteCount: number, insertString?: string): string {
         return string.slice(0, start) + (insertString || "") + string.slice(start + (deleteCount || 0));
 }
 
 /**
  * adds strToAdd to str at index.
- * @param {string} str
- * @param {string} strToAdd
- * @param {number} index
- * @returns {string}
  */
 export function addCharAt(str: string, strToAdd: string, index: number): string {
         return str.slice(0, index) + strToAdd + str.slice(index);
@@ -119,8 +99,6 @@ export function addCharAt(str: string, strToAdd: string, index: number): string 
 
 /**
  * toLowerCase but better
- * @param {string} str
- * @returns {string}
  */
 export function tolowercase(str: string): string {
         if (str === " ") return " ";

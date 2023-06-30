@@ -1,6 +1,5 @@
 /**
  * Returns an object containing all elements with an `id` attribute in the document, with keys converted to camelCase.
- * @returns {object} An object containing all elements with an `id` attribute in the document, with keys converted to camelCase.
  * @requires {@link kebabToCamel}
  */
 export function getElementsByIds(): object {
@@ -16,8 +15,6 @@ export function getElementsByIds(): object {
 
 /**
  * Converts a string from kebab-case to camelCase.
- * @param {string} str - The string to convert.
- * @returns {string} The converted string in camelCase.
  */
 export function kebabToCamel(str: string): string {
         let spliced: string[] = str.split("");
@@ -33,10 +30,6 @@ export function kebabToCamel(str: string): string {
 
 /**
  * Creates a new element with the specified tag name and attributes, and appends it to the provided parent element.
- * @param {string} tagName - The tag name of the element to create.
- * @param {object} attributes - An object containing the attributes to set on the new element.
- * @param {HTMLElement} parentElem - The parent element to append the new element to.
- * @returns {void}
  */
 export function createAndAppendElement(tagName: string, attributes: { [key: string]: string }, parentElem: Element): void {
         const newElem = document.createElement(tagName);
@@ -48,9 +41,6 @@ export function createAndAppendElement(tagName: string, attributes: { [key: stri
 
 /**
  * Removes one or more classes from one or more elements in the DOM.
- *
- * @param {Array<Element>|Element} elements - The element(s) to remove classes from.
- * @param {string|string[]} classesToRemove - The class(es) to remove from the element(s).
  *
  * @example
  *
@@ -78,9 +68,6 @@ export function rmClasses(elements: Array<Element> | Element, classesToRemove: s
 /**
  * Adds one or more classes to one or more elements in the DOM.
  *
- * @param {Array<Element>|Element} elements - The element(s) to add classes to.
- * @param {string|string[]} classesToAdd - The class(es) to add to the element(s).
- *
  * @example
  *
  * // Add class "example" to all elements with class "container"
@@ -105,10 +92,6 @@ export function addClasses(elements: Array<Element> | Element, classesToAdd: str
 /**
  * removes class of a given array of HTMLElements or one HTMLElement.
  * and adds class to every HTMLElement.
- * @param {Array<HTMLElement> | HTMLElement} elements
- * @param {string} classToRemove
- * @param {string} classToAdd
- * @returns {void}
  */
 export function switchClass(elements: Array<HTMLElement> | HTMLElement, classToRemove: string, classToAdd: string): void {
         const elems = Array.isArray(elements) ? elements : [elements];
@@ -124,8 +107,6 @@ export function switchClass(elements: Array<HTMLElement> | HTMLElement, classToR
 /**
  * Removes all elements from the DOM that match a given CSS selector.
  *
- * @param {string} querySelectorAll - The CSS selector to match elements to be removed.
- *
  * @example
  *
  * // Remove all elements with class "example"
@@ -140,8 +121,6 @@ export function rmAllElemsBy$$(querySelectorAll: string): void {
 
 /**
  * short version of getElementById
- * @param {string} id
- * @returns {HTMLElement}
  */
 export function byId(id: string): HTMLElement | null {
         return document.getElementById(id);
@@ -152,8 +131,6 @@ export function byClassName(className: string): HTMLCollectionOf<HTMLElement> {
 
 /**
  * querySelector
- * @param {string} querySelector
- * @returns {HTMLElement}
  */
 export function $(querySelector: string): HTMLElement | null {
         return document.querySelector(querySelector);
@@ -161,16 +138,12 @@ export function $(querySelector: string): HTMLElement | null {
 
 /**
  * querySelectorAll
- * @param {string} querySelectorAll
- * @returns {HTMLElement}
  */
 export function $$(querySelectorAll: string): NodeListOf<Element> {
         return document.querySelectorAll(querySelectorAll);
 }
 /**
  * Retrieves all items from local storage and updates the values in the provided object.
- * @param {object} lsItems - The object containing key-value pairs to be updated.
- * @returns {object} The `lsItems` object with updated values (if any).
  */
 export function lsGetAll(lsItems: { [key: string]: string }): void {
         for (const key in lsItems) {
@@ -180,8 +153,6 @@ export function lsGetAll(lsItems: { [key: string]: string }): void {
 
 /**
  * Sets all key-value pairs in the provided object to the localStorage.
- * @param {object} lsItems - An object containing key-value pairs to be set in localStorage.
- * @returns {void}
  */
 export function lsSetAll(lsItems: { [key: string]: string }): void {
         for (const key in lsItems) {
@@ -191,9 +162,6 @@ export function lsSetAll(lsItems: { [key: string]: string }): void {
 
 /**
  * Sets a key-value pair to the localStorage.
- * @param {string} lsKey - The key to set in localStorage.
- * @param {string} lsVal - The value to set in localStorage.
- * @returns {void}
  */
 export function lsSet(lsKey: string, lsVal: string): void {
         localStorage.setItem(lsKey, lsVal);
@@ -201,8 +169,6 @@ export function lsSet(lsKey: string, lsVal: string): void {
 
 /**
  * Gets the value associated with the provided key from localStorage.
- * @param {string} lsKey - The key to retrieve from localStorage.
- * @returns {string|null} - The value associated with the provided key, or null if the key is not found in localStorage.
  */
 export function lsGet(lsKey: string): string | null {
         return localStorage.getItem(lsKey);
@@ -210,8 +176,6 @@ export function lsGet(lsKey: string): string | null {
 
 /**
  * check if a element isLastChild
- * @param {HTMLElement} el
- * @returns {boolean}
  */
 export function isLastChild(el: HTMLElement): boolean {
         if (el.parentNode === null) return false;
@@ -220,8 +184,6 @@ export function isLastChild(el: HTMLElement): boolean {
 
 /**
  * check if a element isFirstChild
- * @param {HTMLElement} el
- * @returns {boolean}
  */
 export function isFirstChild(el: HTMLElement): boolean {
         if (el.parentNode === null) return false;
@@ -230,8 +192,6 @@ export function isFirstChild(el: HTMLElement): boolean {
 /**
  * Applies the given CSS rules to the specified element(s). without removing or duplicating old cssText.
  * (enter valid css like examples and dont put unnecessary semicolons like ";;")
- * @param {string} cssRulesString - The CSS rules to apply.
- * @param {(HTMLElement|HTMLElement[])} elementsArray - The element(s) to apply the CSS rules to.
  * @example
  * // Apply CSS rules to a single element
  * const element = document.getElementById("myElement");
@@ -275,9 +235,6 @@ export function cssToElements(cssRulesString: string, elementsArray: HTMLElement
 
 /**
  * Replaces the CSS rules for the specified array of elements with the given CSS rule string.
- *
- * @param {string} cssRulesString - The CSS rule string to be applied to the elements.
- * @param {Array<HTMLElement>| HTMLElement} elementsArray - The array of HTML elements to be updated with the new CSS rules.
  */
 export function cssToElementsReplace(cssRulesString: string, elementsArray: HTMLElement | HTMLElement[]): void {
         const elements = Array.isArray(elementsArray) ? elementsArray : [elementsArray];
@@ -288,9 +245,6 @@ export function cssToElementsReplace(cssRulesString: string, elementsArray: HTML
 
 /**
  * Adds the given CSS rule string to the existing CSS rules for the specified array of elements.
- *
- * @param {string} cssRulesString - The CSS rule string to be added to the elements' existing CSS rules.
- * @param {Array<HTMLElement> | HTMLElement} elementsArray - The array of HTML elements to be updated with the new CSS rules.
  */
 export function cssToElementsAdd(cssRulesString: string, elementsArray: HTMLElement | HTMLElement[]) {
         const elements = Array.isArray(elementsArray) ? elementsArray : [elementsArray];
@@ -301,8 +255,6 @@ export function cssToElementsAdd(cssRulesString: string, elementsArray: HTMLElem
 
 /**
  * Sets the display property of one or more HTML elements to "block".
- *
- * @param {HTMLElement[]|HTMLElement} elements - The HTML element(s) to modify.
  *
  * @example
  * // Set the display of all elements with class "my-element"
@@ -323,8 +275,6 @@ export function displayBlock(elements: HTMLElement[] | HTMLElement): void {
 /**
  * Sets the display property of one or more HTML elements to "none".
  *
- * @param {HTMLElement[]|HTMLElement} elements - The HTML element(s) to modify.
- *
  * @example
  * // Hide all elements with class "my-element"
  * const myElements = document.querySelectorAll('.my-element');
@@ -344,9 +294,6 @@ export function displayNone(elements: HTMLElement | HTMLElement[]): void {
 /**
  * Sets the display property of one or more HTML elements to a specified value.
  *
- * @param {HTMLElement[]|HTMLElement} elements - The HTML element(s) to modify.
- * @param {string} displayString - The value to set the display property to.
- *
  * @example
  * // Set the display of all elements with class "my-element" to "block"
  * const myElements = document.querySelectorAll('.my-element');
@@ -364,7 +311,6 @@ export function setDisplay(elements: HTMLElement | HTMLElement[], displayString:
 }
 /**
  * sets opacity of 1 to a element or elements.
- * @param elements
  */
 export function opacity_1(elements: HTMLElement | HTMLElement[]) {
         const elems = Array.isArray(elements) ? elements : [elements];
@@ -375,7 +321,6 @@ export function opacity_1(elements: HTMLElement | HTMLElement[]) {
 
 /**
  * sets opacity of 0 to a element or elements.
- * @param elements
  */
 export function opacity_0(elements: HTMLElement | HTMLElement[]) {
         const elems = Array.isArray(elements) ? elements : [elements];
@@ -386,8 +331,6 @@ export function opacity_0(elements: HTMLElement | HTMLElement[]) {
 /**
  * checks if element's display is set to block.
  * `element.style.display === "block"`
- * @param element
- * @returns
  */
 export function isBlock(element: HTMLElement) {
         return element.style.display === "block";
@@ -396,8 +339,6 @@ export function isBlock(element: HTMLElement) {
 /**
  * checks if element's display is set to none.
  * `element.style.display === "none"`
- * @param element
- * @returns
  */
 export function isNone(element: HTMLElement) {
         return element.style.display === "none";

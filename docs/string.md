@@ -1,6 +1,6 @@
 # String
 
-### `spice(string: string, start: number, deleteCount: number, insertString: string): string`
+### `spice(string: string, start: number, deleteCount: number, insertString?: string): string`
 
 splice for strings.
 
@@ -16,7 +16,7 @@ const newStr2 = spice(str2, 16, 3, "cat");
 console.log(newStr2); // Output: "The quick brown cat jumps over the lazy dog."
 
 const str3 = "This is a test string.";
-const newStr3 = spice(str3, 10, 5, "");
+const newStr3 = spice(str3, 10, 5);
 console.log(newStr3); // Output: "This is a string."
 ```
 

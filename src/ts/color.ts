@@ -1,7 +1,5 @@
 /**
  * sets given color to a element or elements.
- * @param elements
- * @param color
  */
 export function color(elements: HTMLElement | HTMLElement[], color: string) {
         const elems = Array.isArray(elements) ? elements : [elements];
@@ -11,8 +9,6 @@ export function color(elements: HTMLElement | HTMLElement[], color: string) {
 }
 /**
  * turns string of rgb to array containing rgb values `[r, g, b]`
- * @param {string} string - rgb representaion of a color
- * @returns {Array<number>}
  * @example rgbToArray("rgb(189, 22, 89)") // [189, 22, 89]
  */
 export function rgbToArray(string: string): number[] {
@@ -22,10 +18,6 @@ export function rgbToArray(string: string): number[] {
 
 /**
  *
- * @param {Array<number>} color1
- * @param {Array<number>} color2
- * @param {number} percent
- * @returns {Array<number>}
  */
 export function betweenTwoColor(color1: number[], color2: number[], percent: number): number[] {
         let diff1 = Math.abs(color1[0] - color2[0]);
@@ -45,8 +37,6 @@ export function betweenTwoColor(color1: number[], color2: number[], percent: num
 
 /**
  * turns array containing rgb values to string `"rgb(r, g, b)"`
- * @param {Array<number>} arr
- * @returns {string}
  * @example arrayToRgb([222, 45, 88]); // "rgb(222, 45, 88)"
  */
 export function arrayToRgb(arr: number[]): string {
@@ -55,8 +45,6 @@ export function arrayToRgb(arr: number[]): string {
 
 /**
  * turns rgb array to hex string
- * @param {Array<number>} array
- * @returns {string}
  * @example rgbToHex([68, 419, 0]); // #44ff00
  */
 export function rgbToHex(array: number[]): string {
