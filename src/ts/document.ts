@@ -166,8 +166,8 @@ export function $(querySelector: string): HTMLElement | null {
 /**
  * querySelectorAll
  */
-export function $$(querySelectorAll: string): NodeListOf<Element> {
-        return document.querySelectorAll(querySelectorAll);
+export function $$(querySelectorAll: string) {
+        return Array.from(document.querySelectorAll(querySelectorAll) as NodeListOf<HTMLElement>);
 }
 /**
  * Retrieves all items from local storage and updates the values in the provided object.
@@ -369,4 +369,34 @@ export function isBlock(element: HTMLElement) {
  */
 export function isNone(element: HTMLElement) {
         return element.style.display === "none";
+}
+
+/**
+ * function to get all siblings of given element or elements
+ */
+export function getSiblings(elements: Element | Element[]) {
+        const elems = Array.isArray(elements) ? elements : [elements];
+        let result = [];
+
+        for (let i = 0; i < elems.length; i++) {
+                let parent = elems[i].parentNode;
+
+                if (parent !== null) {
+                        let siblings = Array.from(parent.children).filter((child) => {
+                                child !== elements;
+                        });
+                        if (siblings.length === 0) {
+                                result.push(null);
+                        } else if (siblings.length === 1) {
+                                result.push(siblings[0]);
+                        } else {
+                                result.push(siblings);
+                        }
+                }
+        }
+
+        if (result.length === 1 && result[0] === null) {
+                return null;
+        }
+        return result;
 }
