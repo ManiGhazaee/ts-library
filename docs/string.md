@@ -126,7 +126,7 @@ const string = "string";
 rmCharAt(string, 2); // returns "sting"
 ```
 
-## `addCharAt(str: string, strToAdd: string, index: number): string`
+### `addCharAt(str: string, strToAdd: string, index: number): string`
 
 adds a character at the index given.
 
@@ -137,7 +137,7 @@ const string = "sting";
 addCharAt(string, "r", 2); // returns "string"
 ```
 
-## `tolowercase(str: string): string`
+### `tolowercase(str: string): string`
 
 toLowerCase but better.
 

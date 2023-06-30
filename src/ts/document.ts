@@ -105,6 +105,33 @@ export function switchClass(elements: Array<HTMLElement> | HTMLElement, classToR
 }
 
 /**
+ * checks if an element has a class.
+ */
+export function hasClass(elements: HTMLElement[] | HTMLElement, classNames: string[] | string): boolean | boolean[] | boolean[][] {
+        const elems = Array.isArray(elements) ? elements : [elements];
+        const classNameArr = Array.isArray(classNames) ? classNames : [classNames];
+
+        let result: boolean[][] = [];
+
+        for (let i = 0; i < elems.length; i++) {
+                let arr = [];
+                for (let j = 0; j < classNameArr.length; j++) {
+                        let bool: boolean;
+                        if (elems[i].classList) bool = elems[i].classList.contains(classNameArr[j]);
+                        else bool = new RegExp("(^| )" + classNameArr[j] + "( |$)", "gi").test(elems[i].className);
+
+                        arr.push(bool);
+                }
+                result.push(arr);
+        }
+        if (result.length === 1) {
+                return result[0];
+        } else if (result[0].length === 1) {
+                return result.flat();
+        } else return result;
+}
+
+/**
  * Removes all elements from the DOM that match a given CSS selector.
  *
  * @example
