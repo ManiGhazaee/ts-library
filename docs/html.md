@@ -1,4 +1,4 @@
-# Array
+# HTML
 
 ### `html(htmlString: string): DocumentFragment | ChildNode`
 
