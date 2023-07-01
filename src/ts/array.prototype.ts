@@ -2,7 +2,8 @@ export {};
 
 declare global {
         interface Array<T> {
-                mat(index: number): T[];
+                mat(index: number): T;
+                toPopped(): T[] | undefined;
                 readonly last: T;
         }
 }
@@ -17,7 +18,7 @@ declare global {
  * arr.mat(-4); // undefined
  */
 if (!Array.prototype.mat) {
-        Array.prototype.mat = function <T>(index: number): T[] {
+        Array.prototype.mat = function <T>(index: number): T {
                 if (index < 0) {
                         return this[this.length + index];
                 }
@@ -38,4 +39,16 @@ if (!Array.prototype.last) {
                         return this[this.length - 1];
                 },
         });
+}
+
+/**
+ * Returns a new array that is a copy of the original array with the last element removed.
+ */
+if (!Array.prototype.toPopped) {
+        Array.prototype.toPopped = function () {
+                if (this.length === 0) return undefined;
+                const popped = this.slice();
+                popped.pop();
+                return popped;
+        };
 }
