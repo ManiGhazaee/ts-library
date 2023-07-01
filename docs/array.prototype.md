@@ -1,6 +1,6 @@
 # Array.prototype
 
-### `Array.prototype.mat()`
+### `Array<any>.mat(index: number): any`
 
 Returns the element of the array at the specified index, counting from the end if index is negative.
 
@@ -21,7 +21,7 @@ arr.mat(-4); // undefined
 
 #
 
-### `Array.prototype.last`
+### `Array<any>.last: any`
 
 Gets the last element of the array.
 
@@ -37,7 +37,7 @@ console.log(arr.last); // Output: 3
 
 #
 
-### `Array.prototype.toPopped()`
+### `Array<any>.toPopped(): any[] | undefined`
 
 Returns an array that is a copy of the original array with the last element removed. If array is empty it returns `undefined`.
 
@@ -52,5 +52,28 @@ console.log(popped); // [1, 2]
 
 **Source(s):**
 [toPopped](../src/ts/array.prototype.ts)
+
+#
+
+### `Array<any>.toPushed(...items: any[]): any[]`
+
+Adds one or more elements to the end of an array and returns a new array.
+
+**Example:**
+
+```typescript
+const arr = [1, 2, 3];
+const newArr = arr.toPushed(4, 5, 6);
+console.log(newArr); // [1, 2, 3, 4, 5, 6]
+console.log(arr); // [1, 2, 3]
+
+const emptyArr: string[] = [];
+const anotherArr = emptyArr.toPushed("a", "b", "c");
+console.log(anotherArr); // ['a', 'b', 'c']
+console.log(emptyArr); // []
+```
+
+**Source(s):**
+[toPushed](../src/ts/array.prototype.ts)
 
 #

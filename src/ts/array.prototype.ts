@@ -2,21 +2,27 @@ export {};
 
 declare global {
         interface Array<T> {
-                mat(index: number): T;
+                /**
+                 * Returns the element of the array at the specified index, counting from the end if index is negative.
+                 */
+                mat(index: number): T | undefined;
+                /**
+                 * Returns a new array that is a copy of the original array with the last element removed.
+                 */
                 toPopped(): T[] | undefined;
-                readonly last: T;
+                /**
+                 * Adds one or more elements to the end of an array and returns a new array.
+                 * @param  items - The elements to add to the end of the array.
+                 */
+                toPushed(...items: T[]): T[];
+                /**
+                 * Gets the last element of the array.
+                 * @readonly
+                 */
+                readonly last: T | undefined;
         }
 }
 
-/**
- * Returns the element of the array at the specified index, counting from the end if index is negative.
- * @example
- * const arr = [1, 2, 3];
- * arr.mat(0); // 1
- * arr.mat(-1); // 3
- * arr.mat(3); // undefined
- * arr.mat(-4); // undefined
- */
 if (!Array.prototype.mat) {
         Array.prototype.mat = function <T>(index: number): T {
                 if (index < 0) {
@@ -26,13 +32,6 @@ if (!Array.prototype.mat) {
         };
 }
 
-/**
- * Gets the last element of the array.
- *
- * @name Array.prototype.last
- * @readonly
- * @memberOf Array.prototype
- */
 if (!Array.prototype.last) {
         Object.defineProperty(Array.prototype, "last", {
                 get: function () {
@@ -41,14 +40,19 @@ if (!Array.prototype.last) {
         });
 }
 
-/**
- * Returns a new array that is a copy of the original array with the last element removed.
- */
 if (!Array.prototype.toPopped) {
         Array.prototype.toPopped = function () {
                 if (this.length === 0) return undefined;
                 const popped = this.slice();
                 popped.pop();
                 return popped;
+        };
+}
+
+if (!Array.prototype.toPushed) {
+        Array.prototype.toPushed = function (...items) {
+                const copy = this.slice();
+                copy.push(...items);
+                return copy;
         };
 }

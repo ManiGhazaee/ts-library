@@ -3,6 +3,7 @@ export {};
 declare global {
         interface Array<T> {
                 toPopped(): T[];
+                toPushed(...items: T[]): T[];
         }
 }
 
@@ -15,10 +16,20 @@ if (!Array.prototype.toPopped) {
         };
 }
 
-let arr = [1, 2, 3];
-let poped = arr.toPopped();
-console.log(poped);
-console.log(arr);
+if (!Array.prototype.toPushed) {
+        Array.prototype.toPushed = function (...items) {
+                const copy = this.slice();
+                copy.push(...items);
+                return copy;
+        };
+}
 
-let arr2 = [1];
-arr2.pop();
+const arr = [1, 2, 3];
+const newArr = arr.toPushed(4, 5, 6);
+console.log(newArr); // [1, 2, 3, 4, 5, 6]
+console.log(arr); // [1, 2, 3]
+
+const emptyArr: string[] = [];
+const anotherArr = emptyArr.toPushed("a", "b", "c");
+console.log(anotherArr); // ['a', 'b', 'c']
+console.log(emptyArr); // []
