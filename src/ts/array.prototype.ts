@@ -3,10 +3,6 @@ export {};
 declare global {
         interface Array<T> {
                 /**
-                 * Returns the element of the array at the specified index, counting from the end if index is negative.
-                 */
-                mat(index: number): T | undefined;
-                /**
                  * Returns a new array that is a copy of the original array with the last element removed.
                  */
                 toPopped(): T[] | undefined;
@@ -40,15 +36,6 @@ declare global {
                  */
                 readonly last: T | undefined;
         }
-}
-
-if (!Array.prototype.mat) {
-        Array.prototype.mat = function <T>(index: number): T {
-                if (index < 0) {
-                        return this[this.length + index];
-                }
-                return this[index];
-        };
 }
 
 if (!Array.prototype.last) {
