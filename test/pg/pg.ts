@@ -57,3 +57,20 @@ if (!Array.prototype.toSorted) {
                 return copy;
         };
 }
+
+export function shuffleArray<T>(arr: T[]): T[] {
+        let R;
+        let i = 0;
+        while (i < arr.length) {
+                R = Math.floor(Math.random() * arr.length);
+                [arr[i], arr[R]] = [arr[R], arr[i]];
+                i++;
+        }
+        return arr;
+}
+
+
+
+let arr = [1, 2, 3, 4, 5, 6, 7];
+let shuffled = shuffleArray(arr);
+console.log(shuffled); // [5, 2, 4, 3, 1, 7, 6]

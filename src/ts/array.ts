@@ -46,3 +46,17 @@ export function deepCopy<T>(source: T): T {
 export function getRandomItem<T>(arr: T[]): T {
         return arr[Math.floor(Math.random() * arr.length)];
 }
+
+/**
+ * Shuffles the given array and returns it.
+ */
+export function shuffleArray<T>(arr: T[]): T[] {
+        let R;
+        let i = 0;
+        while (i < arr.length) {
+                R = Math.floor(Math.random() * arr.length);
+                [arr[i], arr[R]] = [arr[R], arr[i]];
+                i++;
+        }
+        return arr;
+}
