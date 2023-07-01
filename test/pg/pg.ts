@@ -2,7 +2,7 @@ export {};
 
 declare global {
         interface Array<T> {
-                toPopped(): T[];
+                toPopped(): T[] | undefined;
                 toPushed(...items: T[]): T[];
                 toShifted(): T[];
                 toUnshifted(...items: T[]): T[];
@@ -21,7 +21,7 @@ if (!Array.prototype.toPopped) {
 
 if (!Array.prototype.toPushed) {
         Array.prototype.toPushed = function (...items) {
-                const copy = this.slice();
+                const copy = this.slice(0);
                 copy.push(...items);
                 return copy;
         };
@@ -57,7 +57,3 @@ if (!Array.prototype.toSorted) {
                 return copy;
         };
 }
-const arr = [2, 1, 4, 3];
-const sorted = arr.toSorted((a, b) => a - b);
-console.log(sorted); // [1, 2, 3, 4]
-console.log(arr); // [2, 1, 4, 3]

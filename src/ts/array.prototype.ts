@@ -49,7 +49,7 @@ if (!Array.prototype.last) {
 if (!Array.prototype.toPopped) {
         Array.prototype.toPopped = function () {
                 if (this.length === 0) return undefined;
-                const copy = this.slice();
+                const copy = this.slice(0);
                 copy.pop();
                 return copy;
         };
@@ -57,7 +57,7 @@ if (!Array.prototype.toPopped) {
 
 if (!Array.prototype.toPushed) {
         Array.prototype.toPushed = function (...items) {
-                const copy = this.slice();
+                const copy = this.slice(0);
                 copy.push(...items);
                 return copy;
         };
@@ -65,7 +65,7 @@ if (!Array.prototype.toPushed) {
 
 if (!Array.prototype.toShifted) {
         Array.prototype.toShifted = function () {
-                const copy = this.slice();
+                const copy = this.slice(0);
                 copy.shift();
                 return copy;
         };
@@ -73,7 +73,7 @@ if (!Array.prototype.toShifted) {
 
 if (!Array.prototype.toUnshifted) {
         Array.prototype.toUnshifted = function (...items) {
-                const copy = this.slice();
+                const copy = this.slice(0);
                 copy.unshift(...items);
                 return copy;
         };
@@ -81,7 +81,7 @@ if (!Array.prototype.toUnshifted) {
 
 if (!Array.prototype.toSorted) {
         Array.prototype.toSorted = function (compareFn) {
-                const copy = this.slice();
+                const copy = this.slice(0);
                 copy.sort(compareFn);
                 return copy;
         };
