@@ -25,6 +25,16 @@ declare global {
                  */
                 toUnshifted(...items: T[]): T[];
                 /**
+                 * Creates a sorted copy of the array, using the provided compare function.
+                 * @param compareFn - A function that defines the sort order.
+                 * @example
+                 * const arr = [2, 1, 4, 3];
+                 * const sorted = arr.toSorted((a, b) => a - b);
+                 * console.log(sorted); // [1, 2, 3, 4]
+                 * console.log(arr); // [2, 1, 4, 3]
+                 */
+                toSorted(compareFn?: (a: T, b: T) => number): T[];
+                /**
                  * Gets the last element of the array.
                  * @readonly
                  */
@@ -78,6 +88,14 @@ if (!Array.prototype.toUnshifted) {
         Array.prototype.toUnshifted = function (...items) {
                 const copy = this.slice();
                 copy.unshift(...items);
+                return copy;
+        };
+}
+
+if (!Array.prototype.toSorted) {
+        Array.prototype.toSorted = function (compareFn) {
+                const copy = this.slice();
+                copy.sort(compareFn);
                 return copy;
         };
 }

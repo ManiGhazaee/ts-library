@@ -37,14 +37,25 @@ if (!Array.prototype.toUnshifted) {
                 return copy;
         };
 }
-var test = [1];
-test.shift();
-test.unshift();
-var arr = [1, 2, 3];
-var shifted = arr.toShifted();
-console.log(shifted);
-console.log(arr);
-var arr1 = [2, 3];
-var unshifted = arr.toUnshifted(1);
-console.log(unshifted);
-console.log(arr1);
+if (!Array.prototype.toUnshifted) {
+        Array.prototype.toUnshifted = function () {
+                var items = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                        items[_i] = arguments[_i];
+                }
+                var copy = this.slice();
+                copy.unshift.apply(copy, items);
+                return copy;
+        };
+}
+if (!Array.prototype.toSorted) {
+        Array.prototype.toSorted = function (compareFn) {
+                var copy = this.slice();
+                copy.sort(compareFn);
+                return copy;
+        };
+}
+const arr = [2, 1, 4, 3];
+const sorted = arr.toSorted((a, b) => a - b);
+console.log(sorted); // [1, 2, 3, 4]
+console.log(arr); // [2, 1, 4, 3]

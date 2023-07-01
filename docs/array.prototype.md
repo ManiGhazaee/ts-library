@@ -113,3 +113,20 @@ console.log(arr); // [2, 3]
 [toUnshifted](../src/ts/array.prototype.ts)
 
 #
+
+### `Array<any>.toSorted(compareFn?: ((a: any, b: any) => number) | undefined): any[]`
+
+Creates a sorted copy of the array, using the provided compare function.
+
+**Example:**
+
+```typescript
+const arr = [2, 1, 4, 3];
+const sorted = arr.toSorted((a, b) => a - b);
+console.log(sorted); // [1, 2, 3, 4]
+console.log(arr); // [2, 1, 4, 3]
+```
+
+**Source(s):**
+[toSorted](../src/ts/array.prototype.ts)
+

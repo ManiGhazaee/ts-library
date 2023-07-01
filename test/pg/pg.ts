@@ -6,6 +6,7 @@ declare global {
                 toPushed(...items: T[]): T[];
                 toShifted(): T[];
                 toUnshifted(...items: T[]): T[];
+                toSorted(compareFn?: (a: T, b: T) => number): T[];
         }
 }
 
@@ -41,16 +42,22 @@ if (!Array.prototype.toUnshifted) {
                 return copy;
         };
 }
-let test = [1];
-test.shift();
-test.unshift();
+if (!Array.prototype.toUnshifted) {
+        Array.prototype.toUnshifted = function (...items) {
+                const copy = this.slice();
+                copy.unshift(...items);
+                return copy;
+        };
+}
 
-const arr = [1, 2, 3];
-const shifted = arr.toShifted();
-console.log(shifted);
-console.log(arr);
-
-const arr1 = [1, 2, 3];
-const unshifted = arr.toUnshifted();
-console.log(unshifted);
-console.log(arr1);
+if (!Array.prototype.toSorted) {
+        Array.prototype.toSorted = function (compareFn) {
+                const copy = this.slice();
+                copy.sort(compareFn);
+                return copy;
+        };
+}
+const arr = [2, 1, 4, 3];
+const sorted = arr.toSorted((a, b) => a - b);
+console.log(sorted); // [1, 2, 3, 4]
+console.log(arr); // [2, 1, 4, 3]
