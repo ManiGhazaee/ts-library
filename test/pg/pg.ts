@@ -4,6 +4,8 @@ declare global {
         interface Array<T> {
                 toPopped(): T[];
                 toPushed(...items: T[]): T[];
+                toShifted(): T[];
+                toUnshifted(...items: T[]): T[];
         }
 }
 
@@ -24,12 +26,31 @@ if (!Array.prototype.toPushed) {
         };
 }
 
-const arr = [1, 2, 3];
-const newArr = arr.toPushed(4, 5, 6);
-console.log(newArr); // [1, 2, 3, 4, 5, 6]
-console.log(arr); // [1, 2, 3]
+if (!Array.prototype.toShifted) {
+        Array.prototype.toShifted = function () {
+                const copy = this.slice();
+                copy.shift();
+                return copy;
+        };
+}
 
-const emptyArr: string[] = [];
-const anotherArr = emptyArr.toPushed("a", "b", "c");
-console.log(anotherArr); // ['a', 'b', 'c']
-console.log(emptyArr); // []
+if (!Array.prototype.toUnshifted) {
+        Array.prototype.toUnshifted = function (...items) {
+                const copy = this.slice();
+                copy.unshift(...items);
+                return copy;
+        };
+}
+let test = [1];
+test.shift();
+test.unshift();
+
+const arr = [1, 2, 3];
+const shifted = arr.toShifted();
+console.log(shifted);
+console.log(arr);
+
+const arr1 = [1, 2, 3];
+const unshifted = arr.toUnshifted();
+console.log(unshifted);
+console.log(arr1);

@@ -77,3 +77,39 @@ console.log(emptyArr); // []
 [toPushed](../src/ts/array.prototype.ts)
 
 #
+
+### `Array<any>.toShifted(): any[]`
+
+Returns a new array with the first element removed.
+
+**Example:**
+
+```typescript
+const arr = [1, 2, 3];
+const shifted = arr.toShifted();
+console.log(shifted); // [2, 3]
+console.log(arr); // [1, 2, 3]
+```
+
+**Source(s):**
+[toShifted](../src/ts/array.prototype.ts)
+
+#
+
+### `Array<any>.toUnshifted(...items: any[]): any[]`
+
+Returns a new array with the specified elements added to the beginning.
+
+**Example:**
+
+```typescript
+const arr = [2, 3];
+const unshifted = arr.toUnshifted(1);
+console.log(unshifted); // [1, 2, 3]
+console.log(arr); // [2, 3]
+```
+
+**Source(s):**
+[toUnshifted](../src/ts/array.prototype.ts)
+
+#

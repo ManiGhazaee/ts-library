@@ -16,6 +16,15 @@ declare global {
                  */
                 toPushed(...items: T[]): T[];
                 /**
+                 * Returns a new array with the first element removed.
+                 */
+                toShifted(): T[];
+                /**
+                 * Returns a new array with the specified elements added to the beginning.
+                 * @param items - The items to add to the beginning of the array.
+                 */
+                toUnshifted(...items: T[]): T[];
+                /**
                  * Gets the last element of the array.
                  * @readonly
                  */
@@ -43,9 +52,9 @@ if (!Array.prototype.last) {
 if (!Array.prototype.toPopped) {
         Array.prototype.toPopped = function () {
                 if (this.length === 0) return undefined;
-                const popped = this.slice();
-                popped.pop();
-                return popped;
+                const copy = this.slice();
+                copy.pop();
+                return copy;
         };
 }
 
@@ -53,6 +62,22 @@ if (!Array.prototype.toPushed) {
         Array.prototype.toPushed = function (...items) {
                 const copy = this.slice();
                 copy.push(...items);
+                return copy;
+        };
+}
+
+if (!Array.prototype.toShifted) {
+        Array.prototype.toShifted = function () {
+                const copy = this.slice();
+                copy.shift();
+                return copy;
+        };
+}
+
+if (!Array.prototype.toUnshifted) {
+        Array.prototype.toUnshifted = function (...items) {
+                const copy = this.slice();
+                copy.unshift(...items);
                 return copy;
         };
 }
