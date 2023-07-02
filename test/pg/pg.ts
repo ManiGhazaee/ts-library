@@ -77,21 +77,19 @@ export function shuffleArray<T>(arr: T[]): T[] {
         return arr;
 }
 
-function clamp(min: number, numbers: number, max: number): number;
-function clamp(min: number, numbers: number[], max: number): number[];
-function clamp(min: number, numbers: number | number[], max: number): number | number[] {
-        if (min > max) throw new Error(`The minimum value cannot be greater than the maximum value.\nmin: ${min}\nmax: ${max}`);
-        if (!Array.isArray(numbers)) {
-                return Math.max(Math.min(numbers, max), min);
-        } else {
-                let result: number[] = [];
-                for (let i = 0; i < numbers.length; i++) {
-                        result.push(Math.max(Math.min(numbers[i], max), min));
-                }
-                return result;
-        }
-}
+function getDigits(number: number): number[] {
+        if (number === 0) return [0];
+        else if (number < 0) number *= -1;
 
-let arr = [1, 2];
-const ans = clamp(5, arr, 3);
-console.log(ans);
+        let result = [];
+        while (number !== 0) {
+                result.unshift(number % 10);
+                number = Math.floor(number / 10);
+        }
+        return result;
+}
+function getDigitsFloat(number: number): number[] {
+        const chars = number.toString().split("");
+        return chars.map((v) => parseInt(v)).filter((v) => !isNaN(v));
+}
+console.log(getDigits(256));
