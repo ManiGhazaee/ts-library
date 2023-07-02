@@ -77,33 +77,21 @@ export function shuffleArray<T>(arr: T[]): T[] {
         return arr;
 }
 
-let arr = Array(100000).fill(256);
-let t1 = performance.now();
-for (let i = 0; i < 90000; i++) {
-        let poped = arr.toPopped();
-        if (i === 8999 && typeof poped !== "undefined") {
-                console.log(poped[poped?.length - 1]);
+function clamp(min: number, numbers: number, max: number): number;
+function clamp(min: number, numbers: number[], max: number): number[];
+function clamp(min: number, numbers: number | number[], max: number): number | number[] {
+        if (min > max) throw new Error(`The minimum value cannot be greater than the maximum value.\nmin: ${min}\nmax: ${max}`);
+        if (!Array.isArray(numbers)) {
+                return Math.max(Math.min(numbers, max), min);
+        } else {
+                let result: number[] = [];
+                for (let i = 0; i < numbers.length; i++) {
+                        result.push(Math.max(Math.min(numbers[i], max), min));
+                }
+                return result;
         }
 }
-let t2 = performance.now();
-console.log(t2 - t1);
 
-let t3 = performance.now();
-for (let i = 0; i < 90000; i++) {
-        let poped = arr.toPoppedx();
-        if (i === 8999 && typeof poped !== "undefined") {
-                console.log(poped[poped?.length - 1]);
-        }
-}
-let t4 = performance.now();
-console.log(t4 - t3);
-
-let t5 = performance.now();
-for (let i = 0; i < 90000; i++) {
-        let poped = arr.toPopped();
-        if (i === 8999 && typeof poped !== "undefined") {
-                console.log(poped[poped?.length - 1]);
-        }
-}
-let t6 = performance.now();
-console.log(t6 - t5);
+let arr = [1, 2];
+const ans = clamp(5, arr, 3);
+console.log(ans);
