@@ -3,6 +3,7 @@ export {};
 declare global {
         interface Array<T> {
                 toPopped(): T[] | undefined;
+                toPoppedx(): T[] | undefined;
                 toPushed(...items: T[]): T[];
                 toShifted(): T[];
                 toUnshifted(...items: T[]): T[];
@@ -16,6 +17,13 @@ if (!Array.prototype.toPopped) {
                 const popped = this.slice();
                 popped.pop();
                 return popped;
+        };
+}
+
+if (!Array.prototype.toPoppedx) {
+        Array.prototype.toPoppedx = function () {
+                if (this.length === 0) return undefined;
+                return this.slice(0, this.length - 2);
         };
 }
 
@@ -69,8 +77,33 @@ export function shuffleArray<T>(arr: T[]): T[] {
         return arr;
 }
 
+let arr = Array(100000).fill(256);
+let t1 = performance.now();
+for (let i = 0; i < 90000; i++) {
+        let poped = arr.toPopped();
+        if (i === 8999 && typeof poped !== "undefined") {
+                console.log(poped[poped?.length - 1]);
+        }
+}
+let t2 = performance.now();
+console.log(t2 - t1);
 
+let t3 = performance.now();
+for (let i = 0; i < 90000; i++) {
+        let poped = arr.toPoppedx();
+        if (i === 8999 && typeof poped !== "undefined") {
+                console.log(poped[poped?.length - 1]);
+        }
+}
+let t4 = performance.now();
+console.log(t4 - t3);
 
-let arr = [1, 2, 3, 4, 5, 6, 7];
-let shuffled = shuffleArray(arr);
-console.log(shuffled); // [5, 2, 4, 3, 1, 7, 6]
+let t5 = performance.now();
+for (let i = 0; i < 90000; i++) {
+        let poped = arr.toPopped();
+        if (i === 8999 && typeof poped !== "undefined") {
+                console.log(poped[poped?.length - 1]);
+        }
+}
+let t6 = performance.now();
+console.log(t6 - t5);
