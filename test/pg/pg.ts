@@ -66,30 +66,31 @@ if (!Array.prototype.toSorted) {
         };
 }
 
-export function shuffleArray<T>(arr: T[]): T[] {
-        let R;
-        let i = 0;
-        while (i < arr.length) {
-                R = Math.floor(Math.random() * arr.length);
-                [arr[i], arr[R]] = [arr[R], arr[i]];
-                i++;
-        }
-        return arr;
+const print = console.log.bind(console);
+
+function printf(...args: any[]) {
+        console.log(...args);
 }
 
-function getDigits(number: number): number[] {
-        if (number === 0) return [0];
-        else if (number < 0) number *= -1;
+let arr = [];
+for (let i = 0; i < 10000; i++) {
+        arr.push(Math.random() * Math.pow(2, 32));
+}
 
-        let result = [];
-        while (number !== 0) {
-                result.unshift(number % 10);
-                number = Math.floor(number / 10);
-        }
-        return result;
+let times = [];
+for (let i = 0; i < arr.length; i++) {
+        print(arr[i]);
 }
-function getDigitsFloat(number: number): number[] {
-        const chars = number.toString().split("");
-        return chars.map((v) => parseInt(v)).filter((v) => !isNaN(v));
+let t1 = performance.now();
+for (let i = 0; i < arr.length; i++) {
+        print(arr[i]);
 }
-console.log(getDigits(256));
+times.push(performance.now() - t1);
+
+let t2 = performance.now();
+for (let i = 0; i < arr.length; i++) {
+        printf(arr[i]);
+}
+times.push(performance.now() - t2);
+
+console.table(times);
