@@ -49,12 +49,6 @@ if (!Array.prototype.toSorted) {
                 return copy;
         };
 }
-const print = console.log.bind(console);
-function printf(...args) {
-        console.log(...args);
-}
-let arr = [];
-for (let i = 0; i < 100000; i++) {
-        arr.push(Math.random() * Math.pow(2, 32));
-}
+
+const clg = console.log.bind(console);
 

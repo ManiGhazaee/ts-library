@@ -66,31 +66,7 @@ if (!Array.prototype.toSorted) {
         };
 }
 
-const print = console.log.bind(console);
+const clg = console.log.bind(console);
 
-function printf(...args: any[]) {
-        console.log(...args);
-}
-
-let arr = [];
-for (let i = 0; i < 10000; i++) {
-        arr.push(Math.random() * Math.pow(2, 32));
-}
-
-let times = [];
-for (let i = 0; i < arr.length; i++) {
-        print(arr[i]);
-}
-let t1 = performance.now();
-for (let i = 0; i < arr.length; i++) {
-        print(arr[i]);
-}
-times.push(performance.now() - t1);
-
-let t2 = performance.now();
-for (let i = 0; i < arr.length; i++) {
-        printf(arr[i]);
-}
-times.push(performance.now() - t2);
-
-console.table(times);
+const arr = new ArrayBuffer(8);
+clg(arr);
