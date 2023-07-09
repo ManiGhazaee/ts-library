@@ -107,6 +107,10 @@ export function switchClass(elements: Array<HTMLElement> | HTMLElement, classToR
 /**
  * checks if an element has a class.
  */
+export function hasClass(elements: HTMLElement, classNmaes: string): boolean;
+export function hasClass(elements: HTMLElement[], classNmaes: string): boolean[];
+export function hasClass(elements: HTMLElement, classNmaes: string[]): boolean[];
+export function hasClass(elements: HTMLElement[], classNmaes: string[]): boolean[][];
 export function hasClass(elements: HTMLElement[] | HTMLElement, classNames: string[] | string): boolean | boolean[] | boolean[][] {
         const elems = Array.isArray(elements) ? elements : [elements];
         const classNameArr = Array.isArray(classNames) ? classNames : [classNames];
