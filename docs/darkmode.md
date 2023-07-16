@@ -1,4 +1,6 @@
-dark mode example
+# Dark Mode 
+
+**Example:**
 
 ```html
   <html>
@@ -25,3 +27,6 @@ dark mode example
     </body>
   </html>
 ```
+
+**Source(s):**
+[DarkMode](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/darkmode.ts)
