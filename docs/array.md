@@ -13,7 +13,7 @@ arrayDiff(arr1, arr2); // returns [0, 4, 5]
 ```
 
 **Source(s):**
-[arrayDiff](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts){:target="_blank"}
+[arrayDiff](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
 
 #
 
