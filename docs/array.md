@@ -13,7 +13,7 @@ arrayDiff(arr1, arr2); // returns [0, 4, 5]
 ```
 
 **Source(s):**
-[arrayDiff](../src/ts/array.ts#arrayDiff)
+[arrayDiff](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
 
 #
 
@@ -29,7 +29,7 @@ rmDuplicate(array); // returns [1, 2, 3]
 ```
 
 **Source(s):**
-[rmDuplicate](../src/ts/array.ts#rmDuplicate)
+[rmDuplicate](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
 
 #
 
@@ -45,7 +45,7 @@ deepCopy(array); // returns [1, 2, 2, 3]
 ```
 
 **Source(s):**
-[deepCopy](../src/ts/array.ts#deepCopy)
+[deepCopy](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
 
 #
 
@@ -61,7 +61,7 @@ getRandomItem(array);
 ```
 
 **Source(s):**
-[getRandomItem](../src/ts/array.ts#getRandomItem)
+[getRandomItem](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
 
 #
 
@@ -78,6 +78,6 @@ console.log(shuffled); // [5, 2, 4, 3, 1, 7, 6]
 ```
 
 **Source(s):**
-[shuffleArray](../src/ts/array.ts#shuffleArray)
+[shuffleArray](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
 
 #
