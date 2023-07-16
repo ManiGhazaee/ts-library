@@ -8,6 +8,7 @@ Make a color and convert it to hex, rgb, rgba in type of array or string.
 
 ```typescript
 type ColorParameter = string | number[] | { red: number; green: number; blue: number; alpha: number };
+type Color = { red: number; green: number; blue: number; alpha: number };
 ```
 
 **Example(s):**
@@ -30,7 +31,7 @@ const C5 = new Color(c5);
 console.log(C1.red); // 243
 console.log(C3.green); // 43
 console.log(C5.blue); // 1
-console.log(C2.alpha); // 255 
+console.log(C2.alpha); // 255
 ```
 
 **Source(s):**
