@@ -4,7 +4,7 @@
 
 Function to check if an object is empty.
 
-source: [isObjectEmpty](../src/ts/object.ts#isObjectEmpty)
+**Example:**
 
 ```typescript
 let obj1 = {};
@@ -12,3 +12,6 @@ let obj2 = { key: "value" };
 isObjectEmpty(obj1); // returns  true
 isObjectEmpty(obj2); // returns  false
 ```
+
+**source:**
+[isObjectEmpty](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/object.ts#L4)

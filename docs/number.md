@@ -1,5 +1,20 @@
 # Number
 
+### `randomrandom(n: number): number`
+
+generates a random number between 0 and (n - 1).
+
+**Example:**
+
+```typescript
+random(10); // Output will be a random number between 0 and 9
+```
+
+**Source(s):**
+[random](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/number.ts#L4)
+
+#
+
 ### `clamp(min: number, numbers: number | number[], max: number): number | number[]`
 
 Clamp a number or numbers around a min and max value.
@@ -15,7 +30,7 @@ clamp(0, [5, 15, -5], 10); // [5, 10, 0]
 ```
 
 **Source(s):**
-[clamp](../src/ts/array.ts#clamp)
+[clamp](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/number.ts#L11)
 
 #
 
@@ -35,7 +50,7 @@ getDigits(0); // [0]
 ```
 
 **Source(s):**
-[getDigits](../src/ts/array.ts#getDigits)
+[getDigits](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/number.ts#L33)
 
 #
 
@@ -52,6 +67,6 @@ getDigitsFloat(42); // [4, 2]
 ```
 
 **Source(s):**
-[getDigitsFloat](../src/ts/array.ts#getDigitsFloat)
+[getDigitsFloat](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/number.ts#L52)
 
 #
