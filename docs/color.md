@@ -87,9 +87,6 @@ const C1 = new Color(c1);
 console.log(C1.rgbString()); // "rgb(243, 43, 1)"
 ```
 
-**Source(s):**
-[rgbString](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/color.ts)
-
 #
 
 ### `(method) Color.rgbaString(): string`
@@ -125,3 +122,5 @@ console.log(C1.hex()); // "#f32b01"
 
 **Source(s):**
 [hex](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/color.ts)
+
+#

@@ -109,3 +109,4 @@ console.log(arr); // [2, 1, 4, 3]
 **Source(s):**
 [toSorted](../src/ts/array.prototype.ts)
 
+#
