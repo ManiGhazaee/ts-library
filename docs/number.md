@@ -1,6 +1,6 @@
 # Number
 
-### `randomrandom(n: number): number`
+### `random(n: number): number`
 
 generates a random number between 0 and (n - 1).
 
