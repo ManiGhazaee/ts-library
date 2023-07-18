@@ -2,16 +2,13 @@
 
 ### `random(n: number): number`
 
-generates a random number between 0 and (n - 1).
+generates a random number between 0 and (n - 1) inclusive.
 
 **Example:**
 
 ```typescript
 random(10); // Output will be a random number between 0 and 9
 ```
-
-**Source(s):**
-[random](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/number.ts#L4)
 
 #
 
@@ -28,9 +25,6 @@ clamp(0, -5, 10); // 0
 // or:
 clamp(0, [5, 15, -5], 10); // [5, 10, 0]
 ```
-
-**Source(s):**
-[clamp](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/number.ts#L11)
 
 #
 
@@ -49,9 +43,6 @@ getDigits(-456); // [4, 5, 6]
 getDigits(0); // [0]
 ```
 
-**Source(s):**
-[getDigits](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/number.ts#L33)
-
 #
 
 ### `getDigitsFloat(number: number): number[]`
@@ -66,7 +57,6 @@ getDigitsFloat(-0.123); // [0, 1, 2, 3]
 getDigitsFloat(42); // [4, 2]
 ```
 
-**Source(s):**
-[getDigitsFloat](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/number.ts#L52)
-
 #
+
+[source](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/number.ts)

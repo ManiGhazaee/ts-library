@@ -20,9 +20,6 @@ const newStr3 = spice(str3, 10, 5);
 console.log(newStr3); // Output: "This is a string."
 ```
 
-**source:**
-[spice](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts#L89)
-
 #
 
 ### `kebabToCamel(str: string): string`
@@ -36,15 +33,11 @@ const string = "example-string";
 kebabToCamel(string); // returns "exampleString"
 ```
 
-**source:**
- [kebabToCamel](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts#L4)
-
 #
 
 ### `changeCase(string: string, changeTo: Case): string`
 
 Changes the case of a string to the specified format.
-
 
 changeTo type:
 
@@ -79,9 +72,6 @@ changeCase(string, "upper");
 changeCase(string, "lower");
 ```
 
-**source:**
-[changeCase](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts#L40)
-
 #
 
 ### `toCamelOrPascalCase(str: string, changeTo: "camel" | "pascal"): string`
@@ -100,9 +90,6 @@ toCamelOrPascalCase(string, "camel");
 toCamelOrPascalCase(string, "pascal");
 ```
 
-**source:**
- [toCamelOrPascalCase](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts#L57)
-
 #
 
 ### `toUpperOrLowerCase(str: string, changeTo: "lower" | "upper"): string`
@@ -120,9 +107,6 @@ changeCase(string, "upper");
 // Returns "examplestringwithallcases"
 changeCase(string, "lower");
 ```
-
-**source:**
-[toUpperOrLowerCase](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts#L65)
 
 #
 
@@ -145,9 +129,6 @@ changeCase(string, "kebab");
 changeCase(string, "scream");
 ```
 
-**source:**
-[toSnakeOrKebabOrScreamCase](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts#L70)
-
 #
 
 ### `rmCharAt(str: string, index: number): string`
@@ -160,9 +141,6 @@ removes a character at the index given.
 const string = "string";
 rmCharAt(string, 2); // returns "sting"
 ```
-
-source:
-[rmCharAt](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts#L84)
 
 #
 
@@ -177,9 +155,6 @@ const string = "sting";
 addCharAt(string, "r", 2); // returns "string"
 ```
 
-**source:**
-[addCharAt](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts#L96)
-
 #
 
 ### `tolowercase(str: string): string`
@@ -193,5 +168,6 @@ const string = "StRinG";
 tolowercase(string); // returns "string"
 ```
 
-**source:**
-[tolowercase](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts#L103)
+#
+
+[source](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/string.ts)

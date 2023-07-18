@@ -4,22 +4,18 @@
 
 Sets the display property of the HTML element to "none".
 
-**source:**
- [displayNone](../src/ts/htmlelement.prototype.ts)
-
- **Example:**
+**Example:**
 
 ```typescript
 const myElem = $("#my-element")!; // $(querySelector: string): HTMLElement | null
 myElem.displayNone();
 ```
+
 #
 
 ### `HTMLElement.prototype.displayBlock()`
 
 Sets the display property of the HTML element to "block".
-
-**source:** [displayBlock](../src/ts/htmlelement.prototype.ts)
 
 **Example:**
 
@@ -28,3 +24,6 @@ const myElem = $("#my-element")!; // $(querySelector: string): HTMLElement | nul
 myElem.displayBlock();
 ```
 
+#
+
+[source](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/htmlelement.prototype.ts)

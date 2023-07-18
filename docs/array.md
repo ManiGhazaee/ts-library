@@ -12,9 +12,6 @@ let arr2 = [1, 4, 3, 5, 2];
 arrayDiff(arr1, arr2); // returns [0, 4, 5]
 ```
 
-**Source(s):**
-[arrayDiff](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
-
 #
 
 ### `rmDuplicate<T>(array: T[])`
@@ -27,9 +24,6 @@ removes duplicated values from an array.
 let array = [1, 2, 2, 3];
 rmDuplicate(array); // returns [1, 2, 3]
 ```
-
-**Source(s):**
-[rmDuplicate](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
 
 #
 
@@ -44,9 +38,6 @@ let array = [1, 2, 2, 3];
 deepCopy(array); // returns [1, 2, 2, 3]
 ```
 
-**Source(s):**
-[deepCopy](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
-
 #
 
 ### `getRandomItem<T>(arr: T[]): T`
@@ -59,9 +50,6 @@ Function to get a random item from an array.
 let array = [1, 2, 2, 3];
 getRandomItem(array);
 ```
-
-**Source(s):**
-[getRandomItem](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
 
 #
 
@@ -77,7 +65,6 @@ let shuffled = shuffleArray(arr);
 console.log(shuffled); // [5, 2, 4, 3, 1, 7, 6]
 ```
 
-**Source(s):**
-[shuffleArray](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)
-
 #
+
+[source](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.ts)

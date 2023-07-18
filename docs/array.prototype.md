@@ -11,9 +11,6 @@ const arr = [1, 2, 3];
 console.log(arr.last); // Output: 3
 ```
 
-**Source(s):**
-[last](../src/ts/array.prototype.ts)
-
 #
 
 ### `Array<any>.toPopped(): any[] | undefined`
@@ -28,9 +25,6 @@ const popped = arr.toPopped();
 console.log(arr); // [1, 2, 3]
 console.log(popped); // [1, 2]
 ```
-
-**Source(s):**
-[toPopped](../src/ts/array.prototype.ts)
 
 #
 
@@ -52,9 +46,6 @@ console.log(anotherArr); // ['a', 'b', 'c']
 console.log(emptyArr); // []
 ```
 
-**Source(s):**
-[toPushed](../src/ts/array.prototype.ts)
-
 #
 
 ### `Array<any>.toShifted(): any[]`
@@ -69,9 +60,6 @@ const shifted = arr.toShifted();
 console.log(shifted); // [2, 3]
 console.log(arr); // [1, 2, 3]
 ```
-
-**Source(s):**
-[toShifted](../src/ts/array.prototype.ts)
 
 #
 
@@ -88,9 +76,6 @@ console.log(unshifted); // [1, 2, 3]
 console.log(arr); // [2, 3]
 ```
 
-**Source(s):**
-[toUnshifted](../src/ts/array.prototype.ts)
-
 #
 
 ### `Array<any>.toSorted(compareFn?: ((a: any, b: any) => number) | undefined): any[]`
@@ -106,7 +91,6 @@ console.log(sorted); // [1, 2, 3, 4]
 console.log(arr); // [2, 1, 4, 3]
 ```
 
-**Source(s):**
-[toSorted](../src/ts/array.prototype.ts)
-
 #
+
+[source](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/array.prototype.ts)

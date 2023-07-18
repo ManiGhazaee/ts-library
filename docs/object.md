@@ -13,5 +13,6 @@ isObjectEmpty(obj1); // returns  true
 isObjectEmpty(obj2); // returns  false
 ```
 
-**source:**
-[isObjectEmpty](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/object.ts#L4)
+#
+
+[source](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/object.ts)
