@@ -158,7 +158,6 @@ This function takes elements and classesToAdd as parameters. The elements parame
 **Example:**
 
 ```typescript
-Copy code
 // Example 1: Add class "example" to all elements with class "container"
 const containers = document.querySelectorAll('.container');
 addClasses(containers, 'example');
@@ -195,5 +194,385 @@ switchClass(elem, "highlight", "active");
 > Ensure that the elements and classes exist in the DOM before calling this function.
 
 #
+
+### `rmAllElemsBy$$(querySelectorAll: string): void`
+
+Removes all elements from the DOM that match the given CSS selector.
+
+**Example:**
+
+```typescript
+// Remove all elements with class "example"
+rmAllElemsBy$$('.example');
+```
+
+#
+
+### `byId(id: string): HTMLElement | null`
+
+A short version of getElementById that returns the DOM element with the specified id.
+
+**Example:**
+
+```typescript
+const elem = byId("my-element");
+```
+
+#
+
+
+### `byClassName(className: string): HTMLCollectionOf<HTMLElement>`
+
+A function to get all elements with the specified class name.
+
+**Example:**
+
+```typescript
+const elements = byClassName("my-class");
+```
+
+#
+
+### `$(querySelector: string): HTMLElement | null`
+
+A function that uses querySelector to select a single element based on the given CSS selector.
+
+**Example:**
+
+```typescript
+const elem = $("div.my-element");
+```
+
+#
+
+
+### `$$(querySelectorAll: string): HTMLElement[]`
+
+A function that uses querySelectorAll to select multiple elements based on the given CSS selector, and returns them as an array.
+
+**Example:**
+
+```typescript
+const elems = $$(".my-elements");
+```
+
+#
+
+### `lsGetAll(lsItems: { [key: string]: string }): void`
+
+Retrieves all items from local storage and updates the values in the provided object.
+
+**Example:**
+
+```typescript
+const lsItems = { key1: "", key2: "", key3: "" };
+lsGetAll(lsItems);
+// After the function call, lsItems will be updated with the corresponding values from local storage (if available).
+```
+
+#
+
+### `lsSetAll(lsItems: { [key: string]: string }): void`
+
+Sets all key-value pairs in the provided object to the localStorage.
+
+**Example:**
+
+```typescript
+
+const lsItems = { key1: "value1", key2: "value2", key3: "value3" };
+lsSetAll(lsItems);
+// All key-value pairs in lsItems will be saved to localStorage.
+```
+
+#
+
+
+### `lsSet(lsKey: string, lsVal: string): void`
+
+Sets a key-value pair to the localStorage.
+
+**Example:**
+
+```typescript
+lsSet("myKey", "myValue");
+// The key "myKey" with the value "myValue" will be saved to localStorage.
+```
+
+#
+
+
+### `lsGet(lsKey: string): string | null`
+
+Gets the value associated with the provided key from localStorage.
+
+**Example:**
+
+```typescript
+const value = lsGet("myKey");
+console.log(value); // Outputs the value associated with "myKey" or null if it doesn't exist.
+```
+
+#
+
+
+### `isLastChild(el: HTMLElement): boolean`
+
+Checks if an element is the last child of its parent.
+
+**Example:**
+
+```typescript
+const elem = document.querySelector(".my-element");
+const isLast = isLastChild(elem);
+console.log(isLast); // Outputs true if the element is the last child, false otherwise.
+```
+
+#
+
+
+### `isFirstChild(el: HTMLElement): boolean`
+
+Checks if an element is the first child of its parent.
+
+**Example:**
+
+```typescript
+const elem = document.querySelector(".my-element");
+const isFirst = isFirstChild(elem);
+console.log(isFirst); // Outputs true if the element is the first child, false otherwise.
+```
+
+#
+
+### `cssToElements(cssRulesString: string, elementsArray: HTMLElement | HTMLElement[]): void`
+
+This function allows you to apply CSS rules to one or multiple HTMLElements without removing or duplicating the existing CSS rules. It takes a cssRulesString parameter containing valid CSS rules that you want to apply. The rules should be separated by a semicolon and a space ("; "). Ensure there are no unnecessary semicolons in the string.
+
+The function also takes an elementsArray parameter, which specifies the target element(s) to apply the CSS rules. You can pass a single HTMLElement or an array of HTMLElements. If you provide an array of elements, the function will apply the CSS rules to each element in the array.
+
+The process of applying CSS rules involves merging the provided CSS rules with the existing CSS rules of each element. It ensures that duplicate rules are removed to prevent unnecessary redundancy in the cssText of each element.
+
+**Example:**
+
+```typescript
+// Apply CSS rules to a single element
+const element = document.getElementById("myElement");
+cssToElements("color: red; font-size: 16px;", element);
+
+// Apply CSS rules to an array of elements
+const elements = document.querySelectorAll(".myClass");
+cssToElements("background-color: yellow; border: 1px solid black;", elements);
+Explanation:
+```
+
+> **Note**
+> Make sure to use this function carefully, as it directly manipulates the cssText property of the elements. It may override existing styles if not used properly.
+
+
+#
+
+
+### `cssToElementsReplace(cssRulesString: string, elementsArray: HTMLElement | HTMLElement[]): void`
+
+This function allows you to replace the existing CSS rules of one or multiple HTMLElements with the provided CSS rule string. It takes a cssRulesString parameter containing valid CSS rules that you want to set for the elements. The rules should be separated by a semicolon and a space ("; ").
+
+The function also takes an elementsArray parameter, which specifies the target element(s) whose CSS rules will be replaced. You can pass a single HTMLElement or an array of HTMLElements. If you provide an array of elements, the function will replace the CSS rules for each element in the array.
+
+**Parameters:**
+
+`cssRulesString (string)` : A string containing valid CSS rules that will replace the existing CSS rules for the elements.
+
+`elementsArray (HTMLElement | HTMLElement[]) `: The target element(s) whose CSS rules will be replaced. It can be a single HTMLElement or an array of HTMLElements.
+
+**Example:**
+
+```typescript
+const elements = document.querySelectorAll(".myClass");
+cssToElementsReplace("background-color: yellow; border: 1px solid black;", elements);
+```
+
+> **Note**
+> When using this function, keep in mind that it directly sets the cssText property of the elements, which means it will override any existing styles.
+
+#
+
+
+### `cssToElementsAdd(cssRulesString: string, elementsArray: HTMLElement | HTMLElement[])`
+
+This function allows you to add CSS rules to the existing styles of one or multiple HTMLElements. It takes a cssRulesString parameter containing valid CSS rules that you want to add to the elements. The rules should be separated by a semicolon and a space ("; ").
+
+The function also takes an elementsArray parameter, which specifies the target element(s) to which the CSS rules will be added. You can pass a single HTMLElement or an array of HTMLElements. If you provide an array of elements, the function will add the CSS rules to each element in the array.
+
+**Parameters:**
+
+`cssRulesString (string)`: A string containing valid CSS rules that will be added to the existing CSS rules for the elements.
+
+`elementsArray (HTMLElement | HTMLElement[])`: The target element(s) to which the CSS rules will be added. It can be a single HTMLElement or an array of HTMLElements.
+
+**Example:**
+```typescript
+const elements = document.querySelectorAll(".myClass");
+cssToElementsAdd("color: red; font-size: 16px;", elements);
+```
+
+#
+
+### `displayBlock(elements: HTMLElement[] | HTMLElement): void`
+
+This function sets the display property of one or multiple HTMLElements to "block", making them visible. It takes an elements parameter, which can be either a single HTMLElement or an array of HTMLElements. The function will set the display property of each element to "block" to make them visible in the document flow.
+
+**Parameters:**
+
+`elements (HTMLElement[] | HTMLElement)`: The target element(s) whose display property will be set to "block". It can be a single HTMLElement or an array of HTMLElements.
+
+**Example:**
+
+```typescript
+const myElements = document.querySelectorAll('.my-element');
+displayBlock(myElements);
+```
+
+#
+
+### `displayNone(elements: HTMLElement | HTMLElement[]): void`
+
+This function sets the display property of one or multiple HTMLElements to "none", effectively hiding them from the document flow. It takes an elements parameter, which can be either a single HTMLElement or an array of HTMLElements. The function will set the display property of each element to "none" to hide them from the rendered page.
+
+**Parameters:**
+
+`elements (HTMLElement | HTMLElement[])`: The target element(s) whose display property will be set to "none". It can be a single HTMLElement or an array of HTMLElements.
+
+**Example:**
+
+```typescript
+const myElements = document.querySelectorAll('.my-element');
+displayNone(myElements);
+```
+
+> **Note**
+> Setting an element's display property to "none" removes it from the visible layout, but it will still exist in the DOM and can be shown again by changing its display property to another valid value.
+
+#
+
+### `setDisplay(elements: HTMLElement | HTMLElement[], displayString: string): void`
+
+This function sets the display property of one or multiple HTMLElements to the specified value. It takes two parameters: elements and displayString. The elements parameter can be either a single HTMLElement or an array of HTMLElements. The function will set the display property of each element in the array to the provided displayString, making them visible or hidden based on the value.
+
+**Parameters:**
+
+`elements (HTMLElement | HTMLElement[])`: The target element(s) whose display property will be set.
+
+`displayString (string)`: The value to which the display property of the elements will be set.
+
+**Example:**
+
+```typescript
+const myElements = document.querySelectorAll('.my-element');
+setDisplay(myElements, 'block');
+```
+
+#
+
+
+### `opacity_1(elements: HTMLElement | HTMLElement[])`
+
+This function sets the opacity of one or multiple elements to 1, making them fully opaque. It takes a elements parameter, which can be either a single HTMLElement or an array of HTMLElements. The function will set the opacity of each element in the array to 1, making them fully visible.
+
+**Parameters:**
+
+`elements (HTMLElement | HTMLElement[])`: The target element(s) whose opacity will be set to 1.
+
+**Example:**
+
+```typescript
+const myElement = document.getElementById('my-element');
+opacity_1(myElement);
+```
+
+#
+
+### `opacity_0(elements: HTMLElement | HTMLElement[])`
+
+This function sets the opacity of one or multiple elements to 0, making them fully transparent and invisible. It takes a elements parameter, which can be either a single HTMLElement or an array of HTMLElements. The function will set the opacity of each element in the array to 0, effectively hiding them from view.
+
+**Parameters:**
+
+`elements (HTMLElement | HTMLElement[])`: The target element(s) whose opacity will be set to 0.
+
+**Example:**
+
+```typescript
+const myElement = document.getElementById('my-element');
+opacity_0(myElement);
+```
+
+
+#
+
+
+### `isBlock(element: HTMLElement): boolean`
+
+This function checks if the display property of a given HTMLElement is set to "block". It takes a single element parameter representing the target element. The function returns true if the element's display is "block", indicating that it is visible in the document flow, or false if the display is set to any other value.
+
+**Parameters:**
+
+`element (HTMLElement)`: The target element to check.
+
+**Example:**
+
+```typescript
+const myElement = document.getElementById('my-element');
+if (isBlock(myElement)) {
+    // Element's display is set to "block"
+} else {
+    // Element's display is not "block"
+}
+```
+
+#
+
+
+### `isNone(element: HTMLElement): boolean`
+
+This function checks if the display property of a given HTMLElement is set to "none", indicating that the element is hidden from the document flow. It takes a single element parameter representing the target element. The function returns true if the element's display is "none", indicating that it is hidden, or false if the display is set to any other value.
+
+**Parameters:**
+
+`element (HTMLElement)`: The target element to check.
+
+**Example:**
+
+```typescript
+const myElement = document.getElementById('my-element');
+if (isNone(myElement)) {
+    // Element's display is set to "none"
+} else {
+    // Element's display is not "none"
+}
+```
+
+#
+
+
+### `getSiblings(elements: Element | Element[]): (Element | Element[] | null)[] | null`
+
+This function retrieves all siblings of the given element or elements and returns the result in an array. If the provided element has no siblings, it will return null. If the element has one sibling, it will return the sibling as a single Element. If the element has multiple siblings, it will return an array of Elements containing all the siblings.
+
+The elements parameter can be either a single Element or an array of Elements. If you provide an array of elements, the function will retrieve the siblings for each element in the array.
+
+**Parameters:**
+
+`elements (Element | Element[])`: The target element or array of elements whose siblings will be retrieved.
+
+**Example:**
+
+```typescript
+const myElements = document.querySelectorAll('.my-element');
+const siblings = getSiblings(myElements);
+```
+
+#
+
 
 [source](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/document.ts)
