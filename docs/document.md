@@ -159,12 +159,12 @@ This function takes elements and classesToAdd as parameters. The elements parame
 
 ```typescript
 // Example 1: Add class "example" to all elements with class "container"
-const containers = document.querySelectorAll('.container');
-addClasses(containers, 'example');
+const containers = document.querySelectorAll(".container");
+addClasses(containers, "example");
 
 // Example 2: Add classes "class1" and "class2" to a single element
-const elem = document.querySelector('#my-element');
-addClasses(elem, ['class1', 'class2']);
+const elem = document.querySelector("#my-element");
+addClasses(elem, ["class1", "class2"]);
 ```
 
 > **Note**
@@ -203,7 +203,7 @@ Removes all elements from the DOM that match the given CSS selector.
 
 ```typescript
 // Remove all elements with class "example"
-rmAllElemsBy$$('.example');
+rmAllElemsBy$$(".example");
 ```
 
 #
@@ -219,7 +219,6 @@ const elem = byId("my-element");
 ```
 
 #
-
 
 ### `byClassName(className: string): HTMLCollectionOf<HTMLElement>`
 
@@ -244,7 +243,6 @@ const elem = $("div.my-element");
 ```
 
 #
-
 
 ### `$$(querySelectorAll: string): HTMLElement[]`
 
@@ -279,14 +277,12 @@ Sets all key-value pairs in the provided object to the localStorage.
 **Example:**
 
 ```typescript
-
 const lsItems = { key1: "value1", key2: "value2", key3: "value3" };
 lsSetAll(lsItems);
 // All key-value pairs in lsItems will be saved to localStorage.
 ```
 
 #
-
 
 ### `lsSet(lsKey: string, lsVal: string): void`
 
@@ -301,7 +297,6 @@ lsSet("myKey", "myValue");
 
 #
 
-
 ### `lsGet(lsKey: string): string | null`
 
 Gets the value associated with the provided key from localStorage.
@@ -314,7 +309,6 @@ console.log(value); // Outputs the value associated with "myKey" or null if it d
 ```
 
 #
-
 
 ### `isLastChild(el: HTMLElement): boolean`
 
@@ -329,7 +323,6 @@ console.log(isLast); // Outputs true if the element is the last child, false oth
 ```
 
 #
-
 
 ### `isFirstChild(el: HTMLElement): boolean`
 
@@ -369,9 +362,7 @@ Explanation:
 > **Note**
 > Make sure to use this function carefully, as it directly manipulates the cssText property of the elements. It may override existing styles if not used properly.
 
-
 #
-
 
 ### `cssToElementsReplace(cssRulesString: string, elementsArray: HTMLElement | HTMLElement[]): void`
 
@@ -397,7 +388,6 @@ cssToElementsReplace("background-color: yellow; border: 1px solid black;", eleme
 
 #
 
-
 ### `cssToElementsAdd(cssRulesString: string, elementsArray: HTMLElement | HTMLElement[])`
 
 This function allows you to add CSS rules to the existing styles of one or multiple HTMLElements. It takes a cssRulesString parameter containing valid CSS rules that you want to add to the elements. The rules should be separated by a semicolon and a space ("; ").
@@ -411,6 +401,7 @@ The function also takes an elementsArray parameter, which specifies the target e
 `elementsArray (HTMLElement | HTMLElement[])`: The target element(s) to which the CSS rules will be added. It can be a single HTMLElement or an array of HTMLElements.
 
 **Example:**
+
 ```typescript
 const elements = document.querySelectorAll(".myClass");
 cssToElementsAdd("color: red; font-size: 16px;", elements);
@@ -429,7 +420,7 @@ This function sets the display property of one or multiple HTMLElements to "bloc
 **Example:**
 
 ```typescript
-const myElements = document.querySelectorAll('.my-element');
+const myElements = document.querySelectorAll(".my-element");
 displayBlock(myElements);
 ```
 
@@ -446,7 +437,7 @@ This function sets the display property of one or multiple HTMLElements to "none
 **Example:**
 
 ```typescript
-const myElements = document.querySelectorAll('.my-element');
+const myElements = document.querySelectorAll(".my-element");
 displayNone(myElements);
 ```
 
@@ -468,12 +459,11 @@ This function sets the display property of one or multiple HTMLElements to the s
 **Example:**
 
 ```typescript
-const myElements = document.querySelectorAll('.my-element');
-setDisplay(myElements, 'block');
+const myElements = document.querySelectorAll(".my-element");
+setDisplay(myElements, "block");
 ```
 
 #
-
 
 ### `opacity_1(elements: HTMLElement | HTMLElement[])`
 
@@ -486,7 +476,7 @@ This function sets the opacity of one or multiple elements to 1, making them ful
 **Example:**
 
 ```typescript
-const myElement = document.getElementById('my-element');
+const myElement = document.getElementById("my-element");
 opacity_1(myElement);
 ```
 
@@ -503,13 +493,11 @@ This function sets the opacity of one or multiple elements to 0, making them ful
 **Example:**
 
 ```typescript
-const myElement = document.getElementById('my-element');
+const myElement = document.getElementById("my-element");
 opacity_0(myElement);
 ```
 
-
 #
-
 
 ### `isBlock(element: HTMLElement): boolean`
 
@@ -522,16 +510,15 @@ This function checks if the display property of a given HTMLElement is set to "b
 **Example:**
 
 ```typescript
-const myElement = document.getElementById('my-element');
+const myElement = document.getElementById("my-element");
 if (isBlock(myElement)) {
-    // Element's display is set to "block"
+        // Element's display is set to "block"
 } else {
-    // Element's display is not "block"
+        // Element's display is not "block"
 }
 ```
 
 #
-
 
 ### `isNone(element: HTMLElement): boolean`
 
@@ -544,35 +531,14 @@ This function checks if the display property of a given HTMLElement is set to "n
 **Example:**
 
 ```typescript
-const myElement = document.getElementById('my-element');
+const myElement = document.getElementById("my-element");
 if (isNone(myElement)) {
-    // Element's display is set to "none"
+        // Element's display is set to "none"
 } else {
-    // Element's display is not "none"
+        // Element's display is not "none"
 }
 ```
 
 #
-
-
-### `getSiblings(elements: Element | Element[]): (Element | Element[] | null)[] | null`
-
-This function retrieves all siblings of the given element or elements and returns the result in an array. If the provided element has no siblings, it will return null. If the element has one sibling, it will return the sibling as a single Element. If the element has multiple siblings, it will return an array of Elements containing all the siblings.
-
-The elements parameter can be either a single Element or an array of Elements. If you provide an array of elements, the function will retrieve the siblings for each element in the array.
-
-**Parameters:**
-
-`elements (Element | Element[])`: The target element or array of elements whose siblings will be retrieved.
-
-**Example:**
-
-```typescript
-const myElements = document.querySelectorAll('.my-element');
-const siblings = getSiblings(myElements);
-```
-
-#
-
 
 [source](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/document.ts)
