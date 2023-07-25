@@ -409,3 +409,68 @@ export function getSiblings(elements: Element | Element[]) {
 export function isHTMLElement(element: unknown): element is HTMLElement {
         return element instanceof HTMLElement;
 }
+
+/**
+ * This function takes an `element` parameter of type `HTMLElement`, a `by` parameter of type `"tag" | "id" | "class"`, and a `target` parameter of type `string`. It returns the next sibling element of the provided `element` that matches the specified criteria.
+ */
+export function getNextElementBy(element: HTMLElement, by: "tag" | "id" | "class", target: string) {
+        let tempElem = element;
+        if (by === "tag") {
+                for (let i = 0; i < 1000; i++) {
+                        if (tempElem.nextElementSibling !== null) {
+                                tempElem = tempElem.nextElementSibling as HTMLElement;
+                                if (tempElem.tagName === target.toUpperCase()) {
+                                        return tempElem;
+                                } else {
+                                        continue;
+                                }
+                        } else {
+                                return undefined;
+                        }
+                }
+        } else if (by === "id") {
+                for (let i = 0; i < 1000; i++) {
+                        if (tempElem.nextElementSibling !== null) {
+                                tempElem = tempElem.nextElementSibling as HTMLElement;
+                                if (tempElem.id === target) {
+                                        return tempElem;
+                                } else {
+                                        continue;
+                                }
+                        } else {
+                                return undefined;
+                        }
+                }
+        } else if (by === "class") {
+                for (let i = 0; i < 1000; i++) {
+                        if (tempElem.nextElementSibling !== null) {
+                                tempElem = tempElem.nextElementSibling as HTMLElement;
+                                if (tempElem.classList.contains(target)) {
+                                        return tempElem;
+                                } else {
+                                        continue;
+                                }
+                        } else {
+                                return undefined;
+                        }
+                }
+        }
+        return undefined;
+}
+
+/**
+ * This function is an overloaded function that can accept either a single `HTMLElement` or an array of `HTMLElements` as the `elements` parameter. It returns a boolean value or an array of boolean values based on the type of the `elements` parameter.
+ */
+export function isTagName(elements: HTMLElement, tagName: string): boolean;
+export function isTagName(elements: HTMLElement[], tagName: string): boolean[];
+export function isTagName(elements: HTMLElement | HTMLElement[], tagName: string): boolean | boolean[] {
+        if (Array.isArray(elements)) {
+                let result = [];
+                for (let i = 0; i < elements.length; i++) {
+                        result.push(elements[i].tagName === tagName.toUpperCase());
+                }
+                return result;
+        } else {
+                return elements.tagName === tagName.toUpperCase();
+        }
+}

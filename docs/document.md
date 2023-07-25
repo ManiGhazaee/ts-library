@@ -547,4 +547,61 @@ if (isHTMLElement(element)) {
 
 #
 
+### `getNextElementBy(element: HTMLElement, by: "tag" | "id" | "class", target: string): HTMLElement | undefined`
+
+This function takes an `element` parameter of type `HTMLElement`, a `by` parameter of type `"tag" | "id" | "class"`, and a `target` parameter of type `string`. It returns the next sibling element of the provided `element` that matches the specified criteria.
+
+**Parameters:**
+
+- `element` (HTMLElement): The element from which to start searching for the next sibling element.
+- `by` ("tag" | "id" | "class"): The criteria to use for matching the next sibling element. Possible values are "tag", "id", or "class".
+- `target` (string): The value to match against the criteria specified by the `by` parameter.
+
+**Returns:**
+
+- `HTMLElement | undefined`: The next sibling element that matches the specified criteria, or `undefined` if no matching element is found.
+
+**Example:**
+
+```typescript
+const element = document.getElementById("myElement");
+
+const nextElement = getNextElementBy(element, "class", "myClass");
+if (nextElement) {
+        console.log("Next element:", nextElement);
+} else {
+        console.log("No matching element found");
+}
+```
+
+#
+
+### `isTagName(elements: HTMLElement | HTMLElement[], tagName: string): boolean | boolean[]`
+
+This function is an overloaded function that can accept either a single `HTMLElement` or an array of `HTMLElements` as the `elements` parameter. It returns a boolean value or an array of boolean values based on the type of the `elements` parameter.
+
+**Parameters:**
+
+- `elements` (HTMLElement | HTMLElement[]): The element(s) to check the `tagName` against.
+- `tagName` (string): The value to compare against the `tagName` of the `elements`.
+
+**Returns:**
+
+- `boolean | boolean[]`: If the `elements` parameter is an `HTMLElement`, it returns a boolean value indicating whether the `tagName` matches the specified `tagName`. If the `elements` parameter is an array of `HTMLElements`, it returns an array of boolean values indicating whether the `tagName` of each element matches the specified `tagName`.
+
+**Example:**
+
+```typescript
+const element = document.getElementById("myElement");
+const elements = [element, document.getElementById("anotherElement")];
+
+const isSingleMatch = isTagName(element, "div");
+console.log("Is single match:", isSingleMatch); // Output: true
+
+const isMultipleMatch = isTagName(elements, "div");
+console.log("Is multiple match:", isMultipleMatch); // Output: [true, false]
+```
+
+#
+
 [source](https://github.com/ManiGhazaee/ts-library/blob/main/src/ts/document.ts)
