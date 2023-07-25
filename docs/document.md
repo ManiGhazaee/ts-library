@@ -94,18 +94,6 @@ console.log(elementsByIds);
 
 #
 
-### `kebabToCamel(str: string): string`
-
-This function takes a string in kebab-case format (e.g., "my-example-string") and converts it to camelCase format (e.g., "myExampleString").
-
-**Example:**
-
-```typescript
-kebabToCamel(kebabCaseString); // Output: "myExampleString"
-```
-
-#
-
 ### `createAndAppendElement(tagName: string, attributes: { [key: string]: string }, parentElem: Element): void `
 
 This function takes a tagName, a set of attributes in the form of a key-value pair, and a parentElem element. It creates a new HTML element with the given tagName, sets the specified attributes to the element, and then appends it to the provided parentElem.
@@ -130,7 +118,7 @@ In this example, the function will create a new div element with the specified a
 
 #
 
-### `rmClasses(elements: Array<Element> | Element, classesToRemove: string | string[]): void`
+### `rmClass(elements: Array<Element> | Element, classesToRemove: string | string[]): void`
 
 This function takes elements and classesToRemove as parameters. The elements parameter can be an array of elements or a single element. The classesToRemove parameter can be a string representing a single class name or an array of strings representing multiple class names.
 
@@ -139,11 +127,11 @@ This function takes elements and classesToRemove as parameters. The elements par
 ```typescript
 // Example 1: Remove class "example" from all elements with class "container"
 const containers = document.querySelectorAll(".container");
-rmClasses(containers, "example");
+rmClass(containers, "example");
 
 // Example 2: Remove classes "class1" and "class2" from a single element
 const elem = document.querySelector("#my-element");
-rmClasses(elem, ["class1", "class2"]);
+rmClass(elem, ["class1", "class2"]);
 ```
 
 > **Note**
@@ -151,7 +139,7 @@ rmClasses(elem, ["class1", "class2"]);
 
 #
 
-### `addClasses(elements: Array<Element> | Element, classesToAdd: string | string[])`
+### `addClass(elements: Array<Element> | Element, classesToAdd: string | string[])`
 
 This function takes elements and classesToAdd as parameters. The elements parameter can be an array of elements or a single element. The classesToAdd parameter can be a string representing a single class name or an array of strings representing multiple class names.
 
@@ -160,11 +148,11 @@ This function takes elements and classesToAdd as parameters. The elements parame
 ```typescript
 // Example 1: Add class "example" to all elements with class "container"
 const containers = document.querySelectorAll(".container");
-addClasses(containers, "example");
+addClass(containers, "example");
 
 // Example 2: Add classes "class1" and "class2" to a single element
 const elem = document.querySelector("#my-element");
-addClasses(elem, ["class1", "class2"]);
+addClass(elem, ["class1", "class2"]);
 ```
 
 > **Note**
@@ -536,6 +524,24 @@ if (isNone(myElement)) {
         // Element's display is set to "none"
 } else {
         // Element's display is not "none"
+}
+```
+
+#
+
+### `isHTMLElement(element: unknown): element is HTMLElement`
+
+This function takes an `element` parameter of type `unknown` and returns a boolean value indicating whether the element is an instance of `HTMLElement`.
+
+**Example:**
+
+```typescript
+const element = document.getElementById("myElement");
+
+if (isHTMLElement(element)) {
+        console.log("Element is an HTML element");
+} else {
+        console.log("Element is not an HTML element");
 }
 ```
 

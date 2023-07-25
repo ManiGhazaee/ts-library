@@ -52,7 +52,7 @@ export function createAndAppendElement(tagName: string, attributes: { [key: stri
  * const elem = document.querySelector('#my-element');
  * rmClasses(elem, ['class1', 'class2']);
  */
-export function rmClasses(elements: Array<Element> | Element, classesToRemove: string | string[]): void {
+export function rmClass(elements: Array<Element> | Element, classesToRemove: string | string[]): void {
         const classes = Array.isArray(classesToRemove) ? classesToRemove : [classesToRemove];
         const elems = Array.isArray(elements) ? elements : [elements];
 
@@ -78,7 +78,7 @@ export function rmClasses(elements: Array<Element> | Element, classesToRemove: s
  * const elem = document.querySelector('#my-element');
  * addClasses(elem, ['class1', 'class2']);
  */
-export function addClasses(elements: Array<Element> | Element, classesToAdd: string | string[]) {
+export function addClass(elements: Array<Element> | Element, classesToAdd: string | string[]) {
         const classes = Array.isArray(classesToAdd) ? classesToAdd : [classesToAdd];
         const elems = Array.isArray(elements) ? elements : [elements];
 
@@ -209,16 +209,14 @@ export function lsGet(lsKey: string): string | null {
  * check if a element isLastChild
  */
 export function isLastChild(el: HTMLElement): boolean {
-        if (el.parentNode === null) return false;
-        return el === el.parentNode.children[el.parentNode.children.length - 1];
+        return el.parentNode === null ? false : el === el.parentNode.children[el.parentNode.children.length - 1];
 }
 
 /**
  * check if a element isFirstChild
  */
 export function isFirstChild(el: HTMLElement): boolean {
-        if (el.parentNode === null) return false;
-        return el === el.parentNode.children[0];
+        return el.parentNode === null ? false : el === el.parentNode.children[0];
 }
 /**
  * Applies the given CSS rules to the specified element(s). without removing or duplicating old cssText.
@@ -403,4 +401,11 @@ export function getSiblings(elements: Element | Element[]) {
                 return null;
         }
         return result;
+}
+
+/**
+ * function to check if element is instanceof HTMLElement
+ */
+export function isHTMLElement(element: unknown): element is HTMLElement {
+        return element instanceof HTMLElement;
 }
