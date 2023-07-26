@@ -34,7 +34,7 @@ export function getDigits(number: number): number[] {
         if (number === 0) return [0];
         else if (number < 0) number *= -1;
 
-        let result = [];
+        let result: number[] = [];
         while (number !== 0) {
                 result.unshift(number % 10);
                 number = Math.floor(number / 10);

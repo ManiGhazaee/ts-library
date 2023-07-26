@@ -8,7 +8,7 @@
  */
 export function arrayDiff<T>(arr1: T[], arr2: T[]) {
         let set = new Set(arr2);
-        let diff = [];
+        let diff: T[] = [];
 
         for (let i = 0; i < arr1.length; i++) {
                 if (set.has(arr1[i])) {

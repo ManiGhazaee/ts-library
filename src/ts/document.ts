@@ -118,7 +118,7 @@ export function hasClass(elements: HTMLElement[] | HTMLElement, classNames: stri
         let result: boolean[][] = [];
 
         for (let i = 0; i < elems.length; i++) {
-                let arr = [];
+                let arr: boolean[] = [];
                 for (let j = 0; j < classNameArr.length; j++) {
                         let bool: boolean;
                         if (elems[i].classList) bool = elems[i].classList.contains(classNameArr[j]);
@@ -378,7 +378,7 @@ export function isNone(element: HTMLElement) {
  */
 export function getSiblings(elements: Element | Element[]) {
         const elems = Array.isArray(elements) ? elements : [elements];
-        let result = [];
+        let result: (Element | Element[] | null)[] = [];
 
         for (let i = 0; i < elems.length; i++) {
                 let parent = elems[i].parentNode;
@@ -414,47 +414,30 @@ export function isHTMLElement(element: unknown): element is HTMLElement {
  * This function takes an `element` parameter of type `HTMLElement`, a `by` parameter of type `"tag" | "id" | "class"`, and a `target` parameter of type `string`. It returns the next sibling element of the provided `element` that matches the specified criteria.
  */
 export function getNextElementBy(element: HTMLElement, by: "tag" | "id" | "class", target: string) {
-        let tempElem = element;
-        if (by === "tag") {
-                for (let i = 0; i < 1000; i++) {
-                        if (tempElem.nextElementSibling !== null) {
-                                tempElem = tempElem.nextElementSibling as HTMLElement;
-                                if (tempElem.tagName === target.toUpperCase()) {
-                                        return tempElem;
-                                } else {
-                                        continue;
-                                }
+        const byObj = {
+                tag: isTagName,
+                id: isId,
+                class: hasClass,
+        };
+        let tempElem: HTMLElement = element;
+        for (let i = 0; i < 1000; i++) {
+                if (tempElem.nextElementSibling !== null) {
+                        if (isHTMLElement(tempElem.nextElementSibling)) {
+                                tempElem = tempElem.nextElementSibling;
                         } else {
-                                return undefined;
+                                throw new Error("nextElementSibling is a type of Element");
                         }
-                }
-        } else if (by === "id") {
-                for (let i = 0; i < 1000; i++) {
-                        if (tempElem.nextElementSibling !== null) {
-                                tempElem = tempElem.nextElementSibling as HTMLElement;
-                                if (tempElem.id === target) {
-                                        return tempElem;
-                                } else {
-                                        continue;
-                                }
+
+                        if (byObj[by](tempElem, target)) {
+                                return tempElem;
                         } else {
-                                return undefined;
+                                continue;
                         }
-                }
-        } else if (by === "class") {
-                for (let i = 0; i < 1000; i++) {
-                        if (tempElem.nextElementSibling !== null) {
-                                tempElem = tempElem.nextElementSibling as HTMLElement;
-                                if (tempElem.classList.contains(target)) {
-                                        return tempElem;
-                                } else {
-                                        continue;
-                                }
-                        } else {
-                                return undefined;
-                        }
+                } else {
+                        return undefined;
                 }
         }
+
         return undefined;
 }
 
@@ -465,12 +448,26 @@ export function isTagName(elements: HTMLElement, tagName: string): boolean;
 export function isTagName(elements: HTMLElement[], tagName: string): boolean[];
 export function isTagName(elements: HTMLElement | HTMLElement[], tagName: string): boolean | boolean[] {
         if (Array.isArray(elements)) {
-                let result = [];
+                let result: boolean[] = [];
                 for (let i = 0; i < elements.length; i++) {
                         result.push(elements[i].tagName === tagName.toUpperCase());
                 }
                 return result;
         } else {
                 return elements.tagName === tagName.toUpperCase();
+        }
+}
+
+export function isId(elements: HTMLElement, id: string): boolean;
+export function isId(elements: HTMLElement[], id: string): boolean[];
+export function isId(elements: HTMLElement | HTMLElement[], id: string): boolean | boolean[] {
+        if (Array.isArray(elements)) {
+                let result: boolean[] = [];
+                for (let i = 0; i < elements.length; i++) {
+                        result.push(elements[i].id === id);
+                }
+                return result;
+        } else {
+                return elements.id === id;
         }
 }
