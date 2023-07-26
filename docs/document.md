@@ -553,13 +553,13 @@ This function takes an `element` parameter of type `HTMLElement`, a `by` paramet
 
 **Parameters:**
 
-- `element` (HTMLElement): The element from which to start searching for the next sibling element.
-- `by` ("tag" | "id" | "class"): The criteria to use for matching the next sibling element. Possible values are "tag", "id", or "class".
-- `target` (string): The value to match against the criteria specified by the `by` parameter.
+`element` (HTMLElement): The element from which to start searching for the next sibling element.
+`by` ("tag" | "id" | "class"): The criteria to use for matching the next sibling element. Possible values are "tag", "id", or "class".
+`target` (string): The value to match against the criteria specified by the `by` parameter.
 
 **Returns:**
 
-- `HTMLElement | undefined`: The next sibling element that matches the specified criteria, or `undefined` if no matching element is found.
+`HTMLElement | undefined`: The next sibling element that matches the specified criteria, or `undefined` if no matching element is found.
 
 **Example:**
 
@@ -582,12 +582,12 @@ This function is an overloaded function that can accept either a single `HTMLEle
 
 **Parameters:**
 
-- `elements` (HTMLElement | HTMLElement[]): The element(s) to check the `tagName` against.
-- `tagName` (string): The value to compare against the `tagName` of the `elements`.
+`elements` (HTMLElement | HTMLElement[]): The element(s) to check the `tagName` against.
+`tagName` (string): The value to compare against the `tagName` of the `elements`.
 
 **Returns:**
 
-- `boolean | boolean[]`: If the `elements` parameter is an `HTMLElement`, it returns a boolean value indicating whether the `tagName` matches the specified `tagName`. If the `elements` parameter is an array of `HTMLElements`, it returns an array of boolean values indicating whether the `tagName` of each element matches the specified `tagName`.
+`boolean | boolean[]`: If the `elements` parameter is an `HTMLElement`, it returns a boolean value indicating whether the `tagName` matches the specified `tagName`. If the `elements` parameter is an array of `HTMLElements`, it returns an array of boolean values indicating whether the `tagName` of each element matches the specified `tagName`.
 
 **Example:**
 

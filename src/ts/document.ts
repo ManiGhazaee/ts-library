@@ -2,9 +2,9 @@
  * Returns an object containing all elements with an `id` attribute in the document, with keys converted to camelCase.
  * @requires {@link kebabToCamel}
  */
-export function getElementsByIds(): object {
-        let elementsById: { [key: string]: Element } = {};
-        let allElements: NodeListOf<Element> = document.querySelectorAll("*");
+export function getElementsByIds(): Record<string, HTMLElement> {
+        let elementsById: { [key: string]: HTMLElement } = {};
+        let allElements: NodeListOf<HTMLElement> = document.querySelectorAll("*");
         for (let i = 0; i < allElements.length; i++) {
                 if (allElements[i].id != null && allElements[i].id !== "") {
                         elementsById[kebabToCamel(allElements[i].id)] = allElements[i];
